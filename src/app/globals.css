@@ -13,17 +13,12 @@
   --color-card-shadow: rgba(15, 118, 255, 0.18);
 }
 
-@theme inline {
-  --font-sans: var(--font-poppins);
-  --color-background: var(--color-deep-space);
-  --color-foreground: var(--color-ice);
-  --color-primary: var(--color-neon);
-  --color-primary-soft: var(--color-neon-soft);
-  --color-secondary: var(--color-electric);
-}
-
 body {
-  @apply bg-slate-950 text-slate-100 font-sans antialiased;
+  background-color: var(--color-deep-space);
+  color: var(--color-ice);
+  font-family: var(--font-poppins), "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   background-image: radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.12), transparent 45%),
     radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.18), transparent 40%),
     radial-gradient(circle at 50% 80%, rgba(14, 165, 233, 0.16), transparent 45%),
