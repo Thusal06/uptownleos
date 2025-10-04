@@ -4,13 +4,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Save,
-  Settings,
-  Palette,
   Globe,
   Mail,
   Shield,
   Bell,
-  Database,
   Download,
   Upload,
 } from "lucide-react";

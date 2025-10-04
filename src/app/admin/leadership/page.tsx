@@ -11,6 +11,7 @@ import {
   Crown,
   Shield,
 } from "lucide-react";
+import Image from "next/image";
 import { GlassCard } from "@/components/ui/glass-card";
 import { SectionHeading } from "@/components/ui/section-heading";
 
@@ -140,9 +141,11 @@ export default function LeadershipManagement() {
                 <div className="flex items-start justify-between p-6">
                   <div className="flex items-center gap-4">
                     <div className="relative">
-                      <img
+                      <Image
                         src={officer.avatar}
                         alt={officer.name}
+                        width={64}
+                        height={64}
                         className="h-16 w-16 rounded-full border-2 border-sky-500/30"
                       />
                       <div className="absolute -bottom-1 -right-1 rounded-full bg-slate-900 p-1">

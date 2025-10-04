@@ -160,7 +160,7 @@ export default function EventsManagement() {
           {["all", "upcoming", "past"].map((status) => (
             <button
               key={status}
-              onClick={() => setFilterStatus(status as any)}
+              onClick={() => setFilterStatus(status as "all" | "upcoming" | "past")}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition capitalize ${
                 filterStatus === status
                   ? "bg-sky-500/20 text-sky-300 border border-sky-500/30"

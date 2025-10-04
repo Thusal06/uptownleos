@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 type GlassCardProps = {
   children: ReactNode;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: "div" | "section" | "article" | "main" | "header" | "footer";
 };
 
 export function GlassCard({ children, className, as: Component = "div" }: GlassCardProps) {

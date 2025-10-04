@@ -7,12 +7,12 @@ import {
   Edit,
   Trash2,
   Search,
-  Image as ImageIcon,
   Eye,
   EyeOff,
   Calendar,
   User,
 } from "lucide-react";
+import Image from "next/image";
 import { GlassCard } from "@/components/ui/glass-card";
 import { SectionHeading } from "@/components/ui/section-heading";
 
@@ -144,7 +144,7 @@ export default function NewsManagement() {
           {["all", "published", "draft"].map((status) => (
             <button
               key={status}
-              onClick={() => setFilterStatus(status as any)}
+              onClick={() => setFilterStatus(status as "all" | "published" | "draft")}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition capitalize ${
                 filterStatus === status
                   ? "bg-sky-500/20 text-sky-300 border border-sky-500/30"
@@ -169,9 +169,11 @@ export default function NewsManagement() {
             <GlassCard className="group overflow-hidden">
               {/* Article Image */}
               <div className="relative h-48 overflow-hidden">
-                <img
+                <Image
                   src={article.imageUrl}
                   alt={article.title}
+                  width={400}
+                  height={192}
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/10 via-sky-500/20 to-slate-900/60" />
