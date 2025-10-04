@@ -9,24 +9,29 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Leo Lions Club of Colombo Uptown Eminence | A Futuristic Leo Hub",
+  title: "Leo Lions Club of Colombo Uptown Eminence (LLCCUE) | District 306 D7",
   description:
-    "Experience the next era of service with the Leo Lions Club of Colombo Uptown Eminence. Discover leadership, innovation, and immersive storytelling.",
-  metadataBase: new URL("https://llccue.example.com"),
+    "Chartered in 2025 under Lions International, LLCCUE is a modern Leo club in District 306 D7. Discover our leadership, innovative service projects, and commitment to Lead. Serve. Uplift.",
+  metadataBase: new URL("https://llccue.org"),
   keywords: [
     "Leo Lions",
     "Colombo Uptown Eminence",
     "LLCCUE",
+    "District 306 D7",
+    "Chartered 2025",
+    "Aurum'25",
     "youth leadership",
     "service projects",
     "Lionism",
+    "Sri Lanka",
+    "BRANDBOOST360"
   ],
   openGraph: {
-    title: "Leo Lions Club of Colombo Uptown Eminence",
+    title: "Leo Lions Club of Colombo Uptown Eminence | District 306 D7",
     description:
-      "Step into a futuristic service collective leading innovation, compassion, and impact.",
+      "Modern Leo club chartered in 2025, leading innovation in service through technology and youth engagement. Join us in making a difference.",
     type: "website",
-    url: "https://llccue.example.com",
+    url: "https://llccue.org",
     siteName: "LLCCUE",
   },
 };

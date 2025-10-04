@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import {
   LayoutDashboard,
   Users,
@@ -73,11 +74,21 @@ export default function AdminNav() {
         <div className="flex h-full flex-col">
           {/* Logo */}
           <div className="flex h-16 items-center justify-between px-6 border-b border-white/10">
-            <div className="flex items-center gap-3">
-              <div className="h-8 w-8 rounded-full bg-gradient-to-br from-sky-400 to-blue-600" />
-              <span className="text-lg font-semibold text-slate-100">LLCCUE</span>
-            </div>
-            <span className="text-xs text-slate-400">Admin</span>
+            <Link href="/" className="flex items-center gap-3 group">
+              <Image
+                src="/logo.png"
+                alt="Leo Lions Club of Colombo Uptown Eminence"
+                width={32}
+                height={32}
+                className="h-8 w-8 drop-shadow-lg"
+              />
+              <div>
+                <div className="text-lg font-semibold text-slate-100 group-hover:text-sky-300 transition-colors">
+                  LLCCUE
+                </div>
+                <div className="text-xs text-slate-400">Admin Panel</div>
+              </div>
+            </Link>
           </div>
 
           {/* Navigation */}
@@ -110,7 +121,7 @@ export default function AdminNav() {
                 <p className="text-sm font-medium text-slate-100 truncate">
                   Admin User
                 </p>
-                <p className="text-xs text-slate-400 truncate">admin@llccue.org</p>
+                <p className="text-xs text-slate-400 truncate">colombouptowneminence@gmail.com</p>
               </div>
             </div>
             <button className="flex items-center gap-3 w-full rounded-lg px-4 py-3 text-sm font-medium text-red-400 hover:bg-red-500/10 transition-colors mt-2">

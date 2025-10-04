@@ -4,13 +4,16 @@
   --color-deep-space: #020617;
   --color-night: #030a1a;
   --color-moonlit: #0b1f3a;
+  --color-deep-blue: #1e3a8a;      /* Outer petals */
+  --color-light-blue: #3b82f6;      /* Inner petals */
   --color-neon: #3b82f6;
   --color-neon-soft: #60a5fa;
   --color-electric: #38bdf8;
   --color-ice: #f8fafc;
+  --color-yellow: #fbbf24;         /* Lions International yellow accents */
   --color-glass: rgba(255, 255, 255, 0.08);
   --color-glass-border: rgba(255, 255, 255, 0.18);
-  --color-card-shadow: rgba(15, 118, 255, 0.18);
+  --color-card-shadow: rgba(59, 130, 246, 0.18);
 }
 
 body {

@@ -19,26 +19,18 @@ import {
   type Easing,
 } from "framer-motion";
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import FuturisticMemberCard from "@/components/ui/member-card-3d";
 import InteractiveImpactDashboard from "@/components/ui/impact-dashboard";
 import EnhancedParticles, { ServiceImpactParticles } from "@/components/ui/enhanced-particles";
 import AIProjectMatcher from "@/components/ui/ai-project-matcher";
-import Image from "next/image";
+import Navigation from "@/components/ui/navigation";
+import Footer from "@/components/ui/footer";
+import { officers } from "@/data/officers";
 import Link from "next/link";
 
-type Officer = {
-  name: string;
-  role: string;
-  avatar: string;
-  biography: string;
-  background: string;
-  achievements: string[];
-  joinedYear: string;
-  email: string;
-  quote: string;
-};
 
 type ProjectCategory = {
   name: string;
@@ -61,246 +53,55 @@ const panoramaUrl = (id: string) =>
 const cardUrl = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&q=80&sat=-10`;
 
-const officers: Officer[] = [
-  {
-    name: "Anuk Nisalitha",
-    role: "President",
-    avatar: "/board/anuk.jpg",
-    biography: "Visionary leader with exceptional organizational skills and a passion for youth development. Dedicated to empowering young leaders through innovative service initiatives that create lasting community impact.",
-    background: "Graduated with honors in Business Administration from University of Colombo. Previously served as Vice President and has led multiple award-winning service projects in leadership development.",
-    achievements: ["Leadership Excellence Award 2024", "Innovation in Service", "Community Impact Champion"],
-    joinedYear: "2021",
-    email: "anuk@llccue.org",
-    quote: "Leadership is not about being in charge. It's about taking care of those in your charge.",
-  },
-  {
-    name: "Vihandu Wanniarachchi",
-    role: "Vice President",
-    avatar: "/board/vihandu.jpg",
-    biography: "Strategic leader specializing in community outreach and member engagement. Excels at bridging the gap between leadership and members to foster a collaborative environment.",
-    background: "Background in social work with extensive experience in community development programs. Previously led outreach initiatives for various NGOs and community organizations.",
-    achievements: ["Community Outreach Excellence", "Member Engagement Award", "Mentorship Champion"],
-    joinedYear: "2021",
-    email: "vihandu@llccue.org",
-    quote: "Together we can achieve what alone we cannot imagine.",
-  },
-  {
-    name: "Thusal Ranawaka",
-    role: "Secretary",
-    avatar: "/board/thusal.jpg",
-    biography: "Detail-oriented administrator with a passion for organization and efficiency. Ensures smooth operations and effective communication within the club leadership.",
-    background: "Information Technology specialist with Project Management expertise. Brings digital innovation and systematic approaches to traditional service methods and club administration.",
-    achievements: ["Digital Transformation Award", "Service Dedication", "Administrative Excellence"],
-    joinedYear: "2021",
-    email: "thusal@llccue.org",
-    quote: "Excellence in administration enables excellence in service delivery.",
-  },
-  {
-    name: "Rinoshi Nihara",
-    role: "Treasurer",
-    avatar: "/board/rinoshi.jpg",
-    biography: "Financial expert with exceptional attention to detail and commitment to transparency. Manages club finances with integrity and strategic planning for sustainable growth.",
-    background: "Professional accountant with extensive experience in non-profit financial management. Certified in financial governance and compliance best practices.",
-    achievements: ["Financial Excellence Award", "Transparency Champion", "Strategic Planning"],
-    joinedYear: "2022",
-    email: "rinoshi@llccue.org",
-    quote: "Financial transparency builds trust and strengthens our mission.",
-  },
-  {
-    name: "Savindu Pahasara",
-    role: "2nd Vice President",
-    avatar: "/board/savindu.jpg",
-    biography: "Dynamic leader with expertise in program coordination and team motivation. Brings fresh perspectives to vice presidential responsibilities and member development.",
-    background: "Experienced in program management with a strong background in youth leadership development. Has successfully coordinated multiple large-scale service initiatives.",
-    achievements: ["Program Coordination Excellence", "Youth Leadership Award", "Team Motivation Champion"],
-    joinedYear: "2022",
-    email: "savindu@llccue.org",
-    quote: "Great leaders don't set out to be a leader. They set out to make a difference.",
-  },
-  {
-    name: "Yohani Gunathilaka",
-    role: "Assistant Secretary",
-    avatar: "/board/yohani.jpg",
-    biography: "Organized and efficient administrator supporting the Secretary in club operations. Ensures accurate record-keeping and smooth administrative processes.",
-    background: "Background in office administration with experience in non-profit organizations. Brings systematic approaches to club documentation and communication.",
-    achievements: ["Administrative Support Excellence", "Record Management Award", "Communication Skills"],
-    joinedYear: "2022",
-    email: "yohani@llccue.org",
-    quote: "Attention to detail in administration creates excellence in service.",
-  },
-  {
-    name: "Senuri Kawya",
-    role: "Assistant Treasurer",
-    avatar: "/board/senuri.jpg",
-    biography: "Detail-oriented financial professional supporting the Treasurer in financial management and reporting. Ensures accuracy and compliance in all financial operations.",
-    background: "Background in accounting and financial analysis with experience in supporting non-profit financial systems. Brings expertise in financial documentation.",
-    achievements: ["Financial Support Excellence", "Reporting Accuracy Award", "Compliance Champion"],
-    joinedYear: "2023",
-    email: "senuri@llccue.org",
-    quote: "Precision in financial management builds trust in our service mission.",
-  },
-  {
-    name: "Sasira Vihanga",
-    role: "Editor",
-    avatar: "/board/sasira.jpg",
-    biography: "Creative communications specialist responsible for club publications and media content. Ensures professional presentation of club activities and achievements.",
-    background: "Background in journalism and content creation with experience in non-profit communications. Expert in storytelling and visual presentation.",
-    achievements: ["Communication Excellence Award", "Creative Content Champion", "Media Relations"],
-    joinedYear: "2022",
-    email: "sasira@llccue.org",
-    quote: "Great stories inspire great action and meaningful service.",
-  },
-  {
-    name: "Ruchika Roshani",
-    role: "Project Coordinator",
-    avatar: "/board/ruchika.jpg",
-    biography: "Organized project manager specializing in service project coordination and execution. Ensures successful implementation of club initiatives from planning to completion.",
-    background: "Experience in project management with expertise in community service projects. Coordinates multiple stakeholders and ensures timely project delivery.",
-    achievements: ["Project Management Excellence", "Service Implementation Award", "Stakeholder Coordination"],
-    joinedYear: "2022",
-    email: "ruchika@llccue.org",
-    quote: "Successful projects start with excellent coordination and end with meaningful impact.",
-  },
-  {
-    name: "Gayan Danasiri",
-    role: "Project Coordinator",
-    avatar: "/board/gayan.jpg",
-    biography: "Strategic project coordinator focused on innovative service initiatives. Develops creative solutions to community challenges and ensures project sustainability.",
-    background: "Background in community development with expertise in project planning and evaluation. Brings innovative approaches to traditional service projects.",
-    achievements: ["Innovation in Project Management", "Sustainability Award", "Community Impact"],
-    joinedYear: "2023",
-    email: "gayan@llccue.org",
-    quote: "Innovation in service delivery creates lasting community transformation.",
-  },
-  {
-    name: "Seyara Bimdulee",
-    role: "GST",
-    avatar: "/board/seyara.jpg",
-    biography: "Specialized leader responsible for Guiding Service Transition and member development. Ensures smooth integration of new members into the Leo movement.",
-    background: "Background in educational leadership with experience in youth mentorship programs. Expert in member development and training initiatives.",
-    achievements: ["Member Development Excellence", "Mentorship Award", "Integration Champion"],
-    joinedYear: "2022",
-    email: "seyara@llccue.org",
-    quote: "Guiding new members creates the foundation for future leaders.",
-  },
-  {
-    name: "Devnaka Lakvidu",
-    role: "Lion Twister",
-    avatar: "/board/devnaka.jpg",
-    biography: "Youth engagement specialist responsible for connecting Leos with the broader Lions movement. Creates meaningful interactions between youth and senior members.",
-    background: "Background in youth leadership with experience in intergenerational programs. Expert in creating engaging experiences that bridge age gaps.",
-    achievements: ["Youth Engagement Excellence", "Interconnection Award", "Program Innovation"],
-    joinedYear: "2023",
-    email: "devnaka@llccue.org",
-    quote: "Connecting generations strengthens our collective service impact.",
-  },
-  {
-    name: "Methira Gunathilaka",
-    role: "Lion Tamer",
-    avatar: "/board/methira.jpg",
-    biography: "Leadership development specialist focused on nurturing young leaders within the Leo movement. Designs and implements leadership training programs and mentorship opportunities.",
-    background: "Background in educational psychology with expertise in youth leadership development. Experienced in creating structured leadership pathways.",
-    achievements: ["Leadership Development Excellence", "Mentorship Programs Award", "Youth Empowerment"],
-    joinedYear: "2022",
-    email: "methira@llccue.org",
-    quote: "Nurturing young leaders today creates service champions tomorrow.",
-  },
-  {
-    name: "Hesani Withanage",
-    role: "LCIF Coordinator",
-    avatar: "/board/hesani.jpg",
-    biography: "Grants and funding specialist responsible for managing Lions Clubs International Foundation projects. Ensures access to global funding opportunities for local initiatives.",
-    background: "Background in grant management and non-profit funding with experience in international development programs. Expert in LCIF processes and requirements.",
-    achievements: ["Grant Management Excellence", "Funding Success Award", "Global Partnership"],
-    joinedYear: "2023",
-    email: "hesani@llccue.org",
-    quote: "Access to global resources amplifies our local service impact.",
-  },
-  {
-    name: "Thesara Nethdulee",
-    role: "GLT",
-    avatar: "/board/thesara.jpg",
-    biography: "Global Leadership Team representative connecting LLCCUE with the broader Leo movement. Ensures participation in international initiatives and global service projects.",
-    background: "Background in international relations with experience in cross-cultural collaboration. Facilitates global partnerships and exchange programs.",
-    achievements: ["Global Leadership Award", "International Partnership Success", "Cross-Cultural Exchange"],
-    joinedYear: "2022",
-    email: "thesara@llccue.org",
-    quote: "Global connections create local impact with international reach.",
-  },
-  {
-    name: "Tharuja Wanaguru",
-    role: "GMT",
-    avatar: "/board/tharuja.jpg",
-    biography: "Global Membership Team member supporting membership growth and development initiatives. Coordinates with global membership programs and best practices.",
-    background: "Background in membership management with experience in recruitment and retention strategies. Contributes to membership growth and engagement programs.",
-    achievements: ["Membership Growth Award", "Engagement Programs Success", "Recruitment Excellence"],
-    joinedYear: "2023",
-    email: "tharuja@llccue.org",
-    quote: "Growing our membership expands our capacity for service.",
-  },
-  {
-    name: "Ranudi Perera",
-    role: "GMCT",
-    avatar: "/board/ranudi.jpg",
-    biography: "Global Membership Chair Team representative coordinating global membership initiatives at the club level. Implements international membership strategies and programs.",
-    background: "Experience in international program coordination with expertise in global Lions and Leo programs. Facilitates global membership campaigns and initiatives.",
-    achievements: ["Global Coordination Excellence", "International Programs Success", "Global Campaigns"],
-    joinedYear: "2022",
-    email: "ranudi@llccue.org",
-    quote: "Global collaboration creates stronger local service communities.",
-  },
-];
 
 const projectCategories: ProjectCategory[] = [
   {
-    name: "Environment",
-    icon: "🌱",
-    description: "Reimagining sustainability through smart eco-initiatives and green labs.",
-    image: cardUrl("photo-1469474968028-56623f02e42e"),
+    name: "Environmental Conservation",
+    icon: "🌊",
+    description: "Wellawatta Beach Cleanup and environmental awareness campaigns to protect Sri Lanka's coastal ecosystems.",
+    image: cardUrl("photo-1552667466-07770ae110d0"),
   },
   {
-    name: "Innovation",
+    name: "Digital Marketing & Entrepreneurship",
     icon: "💡",
-    description: "Design thinking, hackathons, and digital accelerators for positive change.",
+    description: "BRANDBOOST360 - Digital Marketing Basics for Youth Entrepreneurs program in collaboration with other Leo clubs.",
+    image: cardUrl("photo-1460925895917-afdab827c52f"),
+  },
+  {
+    name: "Leadership Development",
+    icon: "🎓",
+    description: "Club Officers Workshops and training programs facilitated by Zone Chairperson Lion Lakisha Perera.",
     image: cardUrl("photo-1526498460520-4c246339dccb"),
   },
   {
-    name: "Health",
-    icon: "❤️",
-    description:
-      "Augmented health camps, wellness tech, and mindful programs for communities.",
-    image: cardUrl("photo-1512406926046-631bb0abf902"),
-  },
-  {
-    name: "Education",
-    icon: "📘",
-    description:
-      "Immersive learning experiences, future skills workshops, and mentorship initiatives.",
-    image: cardUrl("photo-1498050108023-c5249f4df085"),
+    name: "Community Service",
+    icon: "🤝",
+    description: "Service projects aligned with District Governor's 7-Point Program, including hospital and community outreach.",
+    image: cardUrl("photo-1529336953121-497c3c8685f8"),
   },
 ];
 
 const events: Event[] = [
   {
-    title: "Aurum&apos;25 Charter Installation",
-    date: "July 12, 2025",
+    title: "Aurum&apos;25 - Charter Installation Ceremony",
+    date: "July 24, 2025",
     description:
-      "A luminous evening celebrating leadership ascension with synchronized light shows and immersive storytelling.",
-    cta: "RSVP Now",
+      "A landmark event that officially chartered LLCCUE under Lions International. Installation of club officers, unveiling of the official club banner, and commencement of the club&apos;s journey.",
+    cta: "View Gallery",
   },
   {
-    title: "Neon Pulse Service Week",
-    date: "August 18–24, 2025",
+    title: "BRANDBOOST360 - Digital Marketing Workshop",
+    date: "August 27, 2025",
     description:
-      "A full week of rapid-fire service missions supported by data dashboards and live impact tracking.",
-    cta: "Join the Missions",
+      "Digital Marketing Basics for Youth Entrepreneurs organized in collaboration with Leo Club of St. Joseph&apos;s College Anuradhapura and Lions Club of Anuradhapura City.",
+    cta: "Watch Recording",
   },
   {
-    title: "Quantum Impact Summit",
-    date: "October 3, 2025",
+    title: "Wellawatta Beach Cleanup",
+    date: "September 2025",
     description:
-      "Hybrid summit merging youth leaders, AI, and social innovation pioneers to design future solutions.",
-    cta: "Request an Invite",
+      "Environmental cleanup campaign conducted as part of the club&apos;s environmental initiatives, with live updates and community engagement.",
+    cta: "Join Next Cleanup",
   },
 ];
 
@@ -379,6 +180,9 @@ export default function Home() {
       <div className="noise-overlay" />
       <EnhancedParticles count={50} interactive={true} />
       <ServiceImpactParticles />
+
+      <Navigation />
+
       <main className="relative overflow-hidden">
         <Hero parallaxY={parallaxY} />
         <InteractiveImpactDashboard />
@@ -391,6 +195,9 @@ export default function Home() {
         <Join />
         <Contact />
       </main>
+
+      <Footer />
+
       <ChatWidget />
       <AdminButton />
     </div>
@@ -399,7 +206,7 @@ export default function Home() {
 
 function Hero({ parallaxY }: { parallaxY: MotionValue<number> }) {
   return (
-    <section className="relative flex min-h-[90vh] items-center justify-center px-6 pb-24 pt-32 md:px-12">
+    <section id="home" className="relative flex min-h-[90vh] items-center justify-center px-6 pb-24 pt-32 md:px-12">
       <motion.div
         style={{ y: parallaxY }}
         className="absolute inset-0 -z-10 overflow-hidden"
@@ -431,6 +238,22 @@ function Hero({ parallaxY }: { parallaxY: MotionValue<number> }) {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.9, ease: easeCurve }}
       >
+        {/* Club Logo */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-8"
+        >
+          <Image
+            src="/logo.png"
+            alt="Leo Lions Club of Colombo Uptown Eminence"
+            width={120}
+            height={120}
+            className="h-24 w-24 md:h-32 md:w-32 drop-shadow-2xl"
+          />
+        </motion.div>
+
         <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/10 px-6 py-3 backdrop-blur-xl">
           <Sparkle className="h-5 w-5 text-sky-300" />
           <span className="text-sm tracking-[0.3em] uppercase text-slate-100/75">
@@ -997,7 +820,7 @@ function Contact() {
                 <span className="text-xs uppercase tracking-[0.35em] text-sky-300/70">
                   Email
                 </span>
-                <p className="mt-2 text-base text-slate-100">connect@llccue.org</p>
+                <p className="mt-2 text-base text-slate-100">colombouptowneminence@gmail.com</p>
               </div>
               <div>
                 <span className="text-xs uppercase tracking-[0.35em] text-sky-300/70">
@@ -1058,26 +881,6 @@ function Contact() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="relative mt-24 rounded-3xl border border-white/10 bg-slate-950/80 p-10 text-center">
-      <div className="flex flex-col items-center gap-4">
-        <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/10 px-6 py-3 backdrop-blur-xl">
-          <Sparkle className="h-5 w-5 text-sky-300" />
-          <span className="text-sm tracking-[0.3em] uppercase text-slate-100/75">
-            LLCCUE
-          </span>
-        </div>
-        <p className="text-sm uppercase tracking-[0.35em] text-slate-400/80">
-          Lead. Serve. Uplift.
-        </p>
-        <p className="text-xs text-slate-500">
-          © {new Date().getFullYear()} Leo Lions Club of Colombo Uptown Eminence. Crafted for the future of Lionism.
-        </p>
-      </div>
-    </footer>
-  );
-}
 function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
 
