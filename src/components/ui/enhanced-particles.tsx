@@ -137,15 +137,15 @@ export default function EnhancedParticles({
         ctx.fillStyle = particle.color + Math.floor(currentOpacity * 255).toString(16).padStart(2, "0");
         ctx.fill();
 
-        // Draw connections
-        for (let j = index + 1; j < particles.length; j++) {
+        // Simplified connections - only check nearby particles to reduce calculations
+        for (let j = index + 1; j < Math.min(index + 3, particles.length); j++) {
           const other = particles[j];
           const dx = other.x - particle.x;
           const dy = other.y - particle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < connectionDistance) {
-            const opacity = (1 - distance / connectionDistance) * 0.3;
+          if (distance < connectionDistance * 0.5) {
+            const opacity = (1 - distance / (connectionDistance * 0.5)) * 0.2;
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(other.x, other.y);

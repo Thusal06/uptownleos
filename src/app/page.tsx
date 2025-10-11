@@ -178,8 +178,7 @@ export default function Home() {
   return (
     <div className="relative flex flex-col">
       <div className="noise-overlay" />
-      <EnhancedParticles count={50} interactive={true} />
-      <ServiceImpactParticles />
+      <EnhancedParticles count={15} interactive={false} />
 
       <Navigation />
 
@@ -214,17 +213,17 @@ function Hero({ parallaxY }: { parallaxY: MotionValue<number> }) {
       >
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950/60 to-slate-900" />
         <motion.div
-          className="absolute -left-24 top-10 h-[520px] w-[520px] rounded-full bg-sky-500/25 blur-3xl"
+          className="absolute -left-24 top-10 h-[320px] w-[320px] sm:h-[420px] sm:w-[420px] lg:h-[520px] lg:w-[520px] rounded-full bg-sky-500/25 blur-3xl"
           animate={{ opacity: [0.25, 0.45, 0.25], scale: [1, 1.15, 1] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute -right-10 bottom-0 h-[460px] w-[460px] rounded-full bg-cyan-400/20 blur-3xl"
+          className="absolute -right-10 bottom-0 h-[280px] w-[280px] sm:h-[360px] sm:w-[360px] lg:h-[460px] lg:w-[460px] rounded-full bg-cyan-400/20 blur-3xl"
           animate={{ opacity: [0.2, 0.4, 0.2], scale: [1.1, 0.95, 1.1] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute left-1/2 top-1/2 h-[680px] w-[680px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-sky-500/20" 
+          className="absolute left-1/2 top-1/2 h-[480px] w-[480px] sm:h-[580px] sm:w-[580px] lg:h-[680px] lg:w-[680px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-sky-500/20 hidden sm:block"
           animate={{ rotate: [0, 360] }}
           transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
           style={{ boxShadow: "0 0 120px rgba(56, 189, 248, 0.25)" }}
@@ -273,13 +272,15 @@ function Hero({ parallaxY }: { parallaxY: MotionValue<number> }) {
           <Link href="#about" className="neon-button px-8 py-3">
             <span>Discover Us</span>
           </Link>
-          <Link
-            href="#join"
-            className="flex items-center gap-2 rounded-full border border-sky-500/40 bg-white/5 px-8 py-3 text-sm font-semibold text-sky-200 transition hover:border-sky-400/80 hover:bg-white/10"
+          <a
+            href="https://forms.gle/TjHd3bw3H8S53fGj6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-full border border-sky-500/40 bg-white/5 px-8 py-3 text-sm font-semibold text-sky-200 transition hover:border-sky-400/80 hover:bg-white/10 group"
           >
             Join the Movement
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
+            <ArrowUpRight className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </a>
         </div>
       </motion.div>
 
@@ -300,7 +301,7 @@ function Hero({ parallaxY }: { parallaxY: MotionValue<number> }) {
 function ParticleField() {
   const particles = useMemo(
     () =>
-      new Array(42).fill(0).map((_, idx) => ({
+      new Array(15).fill(0).map((_, idx) => ({
         id: idx,
         left: `${Math.random() * 100}%`,
         top: `${Math.random() * 100}%`,
@@ -349,7 +350,7 @@ function About() {
         align="center"
       />
 
-      <div className="relative mt-16 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+      <div className="relative mt-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
         <GlassCard className="group overflow-hidden">
           <motion.div
             {...fadeInUp()}
@@ -474,8 +475,8 @@ function Leadership() {
         align="center"
       />
 
-      <div className="mt-16">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-20">
+        <div className="grid gap-12 md:grid-cols-2 xl:grid-cols-3">
           {officers.flat().map((officer, idx) => (
             <FuturisticMemberCard key={officer.name} officer={officer} index={idx} />
           ))}
@@ -499,7 +500,7 @@ function Projects() {
 
       <motion.div
         {...fadeInUp()}
-        className="mt-16 grid gap-8 sm:grid-cols-2"
+        className="mt-20 grid gap-12 sm:grid-cols-2"
       >
         {projectCategories.map((category) => (
           <ProjectCard key={category.name} category={category} />
@@ -548,7 +549,7 @@ function Events() {
         }
         align="center"
       />
-      <div className="mt-16 grid gap-6 md:grid-cols-[0.6fr_1.4fr]">
+      <div className="mt-20 grid gap-12 md:grid-cols-[0.6fr_1.4fr]">
         <motion.div
           {...fadeInUp()}
           className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/10 p-6 text-slate-200 backdrop-blur-xl"
@@ -566,12 +567,15 @@ function Events() {
           <p className="mt-6 text-sm text-slate-200/70">
             Immerse in a night of synchronized light, sonic storytelling, and the ceremonial unveiling of our next leadership constellation.
           </p>
-          <Link
-            href="#join"
-            className="neon-button mt-8 inline-flex px-6 py-2"
+          <a
+            href="https://forms.gle/TjHd3bw3H8S53fGj6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="neon-button mt-8 inline-flex px-6 py-2 items-center gap-2 group"
           >
             <span>RSVP / Register</span>
-          </Link>
+            <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
         </motion.div>
         <motion.div
           {...fadeInUp(0.1)}
@@ -610,15 +614,15 @@ function Media() {
         eyebrow="Media Hub"
         title={"A living archive of light"}
         subtitle={
-          "Explore our digital magazine, immersive galleries, and story capsules capturing every pulse of LLCCUE."
+          "Explore our immersive galleries and story capsules capturing every pulse of LLCCUE. Digital magazine coming soon!"
         }
         align="center"
       />
 
-      <div className="mt-16 grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+      <div className="mt-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
         <motion.div
           {...fadeInUp()}
-          className="grid gap-6 sm:grid-cols-2"
+          className="grid gap-8 sm:grid-cols-2"
         >
           {newsItems.map((item) => (
             <article
@@ -734,54 +738,50 @@ function Join() {
 }
 
 function JoinForm() {
-  const fields = [
-    { label: "Full name", name: "name", type: "text" },
-    { label: "Email", name: "email", type: "email" },
-    { label: "Phone", name: "phone", type: "tel" },
-    { label: "Current role", name: "role", type: "text" },
-  ];
-
   return (
-    <form className="grid gap-5">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {fields.map((field) => (
-          <div key={field.name} className="floating-label relative">
-            <input
-              id={field.name}
-              type={field.type}
-              name={field.name}
-              placeholder=" "
-              className="w-full rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-slate-100 shadow-[0_0_35px_rgba(59,130,246,0.16)] transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
-              required
-            />
-            <label
-              htmlFor={field.name}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-xs uppercase tracking-[0.35em] text-slate-400/80"
-            >
-              {field.label}
-            </label>
-          </div>
-        ))}
+    <div className="grid gap-6">
+      <div className="text-center space-y-4">
+        <h3 className="text-2xl font-semibold text-slate-50">
+          Ready to Join LLCCUE?
+        </h3>
+        <p className="text-slate-300/80 leading-relaxed">
+          Become part of Sri Lanka&apos;s most future-ready Leo club.
+          Fill out our membership application form to start your journey with us.
+        </p>
       </div>
-      <div className="floating-label relative">
-        <textarea
-          id="message"
-          name="message"
-          placeholder=" "
-          rows={4}
-          className="w-full rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-slate-100 shadow-[0_0_35px_rgba(59,130,246,0.16)] transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
-        />
-        <label
-          htmlFor="message"
-          className="absolute left-4 top-4 text-xs uppercase tracking-[0.35em] text-slate-400/80"
+
+      <div className="space-y-4">
+        <a
+          href="https://forms.gle/TjHd3bw3H8S53fGj6"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="neon-button w-full px-8 py-4 text-center inline-flex items-center justify-center gap-3 group"
         >
-          Tell us about your spark
-        </label>
+          <span>Join LLCCUE Today</span>
+          <ArrowUpRight className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+        </a>
+
+        <div className="p-4 rounded-2xl border border-sky-500/30 bg-slate-900/60">
+          <p className="text-sm text-slate-300/70 text-center">
+            📋 Application takes 5 minutes •
+            🎯 Join 18+ passionate members •
+            🌟 Start your leadership journey
+          </p>
+        </div>
+
+        <div className="text-center space-y-2">
+          <p className="text-xs text-slate-400/60">
+            Questions? Email us at
+            <a
+              href="mailto:colombouptowneminence@gmail.com"
+              className="text-sky-400 hover:text-sky-300 transition-colors ml-1"
+            >
+              colombouptowneminence@gmail.com
+            </a>
+          </p>
+        </div>
       </div>
-      <button type="submit" className="neon-button px-8 py-3">
-        <span>Submit</span>
-      </button>
-    </form>
+    </div>
   );
 }
 
@@ -876,7 +876,6 @@ function Contact() {
           </div>
         </motion.div>
       </GlassCard>
-      <Footer />
     </section>
   );
 }
@@ -922,13 +921,24 @@ function ChatWidget() {
                 Share our latest innovation projects
               </button>
             </div>
-            <Link
-              href="#join"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-sky-400/40 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.35em] text-sky-200 transition hover:border-sky-400/80 hover:bg-white/10"
-            >
-              Launch Full Chatbot
-              <ArrowUpRight className="h-3 w-3" />
-            </Link>
+            <div className="mt-6 flex flex-col gap-3">
+              <a
+                href="https://forms.gle/TjHd3bw3H8S53fGj6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-sky-400/40 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.35em] text-sky-200 transition hover:border-sky-400/80 hover:bg-white/10 group"
+              >
+                Join LLCCUE
+                <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+              <Link
+                href="#join"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.35em] text-slate-200/60 transition hover:border-white/40 hover:bg-white/10"
+              >
+                Learn More
+                <ArrowUpRight className="h-3 w-3" />
+              </Link>
+            </div>
           </motion.div>
         ) : null}
       </AnimatePresence>

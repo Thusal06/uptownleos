@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -84,12 +84,15 @@ export default function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Link
-              href="#join"
-              className="neon-button px-6 py-2 text-sm font-semibold"
+            <a
+              href="https://forms.gle/TjHd3bw3H8S53fGj6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="neon-button px-6 py-2 text-sm font-semibold inline-flex items-center gap-2 group"
             >
               <span>Join Us</span>
-            </Link>
+              <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -121,13 +124,16 @@ export default function Navigation() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="#join"
-              className="block mx-4 mt-4 neon-button px-6 py-3 text-center text-sm font-semibold"
+            <a
+              href="https://forms.gle/TjHd3bw3H8S53fGj6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mx-4 mt-4 neon-button px-6 py-3 text-center text-sm font-semibold inline-flex items-center justify-center gap-2 group"
               onClick={() => setIsOpen(false)}
             >
               <span>Join Us</span>
-            </Link>
+              <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
           </div>
         </motion.div>
       </div>

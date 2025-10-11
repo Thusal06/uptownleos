@@ -21,12 +21,6 @@ export default function AdminSettings() {
     contactEmail: "connect@llccue.org",
     contactPhone: "+94 77 000 0000",
     address: "Colombo Uptown Hub, Sri Lanka",
-    socialLinks: {
-      facebook: "https://facebook.com/llccue",
-      twitter: "https://twitter.com/llccue",
-      instagram: "https://instagram.com/llccue",
-      linkedin: "https://linkedin.com/in/llccue",
-    },
     notifications: {
       newApplications: true,
       eventRegistrations: true,

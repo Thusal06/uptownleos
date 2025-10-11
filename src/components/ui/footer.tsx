@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, ArrowUpRight } from "lucide-react";
 
 const socialLinks = [
   { icon: Facebook, href: "https://www.facebook.com/share/1WZWZwmFBX/?mibextid=wwXIfr", label: "Facebook" },
@@ -132,12 +132,15 @@ export default function Footer() {
             </div>
 
             <div className="pt-4">
-              <Link
-                href="#join"
-                className="neon-button px-6 py-2 text-sm font-semibold"
+              <a
+                href="https://forms.gle/TjHd3bw3H8S53fGj6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="neon-button px-6 py-2 text-sm font-semibold inline-flex items-center gap-2 group"
               >
                 <span>Join Our Mission</span>
-              </Link>
+                <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
             </div>
           </motion.div>
         </div>

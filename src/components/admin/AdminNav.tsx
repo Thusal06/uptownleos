@@ -121,7 +121,7 @@ export default function AdminNav() {
                 <p className="text-sm font-medium text-slate-100 truncate">
                   Admin User
                 </p>
-                <p className="text-xs text-slate-400 truncate">colombouptowneminence@gmail.com</p>
+                <p className="text-xs text-slate-400 truncate">admin@llccue.org</p>
               </div>
             </div>
             <button className="flex items-center gap-3 w-full rounded-lg px-4 py-3 text-sm font-medium text-red-400 hover:bg-red-500/10 transition-colors mt-2">

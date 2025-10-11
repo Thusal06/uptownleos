@@ -46,7 +46,7 @@ export const officers: Officer[] = [
   {
     name: "Rinoshi Nihara",
     role: "Club Treasurer",
-    avatar: "/board/rinoshi.jpeg",
+    avatar: "/board/rinoshi.jpg",
     biography: "Financial steward with expertise in budget management and resource optimization, ensuring transparent and effective financial operations.",
     background: "Leo Lion Rinoshi Nihara oversees all financial aspects of LLCCUE, ensuring responsible management of club funds and sustainable project financing. Her financial acumen supports the club's various service initiatives.",
     achievements: [
@@ -62,7 +62,7 @@ export const officers: Officer[] = [
   {
     name: "Vihandu Wanniarachchi",
     role: "Vice President",
-    avatar: "/board/vihandu.jpeg",
+    avatar: "/board/vihandu.jpg",
     biography: "Dynamic leader supporting the President and ensuring seamless project execution, bridging vision and implementation.",
     background: "Leo Lion Vihandu Wanniarachchi serves as the primary support to the Club President and plays a crucial role in project coordination. His leadership ensures that all club initiatives are executed effectively.",
     achievements: [
@@ -78,7 +78,7 @@ export const officers: Officer[] = [
   {
     name: "Savindu Pahasara",
     role: "2nd Vice President",
-    avatar: "/board/pahasara.jpeg",
+    avatar: "/board/pahasara.jpg",
     biography: "Innovative leader bringing fresh perspectives and supporting various club initiatives with enthusiasm and dedication.",
     background: "Leo Lion Savindu Pahasara serves as 2nd Vice President, providing additional leadership support and contributing to the strategic direction of LLCCUE. He is known for his creative approach to service projects.",
     achievements: [
@@ -94,7 +94,7 @@ export const officers: Officer[] = [
   {
     name: "Sasira Vihanga",
     role: "Editor",
-    avatar: "/board/sasira.jpeg",
+    avatar: "/board/sasira.jpg",
     biography: "Creative communicator managing all club publications, media content, and ensuring effective communication of LLCCUE's mission and activities.",
     background: "Leo Lion Sasira Vihanga oversees all editorial and communications for LLCCUE. He is responsible for creating compelling content that showcases the club's activities and impact in the community.",
     achievements: [
@@ -126,7 +126,7 @@ export const officers: Officer[] = [
   {
     name: "Tharuja Nemitha Wanaguru",
     role: "GMT Coordinator",
-    avatar: "/board/tharuja.jpeg",
+    avatar: "/board/tharuja.jpg",
     biography: "Global-minded leader promoting international understanding and coordinating global membership and team activities.",
     background: "Leo Lion Tharuja Nemitha Wanaguru serves as the GMT Coordinator, focusing on international relations and global service opportunities. He helps expand the club's reach beyond local boundaries.",
     achievements: [
@@ -142,7 +142,7 @@ export const officers: Officer[] = [
   {
     name: "R. A. Seyara Bimdulee Ranaweera",
     role: "GST Coordinator",
-    avatar: "/board/seyara.jpeg",
+    avatar: "/board/seyara.jpg",
     biography: "Service-focused leader ensuring effective service delivery and coordinating global service team initiatives for maximum community impact.",
     background: "R. A. Seyara Bimdulee Ranaweera serves as the GST Coordinator, focusing on service project implementation and community impact. She ensures that all service initiatives align with global service objectives.",
     achievements: [
@@ -158,7 +158,7 @@ export const officers: Officer[] = [
   {
     name: "R. A. Thesara Nethdulee Ranaweera",
     role: "GLT Coordinator",
-    avatar: "/board/thesara.jpeg",
+    avatar: "/board/thesara.jpg",
     biography: "Leadership development expert designing and implementing leadership training programs to empower club members and future leaders.",
     background: "R. A. Thesara Nethdulee Ranaweera serves as the GLT Coordinator, focusing on leadership development and training. He plays a crucial role in building the leadership capacity of club members.",
     achievements: [
@@ -174,7 +174,7 @@ export const officers: Officer[] = [
   {
     name: "Methira Gunathilaka",
     role: "Lion Tamer",
-    avatar: "/board/methira.jpeg",
+    avatar: "/board/methira.jpg",
     biography: "Event management specialist creating engaging activities and ensuring memorable experiences at all club events and activities.",
     background: "Methira Gunathilaka serves as the Lion Tamer, bringing energy and creativity to club events. She ensures that all activities are engaging, fun, and contribute to member development.",
     achievements: [
@@ -222,7 +222,7 @@ export const officers: Officer[] = [
   {
     name: "Ruchika Roshani Wedisinghe",
     role: "Project Coordinator",
-    avatar: "/board/ruchika.jpeg",
+    avatar: "/board/ruchika.jpg",
     biography: "Creative project designer bringing innovative solutions and fresh perspectives to community service initiatives and project development.",
     background: "Ruchika Roshani Wedisinghe serves as a Project Coordinator, bringing creativity and innovation to service project design. She ensures that projects are engaging and effective.",
     achievements: [
@@ -238,7 +238,7 @@ export const officers: Officer[] = [
   {
     name: "I. D. S. Kawya Ranasinghe",
     role: "Assistant Treasurer",
-    avatar: "/board/senuri.jpeg",
+    avatar: "/board/senuri.jpg",
     biography: "Financial analyst supporting treasury operations and ensuring fiscal responsibility through effective budget planning and resource management.",
     background: "I. D. S. Kawya Ranasinghe serves as Assistant Treasurer, providing crucial support to financial operations. She ensures that all financial activities are properly managed and documented.",
     achievements: [
@@ -254,7 +254,7 @@ export const officers: Officer[] = [
   {
     name: "O. Supun C. D. Perera",
     role: "External Affairs Coordinator",
-    avatar: "/board/supun.jpeg",
+    avatar: "/board/supun.jpg",
     biography: "Relationship builder connecting the club with external stakeholders, sponsors, and opportunities for enhanced community impact.",
     background: "O. Supun C. D. Perera serves as External Affairs Coordinator, building and maintaining relationships with external stakeholders. He plays a crucial role in expanding the club's reach and impact.",
     achievements: [
@@ -270,7 +270,7 @@ export const officers: Officer[] = [
   {
     name: "Ranudi Perera",
     role: "GMCT Coordinator",
-    avatar: "/board/ranudi.jpeg",
+    avatar: "/board/ranudi.jpg",
     biography: "Dedicated member serving as GMCT Coordinator, bringing enthusiasm and expertise to all club initiatives while contributing to global membership and team activities.",
     background: "Ranudi Perera serves as the GMCT Coordinator for LLCCUE, playing a crucial role in global membership development and team coordination. Her enthusiasm and dedication make her a valuable member of the leadership team.",
     achievements: [

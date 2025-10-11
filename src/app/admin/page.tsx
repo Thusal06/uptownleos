@@ -45,25 +45,25 @@ const stats = [
 
 const recentActivity = [
   {
-    action: "New membership application",
-    user: "John Doe",
+    action: "New membership application received",
+    user: "System",
     time: "2 hours ago",
     type: "application",
   },
   {
-    action: "Updated event details",
+    action: "Event details updated",
     user: "Admin",
     time: "5 hours ago",
     type: "event",
   },
   {
-    action: "Published news article",
-    user: "Sarah Smith",
+    action: "News article published",
+    user: "Admin",
     time: "1 day ago",
     type: "news",
   },
   {
-    action: "Added new team member",
+    action: "Team member added",
     user: "Admin",
     time: "2 days ago",
     type: "member",

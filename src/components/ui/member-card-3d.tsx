@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Award, X, Mail, Calendar, Quote, BookOpen } from "lucide-react";
+import { createPortal } from "react-dom";
 
 interface Officer3D {
   name: string;
@@ -27,16 +28,7 @@ function AnimatedMemberCard({ officer, index }: MemberCard3DProps) {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [showProfile, setShowProfile] = useState(false);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRotation({
-        x: Math.sin(Date.now() * 0.001 + index) * 5,
-        y: Math.cos(Date.now() * 0.001 + index) * 5,
-      });
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, [index]);
+  // Removed continuous rotation animation for performance
 
   return (
     <motion.div
@@ -60,12 +52,12 @@ function AnimatedMemberCard({ officer, index }: MemberCard3DProps) {
             : "0 20px 60px rgba(15, 118, 255, 0.18)",
         }}
         animate={{
-          rotateX: hovered ? [-5, 5, -5] : [rotation.x, rotation.x + 2, rotation.x],
-          rotateY: hovered ? [-5, 5, -5] : [rotation.y, rotation.y + 2, rotation.y],
+          rotateX: hovered ? [-2, 2, -2] : 0,
+          rotateY: hovered ? [-2, 2, -2] : 0,
         }}
         transition={{
-          duration: hovered ? 2 : 4,
-          repeat: Infinity,
+          duration: hovered ? 3 : 0,
+          repeat: hovered ? Infinity : 0,
           ease: "easeInOut",
         }}
         onClick={() => setShowProfile(true)}
@@ -91,8 +83,8 @@ function AnimatedMemberCard({ officer, index }: MemberCard3DProps) {
             backgroundImage: hovered
               ? "linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6)"
               : "linear-gradient(45deg, #1e40af, #1e3a8a, #1e40af)",
-            backgroundSize: "200% 200%",
-            backgroundPosition: "0% 50%",
+            backgroundSize: hovered ? "200% 200%" : "100% 100%",
+            backgroundPosition: hovered ? "0% 50%" : "0% 0%",
             animation: hovered ? "gradient-shift 2s ease infinite" : "none",
             WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
             WebkitMaskComposite: "xor",
@@ -130,39 +122,12 @@ function AnimatedMemberCard({ officer, index }: MemberCard3DProps) {
           </div>
         </div>
 
-        {/* Floating particles */}
-        {hovered && (
-          <div className="absolute inset-0 pointer-events-none">
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-sky-400 rounded-full"
-                initial={{
-                  x: Math.random() * 100 + "%",
-                  y: Math.random() * 100 + "%",
-                  opacity: 0,
-                }}
-                animate={{
-                  y: ["-10%", "-110%"],
-                  opacity: [0, 1, 0],
-                  scale: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: i * 0.2,
-                  ease: "easeOut",
-                }}
-              />
-            ))}
-          </div>
-        )}
-      </motion.div>
+              </motion.div>
 
       {/* Profile Modal */}
-      {showProfile && (
+      {showProfile && createPortal(
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-6"
+          className="fixed inset-0 z-50 w-screen h-screen bg-slate-950/90 backdrop-blur-md"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setShowProfile(false);
@@ -174,7 +139,7 @@ function AnimatedMemberCard({ officer, index }: MemberCard3DProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 30 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="relative w-full max-w-6xl h-[90vh] max-h-[90vh] overflow-hidden rounded-3xl border border-white/10 bg-slate-900/95 shadow-2xl flex flex-col"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] max-w-6xl max-h-[90vh] overflow-hidden rounded-3xl border border-white/10 bg-slate-900/95 shadow-2xl flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
@@ -195,26 +160,26 @@ function AnimatedMemberCard({ officer, index }: MemberCard3DProps) {
             {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto p-8 modal-scrollbar">
               {/* Profile Header with Image */}
-              <div className="flex items-center gap-8 mb-10">
+              <div className="flex flex-col sm:flex-row items-center gap-6 mb-10">
                 <div className="relative flex-shrink-0">
                   <Image
                     src={officer.avatar}
                     alt={officer.name}
                     width={200}
                     height={200}
-                    className="rounded-3xl border-2 border-sky-500/30 shadow-xl"
+                    className="rounded-3xl border-2 border-sky-500/30 shadow-xl w-32 h-32 sm:w-48 sm:h-48 lg:w-56 lg:h-56"
                   />
-                  <div className="absolute -bottom-3 -right-3 h-8 w-8 rounded-full bg-green-400 border-3 border-slate-900 animate-pulse" />
+                  <div className="absolute -bottom-3 -right-3 h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-green-400 border-3 border-slate-900 animate-pulse" />
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-6 text-slate-300 mb-4">
-                    <div className="flex items-center gap-3">
-                      <Mail className="h-5 w-5 text-sky-400" />
-                      <span className="text-base">{officer.email}</span>
+                <div className="flex-1 text-center sm:text-left">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-slate-300 mb-4">
+                    <div className="flex items-center justify-center sm:justify-start gap-2">
+                      <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-sky-400" />
+                      <span className="text-sm sm:text-base">{officer.email}</span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Calendar className="h-5 w-5 text-sky-400" />
-                      <span className="text-base">Member since {officer.joinedYear}</span>
+                    <div className="flex items-center justify-center sm:justify-start gap-2">
+                      <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-sky-400" />
+                      <span className="text-sm sm:text-base">Member since {officer.joinedYear}</span>
                     </div>
                   </div>
                 </div>
@@ -263,7 +228,8 @@ function AnimatedMemberCard({ officer, index }: MemberCard3DProps) {
               </div>
             </div>
           </motion.div>
-        </div>
+        </div>,
+        document.body
       )}
     </motion.div>
   );
