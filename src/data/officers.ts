@@ -12,7 +12,7 @@ export interface Officer {
 
 export const officers: Officer[] = [
   {
-    name: "Anuk Nisalitha",
+    name: "Leo Lion Anuk Nisalitha",
     role: "Club President",
     avatar: "/board/anuk.jpeg",
     biography: "Visionary leader who spearheaded the chartering of LLCCUE and continues to drive the club's innovative approach to service.",
@@ -28,7 +28,7 @@ export const officers: Officer[] = [
     quote: "Leadership is not about being in charge. It's about taking care of those in your charge."
   },
   {
-    name: "Thusal Ranawaka",
+    name: "Leo Lion Thusal Ranawaka",
     role: "Club Secretary",
     avatar: "/board/thusal.jpeg",
     biography: "Dedicated administrator ensuring smooth operations and effective communication within the club, instrumental in organizational development.",
@@ -44,7 +44,7 @@ export const officers: Officer[] = [
     quote: "Efficiency in service amplifies our impact on the community."
   },
   {
-    name: "Rinoshi Nihara",
+    name: "Leo Lion Rinoshi Nihara",
     role: "Club Treasurer",
     avatar: "/board/rinoshi.jpg",
     biography: "Financial steward with expertise in budget management and resource optimization, ensuring transparent and effective financial operations.",
@@ -60,7 +60,7 @@ export const officers: Officer[] = [
     quote: "Transparency in finances builds trust and multiplies our service capacity."
   },
   {
-    name: "Vihandu Wanniarachchi",
+    name: "Leo Lion Vihandu Wanniarachchi",
     role: "Vice President",
     avatar: "/board/vihandu.jpg",
     biography: "Dynamic leader supporting the President and ensuring seamless project execution, bridging vision and implementation.",
@@ -76,7 +76,7 @@ export const officers: Officer[] = [
     quote: "Great service requires both vision and meticulous execution."
   },
   {
-    name: "Savindu Pahasara",
+    name: "Leo Lion Savindu Pahasara",
     role: "2nd Vice President",
     avatar: "/board/pahasara.jpg",
     biography: "Innovative leader bringing fresh perspectives and supporting various club initiatives with enthusiasm and dedication.",
@@ -92,7 +92,7 @@ export const officers: Officer[] = [
     quote: "Protecting our environment is protecting our future."
   },
   {
-    name: "Sasira Vihanga",
+    name: "Leo Lion Sasira Vihanga",
     role: "Editor",
     avatar: "/board/sasira.jpg",
     biography: "Creative communicator managing all club publications, media content, and ensuring effective communication of LLCCUE's mission and activities.",
@@ -108,11 +108,11 @@ export const officers: Officer[] = [
     quote: "Every story of service has the power to inspire more service."
   },
   {
-    name: "V. D. Hesani Hansali Vithanage",
+    name: "Leo Lion Hesani Vithanage",
     role: "LCIF Coordinator",
     avatar: "/board/hesani.jpg",
     biography: "Dedicated humanitarian connecting local projects with Lions Clubs International Foundation funding and global service opportunities.",
-    background: "V. D. Hesani Hansali Vithanage serves as the LCIF Coordinator, bridging local service initiatives with international funding opportunities. She plays a crucial role in accessing global resources for local impact.",
+    background: "Leo Lion Hesani Vithanage serves as the LCIF Coordinator, bridging local service initiatives with international funding opportunities. She plays a crucial role in accessing global resources for local impact.",
     achievements: [
       "Researches and applies for LCIF grants",
       "Connects club projects with international funding",
@@ -124,11 +124,11 @@ export const officers: Officer[] = [
     quote: "Global service begins with local action and international collaboration."
   },
   {
-    name: "Tharuja Nemitha Wanaguru",
+    name: "Leo Lion Tharuja Wanaguru",
     role: "GMT Coordinator",
     avatar: "/board/tharuja.jpg",
     biography: "Global-minded leader promoting international understanding and coordinating global membership and team activities.",
-    background: "Leo Lion Tharuja Nemitha Wanaguru serves as the GMT Coordinator, focusing on international relations and global service opportunities. He helps expand the club's reach beyond local boundaries.",
+    background: "Leo Lion Tharuja Wanaguru serves as the GMT Coordinator, focusing on international relations and global service opportunities. He helps expand the club's reach beyond local boundaries.",
     achievements: [
       "Promotes international understanding and cooperation",
       "Coordinates global team activities",
@@ -140,11 +140,11 @@ export const officers: Officer[] = [
     quote: "Service knows no borders when hearts unite across cultures."
   },
   {
-    name: "R. A. Seyara Bimdulee Ranaweera",
+    name: "Leo Lion Seyara Ranaweera",
     role: "GST Coordinator",
     avatar: "/board/seyara.jpg",
     biography: "Service-focused leader ensuring effective service delivery and coordinating global service team initiatives for maximum community impact.",
-    background: "R. A. Seyara Bimdulee Ranaweera serves as the GST Coordinator, focusing on service project implementation and community impact. She ensures that all service initiatives align with global service objectives.",
+    background: "Leo Lion Seyara Ranaweera serves as the GST Coordinator, focusing on service project implementation and community impact. She ensures that all service initiatives align with global service objectives.",
     achievements: [
       "Coordinates global service team activities",
       "Ensures quality service delivery",
@@ -156,11 +156,11 @@ export const officers: Officer[] = [
     quote: "Service is the language that connects hearts and transforms communities."
   },
   {
-    name: "R. A. Thesara Nethdulee Ranaweera",
+    name: "Leo Lion Thesara Ranaweera",
     role: "GLT Coordinator",
     avatar: "/board/thesara.jpg",
     biography: "Leadership development expert designing and implementing leadership training programs to empower club members and future leaders.",
-    background: "R. A. Thesara Nethdulee Ranaweera serves as the GLT Coordinator, focusing on leadership development and training. He plays a crucial role in building the leadership capacity of club members.",
+    background: "Leo Lion Thesara Ranaweera serves as the GLT Coordinator, focusing on leadership development and training. He plays a crucial role in building the leadership capacity of club members.",
     achievements: [
       "Develops leadership training programs",
       "Mentors emerging leaders within the club",
@@ -172,11 +172,11 @@ export const officers: Officer[] = [
     quote: "Leadership is not inherited, it's cultivated through guidance and practice."
   },
   {
-    name: "Methira Gunathilaka",
+    name: "Leo Lion Methira Gunathilaka",
     role: "Lion Tamer",
     avatar: "/board/methira.jpg",
     biography: "Event management specialist creating engaging activities and ensuring memorable experiences at all club events and activities.",
-    background: "Methira Gunathilaka serves as the Lion Tamer, bringing energy and creativity to club events. She ensures that all activities are engaging, fun, and contribute to member development.",
+    background: "Leo Lion Methira Gunathilaka serves as the Lion Tamer, bringing energy and creativity to club events. She ensures that all activities are engaging, fun, and contribute to member development.",
     achievements: [
       "Organizes engaging club activities and events",
       "Creates icebreakers and team-building exercises",
@@ -188,11 +188,11 @@ export const officers: Officer[] = [
     quote: "Fun and service go hand in hand to create lasting impact."
   },
   {
-    name: "E. A. Devnaka Lakvindu",
+    name: "Leo Lion Devnaka Lakvindu",
     role: "Lion Twister",
     avatar: "/board/devnaka.jpg",
     biography: "Technical specialist bringing modern technology solutions and innovative approaches to traditional service methods and club operations.",
-    background: "E. A. Devnaka Lakvindu serves as the Lion Twister, bringing technical expertise and innovation to club activities. He ensures that the club leverages technology for maximum impact.",
+    background: "Leo Lion Devnaka Lakvindu serves as the Lion Twister, bringing technical expertise and innovation to club activities. He ensures that the club leverages technology for maximum impact.",
     achievements: [
       "Provides technical support for club activities",
       "Innovates new approaches to service delivery",
@@ -204,11 +204,11 @@ export const officers: Officer[] = [
     quote: "Technology amplifies our service potential and extends our reach."
   },
   {
-    name: "M. A. D. G. Danasiri",
+    name: "Leo Lion Danasiri",
     role: "Project Coordinator",
     avatar: "/board/gayan.jpg",
     biography: "Strategic planner designing and implementing service projects, ensuring effective execution and maximum community impact.",
-    background: "M. A. D. G. Danasiri serves as a Project Coordinator, bringing strategic planning expertise to service initiatives. He ensures that all projects are well-designed and effectively implemented.",
+    background: "Leo Lion Danasiri serves as a Project Coordinator, bringing strategic planning expertise to service initiatives. He ensures that all projects are well-designed and effectively implemented.",
     achievements: [
       "Designs and coordinates service projects",
       "Ensures project quality and effectiveness",
@@ -220,11 +220,11 @@ export const officers: Officer[] = [
     quote: "Great projects are born from great planning and dedicated execution."
   },
   {
-    name: "Ruchika Roshani Wedisinghe",
+    name: "Leo Lion Ruchika Wedisinghe",
     role: "Project Coordinator",
     avatar: "/board/ruchika.jpg",
     biography: "Creative project designer bringing innovative solutions and fresh perspectives to community service initiatives and project development.",
-    background: "Ruchika Roshani Wedisinghe serves as a Project Coordinator, bringing creativity and innovation to service project design. She ensures that projects are engaging and effective.",
+    background: "Leo Lion Ruchika Wedisinghe serves as a Project Coordinator, bringing creativity and innovation to service project design. She ensures that projects are engaging and effective.",
     achievements: [
       "Co-designs innovative service projects",
       "Brings creative solutions to community challenges",
@@ -236,11 +236,11 @@ export const officers: Officer[] = [
     quote: "Innovation in service creates solutions that truly matter."
   },
   {
-    name: "I. D. S. Kawya Ranasinghe",
+    name: "Leo Lion Kawya Ranasinghe",
     role: "Assistant Treasurer",
     avatar: "/board/senuri.jpg",
     biography: "Financial analyst supporting treasury operations and ensuring fiscal responsibility through effective budget planning and resource management.",
-    background: "I. D. S. Kawya Ranasinghe serves as Assistant Treasurer, providing crucial support to financial operations. She ensures that all financial activities are properly managed and documented.",
+    background: "Leo Lion Kawya Ranasinghe serves as Assistant Treasurer, providing crucial support to financial operations. She ensures that all financial activities are properly managed and documented.",
     achievements: [
       "Supports treasury operations and financial management",
       "Assists in budget planning and tracking",
@@ -252,11 +252,11 @@ export const officers: Officer[] = [
     quote: "Financial wisdom ensures sustainable service and long-term impact."
   },
   {
-    name: "O. Supun C. D. Perera",
+    name: "Leo Lion Supun Perera",
     role: "External Affairs Coordinator",
     avatar: "/board/supun.jpg",
     biography: "Relationship builder connecting the club with external stakeholders, sponsors, and opportunities for enhanced community impact.",
-    background: "O. Supun C. D. Perera serves as External Affairs Coordinator, building and maintaining relationships with external stakeholders. He plays a crucial role in expanding the club's reach and impact.",
+    background: "Leo Lion Supun Perera serves as External Affairs Coordinator, building and maintaining relationships with external stakeholders. He plays a crucial role in expanding the club's reach and impact.",
     achievements: [
       "Builds relationships with external stakeholders",
       "Identifies partnership and sponsorship opportunities",
@@ -268,11 +268,11 @@ export const officers: Officer[] = [
     quote: "Strong relationships amplify our service impact and community reach."
   },
   {
-    name: "Ranudi Perera",
+    name: "Leo Lion Ranudi Perera",
     role: "GMCT Coordinator",
     avatar: "/board/ranudi.jpg",
     biography: "Dedicated member serving as GMCT Coordinator, bringing enthusiasm and expertise to all club initiatives while contributing to global membership and team activities.",
-    background: "Ranudi Perera serves as the GMCT Coordinator for LLCCUE, playing a crucial role in global membership development and team coordination. Her enthusiasm and dedication make her a valuable member of the leadership team.",
+    background: "Leo Lion Ranudi Perera serves as the GMCT Coordinator for LLCCUE, playing a crucial role in global membership development and team coordination. Her enthusiasm and dedication make her a valuable member of the leadership team.",
     achievements: [
       "Coordinates global membership and team activities",
       "Contributes innovative ideas for club development",

@@ -13,6 +13,11 @@ export const metadata: Metadata = {
   description:
     "Chartered in 2025 under Lions International, LLCCUE is a modern Leo club in District 306 D7. Discover our leadership, innovative service projects, and commitment to Lead. Serve. Uplift.",
   metadataBase: new URL("https://llccue.org"),
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
   keywords: [
     "Leo Lions",
     "Colombo Uptown Eminence",

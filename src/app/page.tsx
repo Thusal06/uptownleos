@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ArrowDown,
   ArrowUpRight,
   CalendarRange,
   Globe2,
@@ -28,6 +29,7 @@ import EnhancedParticles, { ServiceImpactParticles } from "@/components/ui/enhan
 import AIProjectMatcher from "@/components/ui/ai-project-matcher";
 import Navigation from "@/components/ui/navigation";
 import Footer from "@/components/ui/footer";
+import { NewsSection } from "@/components/ui/news-section";
 import { officers } from "@/data/officers";
 import Link from "next/link";
 
@@ -222,13 +224,7 @@ function Hero({ parallaxY }: { parallaxY: MotionValue<number> }) {
           animate={{ opacity: [0.2, 0.4, 0.2], scale: [1.1, 0.95, 1.1] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div
-          className="absolute left-1/2 top-1/2 h-[480px] w-[480px] sm:h-[580px] sm:w-[580px] lg:h-[680px] lg:w-[680px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-sky-500/20 hidden sm:block"
-          animate={{ rotate: [0, 360] }}
-          transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
-          style={{ boxShadow: "0 0 120px rgba(56, 189, 248, 0.25)" }}
-        />
-        <ParticleField />
+          <ParticleField />
       </motion.div>
 
       <motion.div
@@ -285,14 +281,20 @@ function Hero({ parallaxY }: { parallaxY: MotionValue<number> }) {
       </motion.div>
 
       <div className="absolute inset-x-0 bottom-8 flex justify-center">
-        <motion.span
-          className="flex h-14 w-24 items-center justify-center rounded-full border border-sky-500/40 bg-white/5 text-slate-200/60 backdrop-blur-xl"
+        <motion.button
+          className="flex h-14 w-14 items-center justify-center rounded-full border border-sky-500/40 bg-white/5 text-slate-200/60 backdrop-blur-xl hover:bg-white/10 hover:border-sky-500/60 transition-all duration-300"
           variants={floatingVariants}
           initial="initial"
           animate="animate"
+          onClick={() => {
+            const nextSection = document.getElementById('about');
+            nextSection?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
         >
-          Scroll
-        </motion.span>
+          <ArrowDown className="h-6 w-6" />
+        </motion.button>
       </div>
     </section>
   );
@@ -372,7 +374,7 @@ function About() {
             </div>
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/10">
               <Image
-                src={cardUrl("photo-1512406926046-631bb0abf902")}
+                src={cardUrl("photo-1581471273381-90b28eab0b7e")}
                 alt="Immersive LLCCUE experience"
                 width={720}
                 height={900}
@@ -476,7 +478,7 @@ function Leadership() {
       />
 
       <div className="mt-20">
-        <div className="grid gap-12 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-12 md:grid-cols-2 xl:grid-cols-4">
           {officers.flat().map((officer, idx) => (
             <FuturisticMemberCard key={officer.name} officer={officer} index={idx} />
           ))}
@@ -594,7 +596,7 @@ function Events() {
                   {event.title}
                 </p>
                 <p className="mt-3 text-sm text-slate-300/75">{event.description}</p>
-                <button className="mt-4 flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-sky-200/80 transition hover:text-sky-200">
+                <button className="liquid-button mt-4 flex items-center gap-2 text-xs uppercase tracking-[0.35em]">
                   {event.cta}
                   <ArrowUpRight className="h-3 w-3" />
                 </button>
@@ -609,74 +611,78 @@ function Events() {
 
 function Media() {
   return (
-    <section id="media" className="relative mx-auto max-w-6xl px-6 pb-24">
-      <SectionHeading
-        eyebrow="Media Hub"
-        title={"A living archive of light"}
-        subtitle={
-          "Explore our immersive galleries and story capsules capturing every pulse of LLCCUE. Digital magazine coming soon!"
-        }
-        align="center"
-      />
+    <>
+      <section id="media-gallery" className="relative mx-auto max-w-6xl px-6 pb-16">
+        <SectionHeading
+          eyebrow="Gallery"
+          title={"Visual stories of service"}
+          subtitle={
+            "Explore our immersive galleries capturing every pulse of LLCCUE's journey and impact."
+          }
+          align="center"
+        />
 
-      <div className="mt-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
-        <motion.div
-          {...fadeInUp()}
-          className="grid gap-8 sm:grid-cols-2"
-        >
-          {newsItems.map((item) => (
-            <article
-              key={item.title}
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/60"
-            >
-              <div className="relative h-48 w-full overflow-hidden">
+        <div className="mt-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+          <motion.div
+            {...fadeInUp()}
+            className="grid gap-8 sm:grid-cols-2"
+          >
+            {newsItems.map((item) => (
+              <article
+                key={item.title}
+                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/60"
+              >
+                <div className="relative h-48 w-full overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    width={640}
+                    height={480}
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/10 via-sky-500/20 to-slate-900/60" />
+                </div>
+                <div className="relative z-10 flex flex-col gap-3 p-6">
+                  <h3 className="text-xl font-semibold text-slate-100">{item.title}</h3>
+                  <p className="text-sm text-slate-300/75">{item.excerpt}</p>
+                  <Link
+                    href={item.href}
+                    className="mt-4 flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-sky-200/80 transition hover:text-sky-200"
+                  >
+                    Dive deeper
+                    <ArrowUpRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </motion.div>
+          <motion.div
+            {...fadeInUp(0.15)}
+            className="grid h-full gap-4 rounded-3xl border border-sky-500/30 bg-slate-900/60 p-4"
+          >
+            {galleryItems.map((src, idx) => (
+              <motion.div
+                key={src}
+                className="group relative h-40 overflow-hidden rounded-2xl border border-white/10"
+                whileHover={{ scale: 1.01 }}
+                transition={{ duration: 0.4 }}
+              >
                 <Image
-                  src={item.image}
-                  alt={item.title}
+                  src={src}
+                  alt={`Gallery item ${idx + 1}`}
                   width={640}
-                  height={480}
+                  height={360}
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/10 via-sky-500/20 to-slate-900/60" />
-              </div>
-              <div className="relative z-10 flex flex-col gap-3 p-6">
-                <h3 className="text-xl font-semibold text-slate-100">{item.title}</h3>
-                <p className="text-sm text-slate-300/75">{item.excerpt}</p>
-                <Link
-                  href={item.href}
-                  className="mt-4 flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-sky-200/80 transition hover:text-sky-200"
-                >
-                  Dive deeper
-                  <ArrowUpRight className="h-3 w-3" />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </motion.div>
-        <motion.div
-          {...fadeInUp(0.15)}
-          className="grid h-full gap-4 rounded-3xl border border-sky-500/30 bg-slate-900/60 p-4"
-        >
-          {galleryItems.map((src, idx) => (
-            <motion.div
-              key={src}
-              className="group relative h-40 overflow-hidden rounded-2xl border border-white/10"
-              whileHover={{ scale: 1.01 }}
-              transition={{ duration: 0.4 }}
-            >
-              <Image
-                src={src}
-                alt={`Gallery item ${idx + 1}`}
-                width={640}
-                height={360}
-                className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-900/30 via-transparent to-sky-400/20" />
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-900/30 via-transparent to-sky-400/20" />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <NewsSection />
+    </>
   );
 }
 

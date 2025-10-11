@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Activity } from "lucide-react";
+import { Activity, ChevronLeft, ChevronRight } from "lucide-react";
 import { GlassCard } from "./glass-card";
 import { SectionHeading } from "./section-heading";
 
@@ -14,23 +14,41 @@ interface ProjectHeatmap {
 
 export default function InteractiveImpactDashboard() {
   const [heatmap, setHeatmap] = useState<ProjectHeatmap[]>([]);
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(0);
+  const [availableMonths, setAvailableMonths] = useState<string[]>([]);
 
   useEffect(() => {
-    // Generate heatmap data for the last 3 months
+    // Generate heatmap data for the last 3 months (deterministic)
     const today = new Date();
     const threeMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 3, today.getDate());
     const heatmapData: ProjectHeatmap[] = [];
 
     const currentDate = new Date(threeMonthsAgo);
+    let dayCounter = 0;
+
     while (currentDate <= today) {
+      // Use deterministic pseudo-random based on date
+      const dateSeed = currentDate.getFullYear() * 10000 + (currentDate.getMonth() + 1) * 100 + currentDate.getDate();
+      const pseudoRandom = ((dateSeed * 9301 + 49297) % 233280) / 233280;
+
       heatmapData.push({
         date: new Date(currentDate),
-        projects: Math.floor(Math.random() * 5),
-        intensity: Math.random(),
+        projects: Math.floor(pseudoRandom * 5),
+        intensity: pseudoRandom,
       });
       currentDate.setDate(currentDate.getDate() + 1);
+      dayCounter++;
     }
     setHeatmap(heatmapData);
+
+    // Extract unique months
+    const months = [...new Set(heatmapData.map(d =>
+      d.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+    ))];
+    setAvailableMonths(months);
+
+    // Set current month to the most recent month
+    setCurrentMonthIndex(months.length - 1);
   }, []);
 
   const getHeatmapColor = (intensity: number) => {
@@ -39,6 +57,14 @@ export default function InteractiveImpactDashboard() {
     if (intensity < 0.6) return "bg-sky-700";
     if (intensity < 0.8) return "bg-sky-500";
     return "bg-sky-400";
+  };
+
+  const goToPreviousMonth = () => {
+    setCurrentMonthIndex(prev => Math.max(0, prev - 1));
+  };
+
+  const goToNextMonth = () => {
+    setCurrentMonthIndex(prev => Math.min(availableMonths.length - 1, prev + 1));
   };
 
   return (
@@ -57,80 +83,106 @@ export default function InteractiveImpactDashboard() {
         transition={{ duration: 0.6, delay: 0.5 }}
         className="mt-12"
       >
-        <GlassCard className="p-8">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xl font-semibold text-white">Activity Heatmap</h3>
-            <Activity className="h-5 w-5 text-slate-400" />
+        <GlassCard className="p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-white">Activity Heatmap</h3>
+            <Activity className="h-4 w-4 text-slate-400" />
           </div>
 
-          <div className="mb-4">
-            <p className="text-sm text-slate-400">
-              Showing activity for the past 3 months
+          <div className="mb-3">
+            <p className="text-xs text-slate-400">
+              Navigate through months to see activity
             </p>
           </div>
 
-          {/* Month labels and calendar grid */}
-          <div className="space-y-6">
-            {(() => {
-              const months = [...new Set(heatmap.map(d => d.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })))];
-              const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
+          {/* Month navigation */}
+          {availableMonths.length > 0 && (
+            <div className="flex items-center justify-between mb-4">
+              <button
+                onClick={goToPreviousMonth}
+                disabled={currentMonthIndex === 0}
+                className={`p-2 rounded-lg transition-colors ${
+                  currentMonthIndex === 0
+                    ? 'text-slate-600 cursor-not-allowed'
+                    : 'text-slate-300 hover:bg-slate-700 hover:text-white'
+                }`}
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
 
-              return months.map((monthLabel) => {
-                const monthData = heatmap.filter(d =>
-                  d.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) === monthLabel
-                );
-                const firstDay = new Date(monthData[0]?.date).getDay() || 0;
+              <h4 className="text-sm font-semibold text-slate-200">
+                {availableMonths[currentMonthIndex]}
+              </h4>
 
-                return (
-                  <div key={monthLabel} className="space-y-4">
-                    <h4 className="text-base font-semibold text-slate-200 mb-4">{monthLabel}</h4>
+              <button
+                onClick={goToNextMonth}
+                disabled={currentMonthIndex === availableMonths.length - 1}
+                className={`p-2 rounded-lg transition-colors ${
+                  currentMonthIndex === availableMonths.length - 1
+                    ? 'text-slate-600 cursor-not-allowed'
+                    : 'text-slate-300 hover:bg-slate-700 hover:text-white'
+                }`}
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          )}
 
-                    {/* Week day headers */}
-                    <div className="grid grid-cols-7 gap-2">
-                      {weekDays.map((day, i) => (
-                        <div key={i} className="text-center text-sm font-medium text-slate-400">
-                          {day}
-                        </div>
-                      ))}
+          {/* Calendar grid for current month */}
+          {availableMonths.length > 0 && (() => {
+            const currentMonthLabel = availableMonths[currentMonthIndex];
+            const monthData = heatmap.filter(d =>
+              d.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) === currentMonthLabel
+            );
+            const weekDays = ["S", "M", "T", "W", "T", "F", "S"];
+            const firstDay = new Date(monthData[0]?.date).getDay() || 0;
+
+            return (
+              <div className="space-y-2">
+                {/* Week day headers */}
+                <div className="grid grid-cols-7 gap-1">
+                  {weekDays.map((day, i) => (
+                    <div key={i} className="text-center text-xs font-medium text-slate-400">
+                      {day}
                     </div>
+                  ))}
+                </div>
 
-                    {/* Calendar grid */}
-                    <div className="grid grid-cols-7 gap-2">
-                      {/* Empty cells for days before month starts */}
-                      {Array.from({ length: firstDay }).map((_, i) => (
-                        <div key={`empty-${i}`} className="aspect-square" />
-                      ))}
+                {/* Calendar grid */}
+                <div className="grid grid-cols-7 gap-1">
+                  {/* Empty cells for days before month starts */}
+                  {Array.from({ length: firstDay }).map((_, i) => (
+                    <div key={`empty-${i}`} className="aspect-square" />
+                  ))}
 
-                      {/* Actual days */}
-                      {monthData.map((day, index) => (
-                        <motion.div
-                          key={`${monthLabel}-${index}`}
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 1 }}
-                          transition={{ duration: 0.3, delay: 0.6 + index * 0.01 }}
-                          className={`aspect-square rounded-lg ${getHeatmapColor(day.intensity)} cursor-pointer hover:scale-110 transition-transform duration-200 flex items-center justify-center p-1`}
-                          title={`${day.date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}: ${day.projects} projects`}
-                        >
-                          <span className="text-sm text-white font-semibold">
-                            {day.date.getDate()}
-                          </span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              });
-            })()}
-          </div>
+                  {/* Actual days */}
+                  {monthData.map((day, index) => (
+                    <motion.div
+                      key={`${currentMonthLabel}-${index}`}
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.3, delay: 0.6 + index * 0.01 }}
+                      className={`aspect-square rounded-md ${getHeatmapColor(day.intensity)} cursor-pointer hover:scale-110 transition-transform duration-200 flex items-center justify-center p-0.5`}
+                      title={`${day.date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}: ${day.projects} projects`}
+                    >
+                      <span className="text-xs text-white font-semibold">
+                        {day.date.getDate()}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
 
-          <div className="mt-8 flex items-center justify-between text-xs text-slate-400">
+          <div className="mt-4 flex items-center justify-between text-xs text-slate-400">
             <span>Less activity</span>
-            <div className="flex gap-1">
-              <div className="h-3 w-3 bg-slate-800 rounded" />
-              <div className="h-3 w-3 bg-sky-900 rounded" />
-              <div className="h-3 w-3 bg-sky-700 rounded" />
-              <div className="h-3 w-3 bg-sky-500 rounded" />
-              <div className="h-3 w-3 bg-sky-400 rounded" />
+            <div className="flex gap-0.5">
+              <div className="h-2 w-2 bg-slate-800 rounded" />
+              <div className="h-2 w-2 bg-sky-900 rounded" />
+              <div className="h-2 w-2 bg-sky-700 rounded" />
+              <div className="h-2 w-2 bg-sky-500 rounded" />
+              <div className="h-2 w-2 bg-sky-400 rounded" />
             </div>
             <span>More activity</span>
           </div>
