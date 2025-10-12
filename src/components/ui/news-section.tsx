@@ -92,8 +92,8 @@ export function NewsSection() {
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         <SectionHeading
           title="Lions News Hub"
-          description="Stay updated with the latest from Lions International and service communities worldwide"
-          gradient="from-blue-400 to-cyan-400"
+          subtitle="Stay updated with the latest from Lions International and service communities worldwide"
+          align="center"
         />
 
         {/* Category Filter and Refresh */}

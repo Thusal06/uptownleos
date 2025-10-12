@@ -44,7 +44,28 @@ interface NewsArticle {
   guid?: string;
 }
 
-async function fetchRSSFeed(feedUrl: string): Promise<any[]> {
+interface RSSItem {
+  title?: string;
+  link?: string;
+  pubDate?: string;
+  contentSnippet?: string;
+  description?: string;
+  content?: string;
+  image?: string;
+  'media:content'?: {
+    $?: {
+      url?: string;
+    };
+  };
+  enclosure?: {
+    url?: string;
+    type?: string;
+  };
+  'content:encoded'?: string;
+  guid?: string;
+}
+
+async function fetchRSSFeed(feedUrl: string): Promise<RSSItem[]> {
   try {
     const feed = await parser.parseURL(feedUrl);
     return feed.items || [];
@@ -54,7 +75,7 @@ async function fetchRSSFeed(feedUrl: string): Promise<any[]> {
   }
 }
 
-function extractImageUrl(item: any): string | undefined {
+function extractImageUrl(item: RSSItem): string | undefined {
   // Try multiple image sources
   if (item.image) return item.image;
   if (item['media:content']?.['$']?.url) return item['media:content']['$'].url;
@@ -81,7 +102,7 @@ function extractImageUrl(item: any): string | undefined {
   return lionsImages[titleHash];
 }
 
-function generateArticleId(item: any): string {
+function generateArticleId(item: RSSItem): string {
   const content = `${item.title || ''}${item.link || ''}${item.pubDate || ''}`;
   return Buffer.from(content).toString('base64').substring(0, 16);
 }
@@ -105,7 +126,7 @@ function cleanText(text: string): string {
   return cleaned;
 }
 
-function isLionsRelated(item: any): boolean {
+function isLionsRelated(item: RSSItem): boolean {
   const text = `${item.title || ''} ${item.contentSnippet || ''} ${item.description || ''}`.toLowerCase();
   const lionsKeywords = [
     'lions', 'lionism', 'leo club', 'lions club', 'lions international',
@@ -120,7 +141,7 @@ export async function GET(request: NextRequest) {
     const category = searchParams.get('category');
     const limit = parseInt(searchParams.get('limit') || '20');
 
-    let allArticles: NewsArticle[] = [];
+    const allArticles: NewsArticle[] = [];
 
     // Fetch all RSS feeds
     for (const feed of RSS_FEEDS) {

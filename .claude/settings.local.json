@@ -18,7 +18,8 @@
       "mcp__TestSprite__testsprite_generate_frontend_test_plan",
       "mcp__TestSprite__testsprite_generate_standardized_prd",
       "Bash(copy \"testsprite_tests\\tmp\\prd.md\" \"testsprite_tests\\standard_prd.json\")",
-      "Bash(node \"C:\\Users\\Thusal Ranawaka\\AppData\\Local\\npm-cache\\_npx\\8ddf6bea01b2519d\\node_modules\\@testsprite\\testsprite-mcp\\dist\\index.js\" generateCodeAndExecute)"
+      "Bash(node \"C:\\Users\\Thusal Ranawaka\\AppData\\Local\\npm-cache\\_npx\\8ddf6bea01b2519d\\node_modules\\@testsprite\\testsprite-mcp\\dist\\index.js\" generateCodeAndExecute)",
+      "Bash(npm run build)"
     ],
     "deny": [],
     "ask": []
