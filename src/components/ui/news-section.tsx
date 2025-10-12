@@ -35,6 +35,7 @@ const CATEGORIES = [
 ];
 
 const LOADING_SKELETONS = 6;
+const ARTICLES_PER_PAGE = 6;
 
 export function NewsSection() {
   const [newsData, setNewsData] = useState<NewsResponse | null>(null);
@@ -42,14 +43,15 @@ export function NewsSection() {
   const [error, setError] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [refreshing, setRefreshing] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchNews = async (showRefreshAnimation = false) => {
     try {
       if (showRefreshAnimation) setRefreshing(true);
 
       const url = selectedCategory === "all"
-        ? "/api/news?limit=12"
-        : `/api/news?category=${selectedCategory}&limit=12`;
+        ? "/api/news?limit=50"
+        : `/api/news?category=${selectedCategory}&limit=50`;
 
       const response = await fetch(url);
       const data = await response.json();
@@ -72,6 +74,7 @@ export function NewsSection() {
 
   useEffect(() => {
     setLoading(true);
+    setCurrentPage(1);
     fetchNews();
   }, [selectedCategory]);
 
@@ -79,7 +82,23 @@ export function NewsSection() {
     fetchNews(true);
   };
 
-  const filteredArticles = newsData?.articles || [];
+  const allArticles = newsData?.articles || [];
+  const totalPages = Math.ceil(allArticles.length / ARTICLES_PER_PAGE);
+  const startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
+  const endIndex = startIndex + ARTICLES_PER_PAGE;
+  const currentArticles = allArticles.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage(prev => Math.max(1, prev - 1));
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(prev => Math.min(totalPages, prev + 1));
+  };
 
   return (
     <section id="news" className="relative py-20 pb-24">
@@ -174,7 +193,7 @@ export function NewsSection() {
                   </motion.button>
                 </GlassCard>
               </motion.div>
-            ) : filteredArticles.length === 0 ? (
+            ) : currentArticles.length === 0 ? (
               // Empty State
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -194,12 +213,69 @@ export function NewsSection() {
               </motion.div>
             ) : (
               // News Articles
-              filteredArticles.map((article, index) => (
-                <NewsCard key={article.id} article={article} index={index} />
+              currentArticles.map((article, index) => (
+                <NewsCard key={`${article.id}-${currentPage}`} article={article} index={index} />
               ))
             )}
           </AnimatePresence>
         </div>
+
+        {/* Pagination Controls */}
+        {!loading && !error && totalPages > 1 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="flex justify-center items-center gap-2 mt-12"
+          >
+            {/* Previous Button */}
+            <motion.button
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+              className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl text-white/80 hover:text-white hover:bg-white/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              whileHover={{ scale: currentPage === 1 ? 1 : 1.05 }}
+              whileTap={{ scale: currentPage === 1 ? 1 : 0.95 }}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Previous
+            </motion.button>
+
+            {/* Page Numbers */}
+            <div className="flex items-center gap-1">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <motion.button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`w-10 h-10 rounded-full text-sm font-medium transition-all duration-300 ${
+                    currentPage === page
+                      ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
+                      : "border border-white/20 bg-white/10 backdrop-blur-xl text-white/80 hover:text-white hover:bg-white/20"
+                  }`}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  {page}
+                </motion.button>
+              ))}
+            </div>
+
+            {/* Next Button */}
+            <motion.button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+              className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl text-white/80 hover:text-white hover:bg-white/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              whileHover={{ scale: currentPage === totalPages ? 1 : 1.05 }}
+              whileTap={{ scale: currentPage === totalPages ? 1 : 0.95 }}
+            >
+              Next
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </motion.button>
+          </motion.div>
+        )}
 
         {/* Last Updated Info */}
         {newsData && !loading && (
@@ -212,11 +288,10 @@ export function NewsSection() {
             <p className="text-white/50 text-sm">
               Last updated: {new Date(newsData.lastUpdated).toLocaleString()}
             </p>
-            {newsData.total > filteredArticles.length && (
-              <p className="text-white/40 text-xs mt-1">
-                Showing {filteredArticles.length} of {newsData.total} articles
-              </p>
-            )}
+            <p className="text-white/40 text-xs mt-1">
+              Showing {startIndex + 1}-{Math.min(endIndex, allArticles.length)} of {allArticles.length} articles
+              {totalPages > 1 && ` (Page ${currentPage} of ${totalPages})`}
+            </p>
           </motion.div>
         )}
       </div>
