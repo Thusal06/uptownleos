@@ -48,9 +48,9 @@ export function NewsCard({ article, index }: NewsCardProps) {
       whileHover={{ y: -8 }}
       className="h-full"
     >
-      <GlassCard className="group h-full flex flex-col p-0 overflow-hidden glass-card-hover rounded-t-3xl">
+      <GlassCard className="group h-full flex flex-col p-0 overflow-hidden glass-card-hover">
         {/* Article Image */}
-        <div className="relative h-56 overflow-hidden rounded-t-3xl">
+        <div className="relative h-56 overflow-hidden rounded-t-3xl shadow-inner">
           {article.image ? (
             <Image
               src={article.image}
@@ -66,8 +66,8 @@ export function NewsCard({ article, index }: NewsCardProps) {
             />
           ) : (
             <div className="h-full w-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center rounded-t-3xl">
-              <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                <ExternalLink className="w-10 h-10 text-white/60" />
+              <div className="w-24 h-24 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                <ExternalLink className="w-12 h-12 text-white/60" />
               </div>
             </div>
           )}
@@ -148,9 +148,9 @@ export function NewsCardSkeleton({ index }: NewsCardSkeletonProps) {
       transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
       className="h-full"
     >
-      <GlassCard className="h-full flex flex-col p-0 overflow-hidden rounded-t-3xl">
+      <GlassCard className="h-full flex flex-col p-0 overflow-hidden">
         {/* Image Skeleton */}
-        <div className="h-56 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 animate-pulse relative rounded-t-3xl">
+        <div className="h-56 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 animate-pulse relative rounded-t-3xl shadow-inner">
           <div className="absolute top-3 left-3 h-6 w-16 bg-white/10 rounded-full animate-pulse" />
           <div className="absolute top-3 right-3 h-6 w-12 bg-white/10 rounded-full animate-pulse" />
         </div>

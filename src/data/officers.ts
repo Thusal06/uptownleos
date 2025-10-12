@@ -15,17 +15,23 @@ export const officers: Officer[] = [
     name: "Leo Lion Anuk Nisalitha",
     role: "Club President",
     avatar: "/board/anuk.jpeg",
-    biography: "Visionary leader who spearheaded the chartering of LLCCUE and continues to drive the club's innovative approach to service.",
-    background: "Leo Lion Anuk Nisalitha leads LLCCUE with a strong commitment to modernizing service delivery through technology and youth engagement. Under his leadership, the club has established itself as a forward-thinking Leo club in District 306 D7.",
+    biography: "Accomplished environmental leader, scout, and emerging entrepreneur recognized for vision, leadership, and commitment to meaningful change. Proud alumnus of Ananda College and President's Scout Award recipient.",
+    background: "Leo Lion Anuk Nisalitha is a distinguished youth leader with exceptional achievements in environmental conservation, scouting, and community service. As a School Coloursman and recipient of the President's Scout Award (highest Scouting honor in Sri Lanka) and President's Environment Pioneer, he has demonstrated outstanding leadership across multiple domains. His educational journey at Ananda College was marked by academic excellence, environmental activism, and exceptional service, laying the foundation for his emergence as one of Sri Lanka's most promising young leaders.",
     achievements: [
-      "Led the chartering of LLCCUE under Lions International",
-      "Organized Aurum'25 Charter Installation Ceremony",
-      "Established strategic partnerships with multiple organizations",
-      "Pioneered digital service delivery methods"
+      "President's Scout Award - Highest Scouting honor in Sri Lanka",
+      "President's Environment Pioneer Award",
+      "Led Ananda College Environmental Society (ACES) to Best Society Gold Medal",
+      "Secured President's Environmental Award for Ananda College",
+      "Founded 'Eco Vision' - Ananda College's first environmental magazine",
+      "Environmental Leadership Award from Central Environmental Authority of Sri Lanka",
+      "Most Outstanding Environmental Pioneer (2022/23) of Ananda College",
+      "District President's Appreciation Award & District Governor's Appreciation Award",
+      "Led chartering of LLCCUE under Lions International",
+      "Organized Aurum'25 Charter Installation Ceremony"
     ],
     joinedYear: "2025",
     email: "anuk@llccue.org",
-    quote: "Leadership is not about being in charge. It's about taking care of those in your charge."
+    quote: "Leadership exemplifies the essence of the Leo spirit: service before self, vision before victory, and purpose before praise."
   },
   {
     name: "Leo Lion Thusal Ranawaka",

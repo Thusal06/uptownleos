@@ -106,3 +106,12 @@ pids
 
 # Claude Code settings
 .claude/settings.local.json
+
+# TestSprite and test directories
+testsprite_tests/
+test-results/
+playwright-report/
+
+# Documentation files (optional - uncomment if you want to ignore)
+# PRODUCT_REQUIREMENTS.md
+# *.md
