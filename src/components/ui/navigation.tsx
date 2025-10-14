@@ -85,7 +85,7 @@ export default function Navigation() {
           {/* CTA Button */}
           <div className="hidden lg:block">
             <a
-              href="https://forms.gle/TjHd3bw3H8S53fGj6"
+              href="https://forms.gle/sQYfyG5Vu2ZEb7y47"
               target="_blank"
               rel="noopener noreferrer"
               className="neon-button px-6 py-2 text-sm font-semibold inline-flex items-center gap-2 group"
@@ -125,7 +125,7 @@ export default function Navigation() {
               </Link>
             ))}
             <a
-              href="https://forms.gle/TjHd3bw3H8S53fGj6"
+              href="https://forms.gle/sQYfyG5Vu2ZEb7y47"
               target="_blank"
               rel="noopener noreferrer"
               className="block mx-4 mt-4 neon-button px-6 py-3 text-center text-sm font-semibold inline-flex items-center justify-center gap-2 group"
