@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Plus,
@@ -10,59 +10,27 @@ import {
   UserPlus,
   Crown,
   Shield,
+  Save,
+  X,
 } from "lucide-react";
 import Image from "next/image";
 import { GlassCard } from "@/components/ui/glass-card";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 interface Officer {
-  id: string;
+  _id: string;
   name: string;
   role: string;
   email: string;
-  phone: string;
   avatar: string;
+  biography: string;
+  background: string;
+  achievements: string[];
+  joinedYear: string;
+  quote: string;
   isActive: boolean;
+  order: number;
 }
-
-const mockOfficers: Officer[] = [
-  {
-    id: "1",
-    name: "Club President",
-    role: "President",
-    email: "president@llccue.org",
-    phone: "+94 77 000 0001",
-    avatar: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=150&h=150&fit=facearea",
-    isActive: true,
-  },
-  {
-    id: "2",
-    name: "Club Secretary",
-    role: "Secretary",
-    email: "secretary@llccue.org",
-    phone: "+94 77 000 0002",
-    avatar: "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=150&h=150&fit=facearea",
-    isActive: true,
-  },
-  {
-    id: "3",
-    name: "Club Treasurer",
-    role: "Treasurer",
-    email: "treasurer@llccue.org",
-    phone: "+94 77 000 0003",
-    avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&h=150&fit=facearea",
-    isActive: true,
-  },
-  {
-    id: "4",
-    name: "Club Vice President",
-    role: "Vice President",
-    email: "vicepresident@llccue.org",
-    phone: "+94 77 000 0004",
-    avatar: "https://images.unsplash.com/photo-1541534401786-2077eed87a75?w=150&h=150&fit=facearea",
-    isActive: true,
-  },
-];
 
 const roleIcons: { [key: string]: React.ReactNode } = {
   President: <Crown className="h-4 w-4 text-yellow-400" />,
@@ -72,9 +40,40 @@ const roleIcons: { [key: string]: React.ReactNode } = {
 };
 
 export default function LeadershipManagement() {
-  const [officers, setOfficers] = useState<Officer[]>(mockOfficers);
+  const [officers, setOfficers] = useState<Officer[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
+  const [editingOfficer, setEditingOfficer] = useState<Officer | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [formData, setFormData] = useState({
+    name: "",
+    role: "",
+    email: "",
+    avatar: "",
+    biography: "",
+    background: "",
+    achievements: "",
+    joinedYear: "",
+    quote: "",
+  });
+
+  useEffect(() => {
+    fetchOfficers();
+  }, []);
+
+  const fetchOfficers = async () => {
+    try {
+      const response = await fetch('/api/officers');
+      const data = await response.json();
+      if (data.success) {
+        setOfficers(data.data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch officers:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredOfficers = officers.filter(
     (officer) =>
@@ -82,18 +81,106 @@ export default function LeadershipManagement() {
       officer.role.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleDelete = (id: string) => {
-    setOfficers(officers.filter((officer) => officer.id !== id));
+  const handleDelete = async (id: string) => {
+    if (confirm('Are you sure you want to delete this officer?')) {
+      try {
+        const response = await fetch(`/api/officers/${id}`, {
+          method: 'DELETE',
+        });
+        if (response.ok) {
+          setOfficers(officers.filter((officer) => officer._id !== id));
+        }
+      } catch (error) {
+        console.error('Failed to delete officer:', error);
+      }
+    }
   };
 
-  const handleToggleActive = (id: string) => {
-    setOfficers(
-      officers.map((officer) =>
-        officer.id === id
-          ? { ...officer, isActive: !officer.isActive }
-          : officer
-      )
-    );
+  const handleToggleActive = async (id: string) => {
+    const officer = officers.find(o => o._id === id);
+    if (officer) {
+      try {
+        const response = await fetch(`/api/officers/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ isActive: !officer.isActive }),
+        });
+        if (response.ok) {
+          setOfficers(
+            officers.map((officer) =>
+              officer._id === id
+                ? { ...officer, isActive: !officer.isActive }
+                : officer
+            )
+          );
+        }
+      } catch (error) {
+        console.error('Failed to toggle officer status:', error);
+      }
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const payload = {
+        ...formData,
+        achievements: formData.achievements.split('\n').filter(a => a.trim()),
+      };
+
+      const url = editingOfficer ? `/api/officers/${editingOfficer._id}` : '/api/officers';
+      const method = editingOfficer ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        setShowAddModal(false);
+        setEditingOfficer(null);
+        resetForm();
+        fetchOfficers();
+      }
+    } catch (error) {
+      console.error('Failed to save officer:', error);
+    }
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      role: "",
+      email: "",
+      avatar: "",
+      biography: "",
+      background: "",
+      achievements: "",
+      joinedYear: "",
+      quote: "",
+    });
+  };
+
+  const openEditModal = (officer: Officer) => {
+    setEditingOfficer(officer);
+    setFormData({
+      name: officer.name,
+      role: officer.role,
+      email: officer.email,
+      avatar: officer.avatar,
+      biography: officer.biography,
+      background: officer.background,
+      achievements: officer.achievements.join('\n'),
+      joinedYear: officer.joinedYear,
+      quote: officer.quote,
+    });
+    setShowAddModal(true);
   };
 
   return (
@@ -131,7 +218,7 @@ export default function LeadershipManagement() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filteredOfficers.map((officer, index) => (
           <motion.div
-            key={officer.id}
+            key={officer._id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -180,21 +267,24 @@ export default function LeadershipManagement() {
                 <div className="px-6 pb-6">
                   <div className="space-y-2 text-sm text-slate-300/70">
                     <p>📧 {officer.email}</p>
-                    <p>📱 {officer.phone}</p>
+                    <p>📅 Joined {officer.joinedYear}</p>
                   </div>
 
                   <div className="mt-4 flex items-center gap-2">
                     <button
-                      onClick={() => handleToggleActive(officer.id)}
+                      onClick={() => handleToggleActive(officer._id)}
                       className="flex-1 rounded-lg border border-white/10 bg-slate-900/70 px-3 py-2 text-xs font-medium text-slate-300 transition hover:border-sky-400/60 hover:bg-slate-900/80"
                     >
                       {officer.isActive ? "Deactivate" : "Activate"}
                     </button>
-                    <button className="rounded-lg border border-white/10 bg-slate-900/70 p-2 text-slate-300 transition hover:border-blue-400/60 hover:bg-slate-900/80">
+                    <button
+                      onClick={() => openEditModal(officer)}
+                      className="rounded-lg border border-white/10 bg-slate-900/70 p-2 text-slate-300 transition hover:border-blue-400/60 hover:bg-slate-900/80"
+                    >
                       <Edit className="h-3 w-3" />
                     </button>
                     <button
-                      onClick={() => handleDelete(officer.id)}
+                      onClick={() => handleDelete(officer._id)}
                       className="rounded-lg border border-white/10 bg-slate-900/70 p-2 text-slate-300 transition hover:border-red-400/60 hover:bg-slate-900/80"
                     >
                       <Trash2 className="h-3 w-3" />
@@ -207,71 +297,170 @@ export default function LeadershipManagement() {
         ))}
       </div>
 
-      {/* Add Officer Modal */}
+      {/* Add/Edit Officer Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm">
-          <GlassCard className="w-full max-w-md">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
+          <GlassCard className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="p-6">
-              <h3 className="text-xl font-semibold text-slate-100 mb-4">
-                Add New Officer
-              </h3>
-              <form className="space-y-4">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-semibold text-slate-100">
+                  {editingOfficer ? "Edit Officer" : "Add New Officer"}
+                </h3>
+                <button
+                  onClick={() => {
+                    setShowAddModal(false);
+                    setEditingOfficer(null);
+                    resetForm();
+                  }}
+                  className="rounded-lg border border-white/10 bg-slate-900/70 p-2 text-slate-300 transition hover:border-slate-400/60 hover:bg-slate-900/80"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                      Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      className="w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+                      placeholder="Enter officer name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                      Role *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.role}
+                      onChange={(e) => setFormData({...formData, role: e.target.value})}
+                      className="w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+                      placeholder="e.g., Club President"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      className="w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+                      placeholder="Enter email address"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                      Joined Year *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.joinedYear}
+                      onChange={(e) => setFormData({...formData, joinedYear: e.target.value})}
+                      className="w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+                      placeholder="e.g., 2025"
+                    />
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-2">
-                    Name
+                    Avatar URL *
+                  </label>
+                  <input
+                    type="url"
+                    required
+                    value={formData.avatar}
+                    onChange={(e) => setFormData({...formData, avatar: e.target.value})}
+                    className="w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+                    placeholder="Enter avatar image URL"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Biography *
+                  </label>
+                  <textarea
+                    required
+                    rows={3}
+                    value={formData.biography}
+                    onChange={(e) => setFormData({...formData, biography: e.target.value})}
+                    className="w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+                    placeholder="Brief biography"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Background
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={formData.background}
+                    onChange={(e) => setFormData({...formData, background: e.target.value})}
+                    className="w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+                    placeholder="Detailed background information"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Achievements (one per line)
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={formData.achievements}
+                    onChange={(e) => setFormData({...formData, achievements: e.target.value})}
+                    className="w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+                    placeholder="Enter achievements, one per line"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Quote
                   </label>
                   <input
                     type="text"
+                    value={formData.quote}
+                    onChange={(e) => setFormData({...formData, quote: e.target.value})}
                     className="w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
-                    placeholder="Enter officer name"
+                    placeholder="Inspirational quote"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    Role
-                  </label>
-                  <select className="w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40">
-                    <option value="">Select role</option>
-                    <option value="President">President</option>
-                    <option value="Vice President">Vice President</option>
-                    <option value="Secretary">Secretary</option>
-                    <option value="Treasurer">Treasurer</option>
-                    <option value="Director">Director</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    className="w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
-                    placeholder="Enter email address"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    className="w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition focus:border-sky-500/70 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
-                    placeholder="Enter phone number"
-                  />
-                </div>
+
                 <div className="flex gap-3 pt-4">
                   <button
                     type="button"
-                    onClick={() => setShowAddModal(false)}
+                    onClick={() => {
+                      setShowAddModal(false);
+                      setEditingOfficer(null);
+                      resetForm();
+                    }}
                     className="flex-1 rounded-lg border border-white/10 bg-slate-900/70 px-4 py-2 text-sm font-medium text-slate-300 transition hover:border-slate-400/60 hover:bg-slate-900/80"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 rounded-lg border border-sky-500/40 bg-sky-500/20 px-4 py-2 text-sm font-medium text-sky-200 transition hover:border-sky-400/80 hover:bg-sky-500/30"
+                    className="flex-1 rounded-lg border border-sky-500/40 bg-sky-500/20 px-4 py-2 text-sm font-medium text-sky-200 transition hover:border-sky-400/80 hover:bg-sky-500/30 flex items-center justify-center gap-2"
                   >
-                    Add Officer
+                    <Save className="h-4 w-4" />
+                    {editingOfficer ? "Update Officer" : "Add Officer"}
                   </button>
                 </div>
               </form>

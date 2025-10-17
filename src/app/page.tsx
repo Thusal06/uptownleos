@@ -19,7 +19,7 @@ import {
   type Variants,
   type Easing,
 } from "framer-motion";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
@@ -30,8 +30,22 @@ import AIProjectMatcher from "@/components/ui/ai-project-matcher";
 import Navigation from "@/components/ui/navigation";
 import Footer from "@/components/ui/footer";
 import { NewsSection } from "@/components/ui/news-section";
-import { officers } from "@/data/officers";
 import Link from "next/link";
+
+interface Officer {
+  _id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  biography: string;
+  background: string;
+  achievements: string[];
+  joinedYear: string;
+  email: string;
+  quote: string;
+  isActive: boolean;
+  order: number;
+}
 
 
 type ProjectCategory = {
@@ -466,6 +480,45 @@ function Timeline() {
 }
 
 function Leadership() {
+  const [officers, setOfficers] = useState<Officer[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchOfficers() {
+      try {
+        const response = await fetch('/api/officers?active=true');
+        const data = await response.json();
+        if (data.success) {
+          setOfficers(data.data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch officers:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchOfficers();
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="leadership" className="relative mx-auto max-w-6xl px-6 pb-24">
+        <SectionHeading
+          eyebrow="Faces of the Club"
+          title={"Leadership in 3D"}
+          subtitle={
+            "Experience our team through interactive 3D profiles showcasing service hours, projects, and achievements."
+          }
+          align="center"
+        />
+        <div className="mt-20 text-center text-slate-400">
+          Loading leadership team...
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="leadership" className="relative mx-auto max-w-6xl px-6 pb-24">
       <SectionHeading
@@ -479,8 +532,8 @@ function Leadership() {
 
       <div className="mt-20">
         <div className="grid gap-12 md:grid-cols-2 xl:grid-cols-4">
-          {officers.flat().map((officer, idx) => (
-            <FuturisticMemberCard key={officer.name} officer={officer} index={idx} />
+          {officers.map((officer, idx) => (
+            <FuturisticMemberCard key={officer._id} officer={officer} index={idx} />
           ))}
         </div>
       </div>
