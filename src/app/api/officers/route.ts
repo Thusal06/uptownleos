@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Officer, { IOfficer } from '@/models/Officer';
+import Officer from '@/models/Officer';
+
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
+interface QueryFilter {
+  isActive?: boolean;
+}
 
 export async function GET(request: NextRequest) {
   try {
@@ -9,7 +16,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const active = searchParams.get('active');
 
-    let query: any = {};
+    const query: QueryFilter = {};
     if (active === 'true') {
       query.isActive = true;
     }
@@ -35,10 +42,11 @@ export async function POST(request: NextRequest) {
     await officer.save();
 
     return NextResponse.json({ success: true, data: officer }, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error creating officer:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create officer';
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to create officer' },
+      { success: false, error: errorMessage },
       { status: 400 }
     );
   }

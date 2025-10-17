@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import News, { INews } from '@/models/News';
+import News from '@/models/News';
+
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
@@ -12,7 +15,11 @@ export async function GET(request: NextRequest) {
     const category = searchParams.get('category');
     const limit = parseInt(searchParams.get('limit') || '10');
 
-    let query: any = {};
+    const query: {
+      isPublished?: boolean;
+      featured?: boolean;
+      category?: string;
+    } = {};
     if (published === 'true') query.isPublished = true;
     if (featured === 'true') query.featured = true;
     if (category) query.category = category;
@@ -46,10 +53,11 @@ export async function POST(request: NextRequest) {
     await news.save();
 
     return NextResponse.json({ success: true, data: news }, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error creating news:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create news';
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to create news' },
+      { success: false, error: errorMessage },
       { status: 400 }
     );
   }

@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Application, { IApplication } from '@/models/Application';
+import Application from '@/models/Application';
+
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
@@ -10,7 +13,9 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get('status');
     const limit = parseInt(searchParams.get('limit') || '20');
 
-    let query: any = {};
+    const query: {
+      status?: string;
+    } = {};
     if (status) query.status = status;
 
     const applications = await Application.find(query)
@@ -36,10 +41,11 @@ export async function POST(request: NextRequest) {
     await application.save();
 
     return NextResponse.json({ success: true, data: application }, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error creating application:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create application';
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to create application' },
+      { success: false, error: errorMessage },
       { status: 400 }
     );
   }

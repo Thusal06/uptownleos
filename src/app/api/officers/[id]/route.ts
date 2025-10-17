@@ -1,16 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Officer, { IOfficer } from '@/models/Officer';
+import Officer from '@/models/Officer';
 
-interface Params {
-  params: { id: string };
-}
-
-export async function GET(request: NextRequest, { params }: Params) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectDB();
 
-    const officer = await Officer.findById(params.id);
+    const { id } = await params;
+    const officer = await Officer.findById(id);
 
     if (!officer) {
       return NextResponse.json(
@@ -29,13 +26,14 @@ export async function GET(request: NextRequest, { params }: Params) {
   }
 }
 
-export async function PUT(request: NextRequest, { params }: Params) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectDB();
 
+    const { id } = await params;
     const body = await request.json();
     const officer = await Officer.findByIdAndUpdate(
-      params.id,
+      id,
       body,
       { new: true, runValidators: true }
     );
@@ -48,20 +46,22 @@ export async function PUT(request: NextRequest, { params }: Params) {
     }
 
     return NextResponse.json({ success: true, data: officer });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error updating officer:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to update officer';
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to update officer' },
+      { success: false, error: errorMessage },
       { status: 400 }
     );
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: Params) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectDB();
 
-    const officer = await Officer.findByIdAndDelete(params.id);
+    const { id } = await params;
+    const officer = await Officer.findByIdAndDelete(id);
 
     if (!officer) {
       return NextResponse.json(

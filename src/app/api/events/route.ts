@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Event, { IEvent } from '@/models/Event';
+import Event from '@/models/Event';
+
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
@@ -11,7 +14,10 @@ export async function GET(request: NextRequest) {
     const type = searchParams.get('type');
     const limit = parseInt(searchParams.get('limit') || '10');
 
-    let query: any = {};
+    const query: {
+      status?: string;
+      type?: string;
+    } = {};
     if (status) query.status = status;
     if (type) query.type = type;
 
@@ -38,10 +44,11 @@ export async function POST(request: NextRequest) {
     await event.save();
 
     return NextResponse.json({ success: true, data: event }, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error creating event:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create event';
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to create event' },
+      { success: false, error: errorMessage },
       { status: 400 }
     );
   }
