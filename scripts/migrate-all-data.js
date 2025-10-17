@@ -47,6 +47,24 @@ const officers = [
     order: 1
   },
   {
+    name: "Leo Lion Yohani Gunathilaka",
+    role: "Assistant Secretary",
+    avatar: "/board/yohani.jpg",
+    biography: "Detail-oriented administrator supporting the Club Secretary in managing official documentation, communications, and ensuring smooth administrative operations.",
+    background: "Leo Lion Yohani Gunathilaka serves as Assistant Secretary, providing crucial support to the Club Secretary in managing all administrative functions of LLCCUE. Her attention to detail and organizational skills ensure that all club records are maintained accurately and communications are handled efficiently.",
+    achievements: [
+      "Assists in maintaining official club records and documentation",
+      "Supports communication with members and external stakeholders",
+      "Helps coordinate club meetings and events",
+      "Ensures compliance with Lions International administrative standards"
+    ],
+    joinedYear: "2025",
+    email: "yohani@llccue.org",
+    quote: "Efficient administration is the foundation of effective service.",
+    isActive: true,
+    order: 2
+  },
+  {
     name: "Leo Lion Rinoshi Nihara",
     role: "Club Treasurer",
     avatar: "/board/rinoshi.jpg",
@@ -62,7 +80,7 @@ const officers = [
     email: "rinoshi@llccue.org",
     quote: "Transparency in finances builds trust and multiplies our service capacity.",
     isActive: true,
-    order: 2
+    order: 3
   },
   {
     name: "Leo Lion Vihandu Wanniarachchi",
@@ -80,7 +98,7 @@ const officers = [
     email: "vihandu@llccue.org",
     quote: "Great service requires both vision and meticulous execution.",
     isActive: true,
-    order: 3
+    order: 17
   },
   {
     name: "Leo Lion Savindu Pahasara",
@@ -98,7 +116,7 @@ const officers = [
     email: "savindu@llccue.org",
     quote: "Protecting our environment is protecting our future.",
     isActive: true,
-    order: 4
+    order: 17
   },
   {
     name: "Leo Lion Sasira Vihanga",
@@ -116,7 +134,7 @@ const officers = [
     email: "sasira@llccue.org",
     quote: "Every story of service has the power to inspire more service.",
     isActive: true,
-    order: 5
+    order: 17
   },
   {
     name: "Leo Lion Hesani Vithanage",
@@ -134,7 +152,7 @@ const officers = [
     email: "hesani@llccue.org",
     quote: "Global service begins with local action and international collaboration.",
     isActive: true,
-    order: 6
+    order: 17
   },
   {
     name: "Leo Lion Tharuja Wanaguru",
@@ -152,7 +170,7 @@ const officers = [
     email: "tharuja@llccue.org",
     quote: "Service knows no borders when hearts unite across cultures.",
     isActive: true,
-    order: 7
+    order: 17
   },
   {
     name: "Leo Lion Seyara Ranaweera",
@@ -170,7 +188,7 @@ const officers = [
     email: "seyara@llccue.org",
     quote: "Service is the language that connects hearts and transforms communities.",
     isActive: true,
-    order: 8
+    order: 17
   },
   {
     name: "Leo Lion Thesara Ranaweera",
@@ -188,7 +206,7 @@ const officers = [
     email: "thesara@llccue.org",
     quote: "Leadership is not inherited, it's cultivated through guidance and practice.",
     isActive: true,
-    order: 9
+    order: 17
   },
   {
     name: "Leo Lion Methira Gunathilaka",
@@ -206,7 +224,7 @@ const officers = [
     email: "methira@llccue.org",
     quote: "Fun and service go hand in hand to create lasting impact.",
     isActive: true,
-    order: 10
+    order: 17
   },
   {
     name: "Leo Lion Devnaka Lakvindu",
@@ -224,7 +242,7 @@ const officers = [
     email: "devnaka@llccue.org",
     quote: "Technology amplifies our service potential and extends our reach.",
     isActive: true,
-    order: 11
+    order: 17
   },
   {
     name: "Leo Lion Danasiri",
@@ -242,7 +260,7 @@ const officers = [
     email: "danasiri@llccue.org",
     quote: "Great projects are born from great planning and dedicated execution.",
     isActive: true,
-    order: 12
+    order: 17
   },
   {
     name: "Leo Lion Ruchika Wedisinghe",
@@ -260,7 +278,7 @@ const officers = [
     email: "ruchika@llccue.org",
     quote: "Innovation in service creates solutions that truly matter.",
     isActive: true,
-    order: 13
+    order: 17
   },
   {
     name: "Leo Lion Kawya Ranasinghe",
@@ -278,7 +296,7 @@ const officers = [
     email: "kawya@llccue.org",
     quote: "Financial wisdom ensures sustainable service and long-term impact.",
     isActive: true,
-    order: 14
+    order: 17
   },
   {
     name: "Leo Lion Supun Perera",
@@ -296,7 +314,7 @@ const officers = [
     email: "supun@llccue.org",
     quote: "Strong relationships amplify our service impact and community reach.",
     isActive: true,
-    order: 15
+    order: 17
   },
   {
     name: "Leo Lion Ranudi Perera",
@@ -314,7 +332,7 @@ const officers = [
     email: "ranudi@llccue.org",
     quote: "Every act of service, no matter how small, creates ripples of positive change.",
     isActive: true,
-    order: 16
+    order: 17
   }
 ];
 
