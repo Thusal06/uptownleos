@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_click",
+      "mcp__TestSprite__testsprite_bootstrap_tests",
+      "mcp__filesystem__list_directory",
+      "mcp__filesystem__read_multiple_files",
+      "mcp__filesystem__read_text_file",
+      "mcp__filesystem__write_file",
+      "mcp__TestSprite__testsprite_generate_code_summary",
+      "mcp__filesystem__create_directory",
+      "mcp__TestSprite__testsprite_generate_frontend_test_plan",
+      "mcp__TestSprite__testsprite_generate_standardized_prd",
+      "Bash(copy \"testsprite_tests\\tmp\\prd.md\" \"testsprite_tests\\standard_prd.json\")",
+      "Bash(node \"C:\\Users\\Thusal Ranawaka\\AppData\\Local\\npm-cache\\_npx\\8ddf6bea01b2519d\\node_modules\\@testsprite\\testsprite-mcp\\dist\\index.js\" generateCodeAndExecute)",
+      "Bash(npm run build)",
+      "Bash(node scripts/add-yohani.js)",
+      "mcp__ide__getDiagnostics",
+      "Bash(npm run lint)",
+      "Bash(timeout:*)",
+      "Bash(curl:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git rm:*)",
+      "Bash(del:*)",
+      "Bash(rm:*)",
+      "Bash(git checkout:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
