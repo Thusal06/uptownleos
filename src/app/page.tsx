@@ -1,1052 +1,344 @@
 "use client";
 
-import {
-  ArrowDown,
-  ArrowUpRight,
-  CalendarRange,
-  Globe2,
-  MessageSquare,
-  Sparkle,
-} from "lucide-react";
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-  type MotionProps,
-  type MotionValue,
-  type Variants,
-  type Easing,
-} from "framer-motion";
-import { useMemo, useState, useEffect } from "react";
-import dynamic from "next/dynamic";
+import { ArrowDown, Calendar, Mail, MapPin, Users, Sparkles, Target, Zap } from "lucide-react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { GlassCard } from "@/components/ui/glass-card";
-import { BiographyCard } from "@/components/ui/biography-card";
 import Navigation from "@/components/ui/navigation";
 import Footer from "@/components/ui/footer";
-import Link from "next/link";
 
-// Lazy-load heavier sections to reduce initial work on the main thread
-const InteractiveImpactDashboard = dynamic(
-  () => import("@/components/ui/impact-dashboard"),
-  { ssr: false, loading: () => <SectionPlaceholder title="Impact Dashboard" /> }
-);
-const AIProjectMatcher = dynamic(
-  () => import("@/components/ui/ai-project-matcher"),
-  { ssr: false, loading: () => <SectionPlaceholder title="AI Project Matcher" /> }
-);
-const EnhancedParticlesLazy = dynamic(
-  () => import("@/components/ui/enhanced-particles").then(m => m.default),
-  { ssr: false }
-);
-
-interface Officer {
-  _id: string;
-  name: string;
-  role: string;
-  avatar: string;
-  biography: string;
-  background: string;
-  achievements: string[];
-  joinedYear: string;
-  email: string;
-  quote: string;
-  isActive: boolean;
-  order: number;
-}
-
-
-type ProjectCategory = {
-  name: string;
-  icon: string;
-  description: string;
-  image: string;
-};
-
-type Event = {
-  title: string;
-  date: string;
-  description: string;
-  cta: string;
-};
-
-
-const panoramaUrl = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1400&q=80&sat=-15`;
-
-const cardUrl = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&q=80&sat=-10`;
-
-
-const projectCategories: ProjectCategory[] = [
+const projects = [
   {
-    name: "Aurum'25 - Charter Installation",
+    name: "Aurum'25",
+    title: "Charter Installation",
     icon: "🏆",
-    description: "Historic milestone marking LLCCUE's official chartering and installation of the inaugural Board of Officials for Leoistic Year 2025/26.",
+    description: "Historic milestone marking LLCCUE's official chartering and installation of the inaugural Board of Officials.",
     image: "/projects/aurum/WhatsApp Image 2025-08-01 at 11.01.17 AM.jpeg",
+    color: "from-amber-500 to-orange-600",
   },
   {
     name: "BRANDBOOST360",
+    title: "Digital Marketing Workshop",
     icon: "💡",
-    description: "Digital Marketing Basics for Youth Entrepreneurs workshop conducted by Leo Lion Pahan Ruchiranga, equipping young entrepreneurs with essential digital marketing knowledge.",
+    description: "Digital Marketing Basics for Youth Entrepreneurs workshop equipping young minds with essential digital knowledge.",
     image: "/projects/brandboost/0bd12c0caf70ee59c54d28c63c8ee713.jpg",
+    color: "from-blue-500 to-indigo-600",
   },
   {
-    name: "Wellawatta Beach Cleanup",
+    name: "Beach Cleanup",
+    title: "Environmental Conservation",
     icon: "🌊",
-    description: "Environmental sustainability project promoting coastal conservation and raising awareness about marine pollution at Wellawatta Beach.",
+    description: "Environmental sustainability project promoting coastal conservation at Wellawatta Beach.",
     image: "/projects/beachcleanup/00db8c9d61661d50ef61f74bcb76b6e6.jpg",
+    color: "from-cyan-500 to-teal-600",
   },
   {
     name: "Ashirwada Pooja",
+    title: "Blessings Ceremony",
     icon: "🙏",
-    description: "Spiritually enriching ceremony at Asokaramaya Temple to invoke blessings for the club's future endeavors and member success.",
+    description: "Spiritually enriching ceremony at Asokaramaya Temple to invoke blessings for the club's future endeavors.",
     image: "/projects/ashirwadapooja/790e29afdf7e7be317617c82a6b33d9c.jpg",
+    color: "from-purple-500 to-pink-600",
   },
   {
     name: "Project Suwadivi",
+    title: "Hospital Renovation",
     icon: "❤️",
-    description: "Compassionate initiative renovating the Paralyzed Patients' Ward at Ayurvedic Hospital, Rajagiriya to create a more comforting space.",
+    description: "Compassionate initiative renovating the Paralyzed Patients' Ward at Ayurvedic Hospital, Rajagiriya.",
     image: "/projects/suwadivi/7be4e95f1b7649249144940bbf38d103.jpg",
+    color: "from-rose-500 to-red-600",
   },
 ];
 
-const events: Event[] = [
-  {
-    title: "Aurum&apos;25 - Charter Installation Ceremony",
-    date: "July 24, 2025",
-    description:
-      "A landmark event that officially chartered LLCCUE under Lions International. Installation of club officers, unveiling of the official club banner, and commencement of the club&apos;s journey.",
-    cta: "View Gallery",
-  },
-  {
-    title: "BRANDBOOST360 - Digital Marketing Workshop",
-    date: "August 27, 2025",
-    description:
-      "Digital Marketing Basics for Youth Entrepreneurs organized in collaboration with Leo Club of St. Joseph&apos;s College Anuradhapura and Lions Club of Anuradhapura City.",
-    cta: "Watch Recording",
-  },
-  {
-    title: "Wellawatta Beach Cleanup",
-    date: "September 2025",
-    description:
-      "Environmental cleanup campaign conducted as part of the club&apos;s environmental initiatives, with live updates and community engagement.",
-    cta: "Join Next Cleanup",
-  },
+const officers = [
+  { name: "Thusal Ranawaka", role: "Club President", avatar: "/board/thusal.jpeg" },
+  { name: "Yohani Jayasinghe", role: "Club Secretary", avatar: "/board/yohani.jpg" },
+  { name: "Vihandu Adikari", role: "Club Treasurer", avatar: "/board/vihandu.jpg" },
+  { name: "Ruchika Perera", role: "Board Member", avatar: "/board/ruchika.jpg" },
+  { name: "Pahasara Gimhana", role: "Board Member", avatar: "/board/pahasara.jpg" },
+  { name: "Senuri Wijesinghe", role: "Board Member", avatar: "/board/senuri.jpg" },
+  { name: "Seyara Alahakoon", role: "Board Member", avatar: "/board/seyara.jpg" },
+  { name: "Hesani Jayasinghe", role: "Board Member", avatar: "/board/hesani.jpg" },
+  { name: "Rinoshi De Silva", role: "Board Member", avatar: "/board/rinoshi.jpg" },
+  { name: "Supun Aponsu", role: "Board Member", avatar: "/board/supun.jpg" },
+  { name: "Devnaka Methmal", role: "Board Member", avatar: "/board/devnaka.jpg" },
+  { name: "Gayan Bandara", role: "Board Member", avatar: "/board/gayan.jpg" },
+  { name: "Anuk Piyumal", role: "Board Member", avatar: "/board/anuk.jpeg" },
+  { name: "Methira Ranathunga", role: "Board Member", avatar: "/board/methira.jpg" },
+  { name: "Ranudi Sathsarani", role: "Board Member", avatar: "/board/ranudi.jpg" },
+  { name: "Sasira Dilmith", role: "Board Member", avatar: "/board/sasira.jpg" },
+  { name: "Thesara Thirimanna", role: "Board Member", avatar: "/board/thesara.jpg" },
+  { name: "Tharuja Abeywardena", role: "Board Member", avatar: "/board/tharuja.jpg" },
 ];
 
-const newsItems = [
-  {
-    title: "LLCCUE wins global innovation grant",
-    excerpt:
-      "Our immersive service lab secured international recognition for its sustainable AI initiative.",
-    image: cardUrl("photo-1500530855697-b586d89ba3ee"),
-    href: "#",
-  },
-  {
-    title: "Lionism 4.0 workshop empowers 120 youth",
-    excerpt:
-      "A transformative session blending leadership micro-learning with interactive holographic stories.",
-    image: cardUrl("photo-1529336953121-497c3c8685f8"),
-    href: "#",
-  },
-  {
-    title: "Project Aurora lights up communities",
-    excerpt:
-      "Smart solar pods and ambient tech art installations redefining community spaces.",
-    image: cardUrl("photo-1489515217757-5fd1be406fef"),
-    href: "#",
-  },
-];
-
-const galleryItems = [
-  panoramaUrl("photo-1519681393784-d120267933ba"),
-  panoramaUrl("photo-1498050108023-c5249f4df085"),
-  panoramaUrl("photo-1521737604893-d14cc237f11d"),
-  panoramaUrl("photo-1521737604893-ff3c681f0f21"),
-  panoramaUrl("photo-1498050108023-c5249f4df085"),
-  panoramaUrl("photo-1545239351-1141bd82e8a6"),
-];
-
-const easeCurve: Easing = [0.25, 0.8, 0.25, 1];
-const chatEase: Easing = [0.4, 0, 0.2, 1];
-const floatEase: Easing = [0.45, 0, 0.55, 1];
-
-const useParallax = (): MotionValue<number> => {
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], [0, -300]);
-  return y;
-};
-
-const floatingVariants: Variants = {
-  initial: { y: 0 },
-  animate: {
-    y: [0, -10, 0],
-    transition: {
-      duration: 6,
-      repeat: Infinity,
-      ease: floatEase,
-    },
-  },
-};
-
-const fadeInUp = (delay = 0): MotionProps => ({
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.35 },
-  transition: {
-    duration: 0.6,
-    delay,
-    ease: easeCurve,
-  },
-});
-
-export default function Home() {
-  const parallaxY = useParallax();
-  const prefersReduced = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
+export default function HomePage() {
+  const [activeSection, setActiveSection] = useState("home");
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const onResize = () => setIsMobile(window.innerWidth < 768);
-    onResize();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const handleScroll = () => {
+      const sections = ["home", "about", "leadership", "projects", "contact"];
+      for (const id of sections) {
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(id);
+            break;
+          }
+        }
+      }
+
+      // Scroll progress
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const scrolled = (window.scrollY / documentHeight) * 100;
+      setScrollProgress(scrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const showAmbientFX = !prefersReduced && !isMobile;
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
-    <div className="relative flex flex-col">
-      {showAmbientFX ? <div className="noise-overlay" /> : null}
-      {showAmbientFX ? (
-        <EnhancedParticlesLazy count={12} interactive={false} />
-      ) : null}
+    <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden">
+      {/* Progress Bar */}
+      <div
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 z-[60] transition-all duration-150"
+        style={{ width: `${scrollProgress}%` }}
+      />
 
-      <Navigation />
+      <Navigation activeSection={activeSection} scrollToSection={scrollToSection} />
 
-      <main className="relative overflow-hidden">
-        <Hero parallaxY={parallaxY} />
-        <InteractiveImpactDashboard />
-        <About />
-        <Leadership />
-        <Projects />
-        <AIProjectMatcher />
-        <Events />
-        <Media />
-        <Join />
-        <Contact />
-      </main>
+      {/* Hero Section */}
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-8">
+            <Sparkles className="w-4 h-4 text-cyan-400" />
+            <span className="text-sm text-slate-300">Leo Lions Club of Colombo Uptown Eminence</span>
+          </div>
+
+          <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-6">
+            <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
+              We Lead.
+            </span>
+            <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              We Serve.
+            </span>
+            <span className="block bg-gradient-to-r from-pink-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
+              We Uplift.
+            </span>
+          </h1>
+
+          <p className="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto mb-12">
+            Creating transformative change through service, leadership, and compassion.
+          </p>
+
+          <div className="flex flex-wrap gap-4 justify-center">
+            <button
+              onClick={() => scrollToSection("projects")}
+              className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
+            >
+              <span className="relative z-10">Explore Our Work</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </button>
+            <button
+              onClick={() => scrollToSection("leadership")}
+              className="px-8 py-4 rounded-full font-semibold border-2 border-white/20 hover:border-white/40 hover:bg-white/5 transition-all"
+            >
+              Meet Our Team
+            </button>
+          </div>
+        </div>
+
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+          <ArrowDown className="h-6 w-6 text-slate-500" />
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-32 px-6 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/20 to-transparent" />
+        <div className="mx-auto max-w-6xl relative z-10">
+          <div className="text-center mb-20">
+            <span className="inline-block px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-4">
+              Who We Are
+            </span>
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                Driven by Purpose
+              </span>
+            </h2>
+            <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+              The Leo Lions Club of Colombo Uptown Eminence brings together passionate young leaders
+              committed to creating meaningful impact in our community through service, innovation, and dedication.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-blue-500/10 to-transparent border border-blue-500/20 hover:border-blue-500/40 transition-all hover:scale-105">
+              <div className="absolute inset-0 bg-blue-500/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-6">
+                  <Target className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
+                <p className="text-slate-400">To empower youth through leadership development and community service that creates lasting positive change.</p>
+              </div>
+            </div>
+
+            <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-purple-500/10 to-transparent border border-purple-500/20 hover:border-purple-500/40 transition-all hover:scale-105">
+              <div className="absolute inset-0 bg-purple-500/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-6">
+                  <Zap className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
+                <p className="text-slate-400">To be the leading youth organization fostering innovation, service, and excellence in everything we do.</p>
+              </div>
+            </div>
+
+            <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-cyan-500/10 to-transparent border border-cyan-500/20 hover:border-cyan-500/40 transition-all hover:scale-105">
+              <div className="absolute inset-0 bg-cyan-500/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center mb-6">
+                  <Users className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Our Values</h3>
+                <p className="text-slate-400">Integrity, service, excellence, and collaboration guide every initiative we undertake.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership Section */}
+      <section id="leadership" className="py-32 px-6 relative overflow-hidden">
+        <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-3xl" />
+        <div className="mx-auto max-w-7xl relative z-10">
+          <div className="text-center mb-20">
+            <span className="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">
+              Leadership Team
+            </span>
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Meet Our Leaders
+              </span>
+            </h2>
+            <p className="text-xl text-slate-400">The dedicated individuals driving our mission forward</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            {officers.map((officer, index) => (
+              <div
+                key={index}
+                className="group relative"
+              >
+                <div className="relative aspect-square rounded-3xl overflow-hidden border-2 border-white/10 group-hover:border-purple-500/50 transition-all duration-300 group-hover:scale-105">
+                  <Image
+                    src={officer.avatar}
+                    alt={officer.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <p className="text-sm font-semibold text-white">{officer.name}</p>
+                    <p className="text-xs text-purple-400">{officer.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-32 px-6 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-950/20 to-transparent" />
+        <div className="mx-auto max-w-7xl relative z-10">
+          <div className="text-center mb-20">
+            <span className="inline-block px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium mb-4">
+              Our Impact
+            </span>
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                Recent Projects
+              </span>
+            </h2>
+            <p className="text-xl text-slate-400">Transforming ideas into impactful realities</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <div
+                key={index}
+                className="group relative rounded-3xl overflow-hidden bg-slate-900/50 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/10"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
+                  <div className={`absolute top-4 right-4 px-4 py-2 rounded-full bg-gradient-to-r ${project.color} text-sm font-bold`}>
+                    {project.icon}
+                  </div>
+                </div>
+                <div className="p-8">
+                  <p className="text-sm font-medium text-slate-400 mb-2">{project.title}</p>
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-cyan-400 transition-colors">{project.name}</h3>
+                  <p className="text-slate-400 leading-relaxed">{project.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-32 px-6 relative overflow-hidden">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 rounded-full blur-3xl" />
+        <div className="mx-auto max-w-4xl text-center relative z-10">
+          <div className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/20 text-sm font-medium mb-8">
+            Join Our Journey
+          </div>
+          <h2 className="text-5xl md:text-7xl font-bold mb-8">
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+              Ready to Make an Impact?
+            </span>
+          </h2>
+          <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
+            Join our community of young leaders and be part of something truly meaningful.
+          </p>
+          <a
+            href="https://forms.gle/TjHd3bw3H8S53fGj6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-lg font-semibold hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 transition-all"
+          >
+            <Mail className="w-5 h-5" />
+            Join LLCCUE Today
+          </a>
+        </div>
+      </section>
 
       <Footer />
-
-      <ChatWidget />
-    </div>
-  );
-}
-
-function Hero({ parallaxY }: { parallaxY: MotionValue<number> }) {
-  return (
-    <section id="home" className="relative flex min-h-[90vh] items-center justify-center px-6 pb-24 pt-32 md:px-12">
-      <motion.div
-        style={{ y: parallaxY }}
-        className="absolute inset-0 -z-10 overflow-hidden"
-        aria-hidden
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950/60 to-slate-900" />
-        <motion.div
-          className="absolute -left-24 top-10 h-[320px] w-[320px] sm:h-[420px] sm:w-[420px] lg:h-[520px] lg:w-[520px] rounded-full bg-sky-500/25 blur-3xl"
-          animate={{ opacity: [0.25, 0.45, 0.25], scale: [1, 1.15, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute -right-10 bottom-0 h-[280px] w-[280px] sm:h-[360px] sm:w-[360px] lg:h-[460px] lg:w-[460px] rounded-full bg-cyan-400/20 blur-3xl"
-          animate={{ opacity: [0.2, 0.4, 0.2], scale: [1.1, 0.95, 1.1] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        />
-          <ParticleField />
-      </motion.div>
-
-      <motion.div
-        className="mx-auto flex max-w-5xl flex-col items-center text-center"
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.9, ease: easeCurve }}
-      >
-        {/* Club Logo */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-8"
-        >
-          <Image
-            src="/logo.png"
-            alt="Leo Lions Club of Colombo Uptown Eminence"
-            width={120}
-            height={120}
-            priority
-            className="h-24 w-24 md:h-32 md:w-32 drop-shadow-2xl will-change-transform"
-          />
-        </motion.div>
-
-        <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/10 px-6 py-3 backdrop-blur-xl">
-          <Sparkle className="h-5 w-5 text-sky-300" />
-          <span className="text-sm tracking-[0.3em] uppercase text-slate-100/75">
-            Lead. Serve. Uplift.
-          </span>
-        </div>
-
-        <h1 className="text-balance text-4xl font-semibold leading-tight text-slate-50 sm:text-5xl md:text-7xl">
-          A New Era of Leo Lions
-        </h1>
-        <p className="mt-8 max-w-3xl text-lg text-slate-200/80 md:text-xl">
-          Welcome to the futuristic service collective of Leo Lions Club of Colombo Uptown
-          Eminence. We ignite youth leadership with technology, creativity, and immersive impact.
-        </p>
-
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-          <Link href="#about" className="neon-button px-8 py-3">
-            <span>Discover Us</span>
-          </Link>
-          <a
-            href="https://forms.gle/TjHd3bw3H8S53fGj6"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-full border border-sky-500/40 bg-white/5 px-8 py-3 text-sm font-semibold text-sky-200 transition hover:border-sky-400/80 hover:bg-white/10 group"
-          >
-            Join the Movement
-            <ArrowUpRight className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </a>
-        </div>
-      </motion.div>
-
-      <div className="absolute inset-x-0 bottom-8 flex justify-center">
-        <motion.button
-          className="flex h-14 w-14 items-center justify-center rounded-full border border-sky-500/40 bg-white/5 text-slate-200/60 backdrop-blur-xl hover:bg-white/10 hover:border-sky-500/60 transition-all duration-300"
-          variants={floatingVariants}
-          initial="initial"
-          animate="animate"
-          onClick={() => {
-            const nextSection = document.getElementById('about');
-            nextSection?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <ArrowDown className="h-6 w-6" />
-        </motion.button>
-      </div>
-    </section>
-  );
-}
-
-function SectionPlaceholder({ title }: { title: string }) {
-  return (
-    <div className="mx-auto max-w-6xl px-6 py-20 text-center text-slate-400">
-      Loading {title}...
-    </div>
-  );
-}
-
-function ParticleField() {
-  const particles = useMemo(
-    () =>
-      new Array(15).fill(0).map((_, idx) => ({
-        id: idx,
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-        size: Math.random() * 4 + 1,
-        duration: Math.random() * 10 + 6,
-        delay: Math.random() * 5,
-      })),
-    []
-  );
-
-  return (
-    <div className="absolute inset-0">
-      {particles.map((particle) => (
-        <motion.span
-          key={particle.id}
-          className="absolute rounded-full bg-sky-400/30 blur-[1px]"
-          style={{
-            width: particle.size,
-            height: particle.size,
-            left: particle.left,
-            top: particle.top,
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 1, 0] }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.delay,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <section id="about" className="relative z-10 mx-auto max-w-6xl px-6 pb-24">
-      <SectionHeading
-        eyebrow="Our Story"
-        title={"Immersive storytelling that redefines Lionism"}
-        subtitle={
-          "From a visionary charter to a living service lab, we craft experiences that merge empathy with innovation across Colombo, Sri Lanka, and beyond."
-        }
-        align="center"
-      />
-
-      <div className="relative mt-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
-        <GlassCard className="group overflow-hidden">
-          <motion.div
-            {...fadeInUp()}
-            className="grid gap-10 text-left md:grid-cols-2 md:gap-12"
-          >
-            <div className="space-y-6">
-              <h3 className="text-2xl font-semibold text-slate-50">
-                The pulse of LLCCUE
-              </h3>
-              <p className="text-base leading-relaxed text-slate-300/80">
-                We are a collective of future-forward Leos engineering transformative pathways for
-                young leaders. Our blueprint fuses community-first values with immersive technology,
-                building a responsive club culture that anticipates tomorrow&apos;s challenges today.
-              </p>
-              <p className="text-base leading-relaxed text-slate-300/80">
-                Through interactive storytelling, data-informed service, and emotion-led design, we
-                expand the Leo legacy into an evolving, blended reality of impact.
-              </p>
-            </div>
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/10">
-              <Image
-                src={cardUrl("photo-1581471273381-90b28eab0b7e")}
-                alt="Immersive LLCCUE experience"
-                width={720}
-                height={900}
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/30 to-sky-400/20" />
-            </div>
-          </motion.div>
-        </GlassCard>
-
-        <motion.div
-          {...fadeInUp(0.2)}
-          className="grid gap-6 rounded-3xl border border-white/10 bg-gradient-to-br from-sky-500/10 via-slate-900/80 to-slate-950/90 p-8 backdrop-blur-lg"
-        >
-          <div className="grid gap-6 text-left">
-            <div>
-              <h4 className="text-lg font-semibold text-sky-200">
-                Mission
-              </h4>
-              <p className="mt-2 text-slate-300/80">
-                Amplify youth leadership through immersive service ecosystems that inspire courage,
-                collaboration, and phenomenal impact.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold text-sky-200">
-                Vision
-              </h4>
-              <p className="mt-2 text-slate-300/80">
-                To become Sri Lanka&apos;s most future-ready Leo club, catalyzing innovation within
-                Lionism and empowering the next generation of changemakers.
-              </p>
-            </div>
-          </div>
-          <div className="h-px bg-gradient-to-r from-transparent via-sky-400/40 to-transparent" />
-          <Timeline />
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-function Timeline() {
-  const timelineItems = [
-    {
-      year: "2023",
-      title: "Charter sparks",
-      description:
-        "LLCCUE is chartered with a bold mission to design immersive service experiences in Colombo Uptown.",
-    },
-    {
-      year: "2024",
-      title: "Digital dawn",
-      description:
-        "Launched our first mixed-reality project labs, empowering virtual volunteering and data-driven outcomes.",
-    },
-    {
-      year: "2025",
-      title: "Global resonance",
-      description:
-        "Expanded into international collaborations with global Leo clubs, co-creating scalable service tech."
-    }
-  ];
-
-  return (
-    <div className="relative">
-      <div className="flex items-center justify-between gap-3 pb-4 text-xs uppercase tracking-[0.6em] text-slate-400">
-        <span>Then</span>
-        <span>Now</span>
-        <span>Next</span>
-      </div>
-      <div className="relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 sm:flex-row">
-        {timelineItems.map((item, index) => (
-          <motion.div
-            key={item.year}
-            className="flex flex-1 flex-col gap-3 rounded-2xl border border-white/10 bg-slate-900/60 p-5 shadow-[0_20px_60px_rgba(59,130,246,0.2)]"
-            {...fadeInUp(index * 0.15)}
-          >
-            <span className="text-xs font-semibold tracking-[0.5em] text-sky-300/80">
-              {item.year}
-            </span>
-            <h5 className="text-xl font-semibold text-slate-100">{item.title}</h5>
-            <p className="text-sm text-slate-300/75">{item.description}</p>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Leadership() {
-  const [officers, setOfficers] = useState<Officer[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchOfficers() {
-      try {
-        const response = await fetch('/api/officers?active=true');
-        const data = await response.json();
-        if (data.success) {
-          setOfficers(data.data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch officers:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchOfficers();
-  }, []);
-
-  if (loading) {
-    return (
-      <section id="leadership" className="relative mx-auto max-w-6xl px-6 pb-24">
-        <SectionHeading
-          eyebrow="Faces of the Club"
-          title={"Meet Our Leadership Team"}
-          subtitle={
-            "Get to know the passionate individuals driving our mission forward through innovation, service, and community engagement."
-          }
-          align="center"
-        />
-        <div className="mt-20 text-center text-slate-400">
-          Loading leadership team...
-        </div>
-      </section>
-    );
-  }
-
-  return (
-    <section id="leadership" className="relative mx-auto max-w-6xl px-6 pb-24">
-      <SectionHeading
-        eyebrow="Faces of the Club"
-          title={"Meet Our Leadership Team"}
-          subtitle={
-            "Get to know the passionate individuals driving our mission forward through innovation, service, and community engagement."
-          }
-        align="center"
-      />
-
-      <div className="mt-20">
-        <div className="grid gap-8 md:gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {officers.map((officer, idx) => (
-            <BiographyCard key={officer._id} officer={officer} index={idx} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Projects() {
-  return (
-    <section id="projects" className="relative mx-auto max-w-6xl px-6 pb-24">
-      <SectionHeading
-        eyebrow="Projects"
-        title={"Immersive initiatives across dimensions"}
-        subtitle={
-          "Each initiative is a portal to experiential service — blending environment, innovation, health, and education into transformative realities."
-        }
-        align="center"
-      />
-
-      <motion.div
-        {...fadeInUp()}
-        className="mt-20 grid gap-12 sm:grid-cols-2"
-      >
-        {projectCategories.map((category) => (
-          <ProjectCard key={category.name} category={category} />
-        ))}
-      </motion.div>
-    </section>
-  );
-}
-
-function ProjectCard({ category }: { category: ProjectCategory }) {
-  return (
-    <motion.article
-      whileHover={{ scale: 1.02 }}
-      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/60 shadow-[0_30px_120px_rgba(15,118,255,0.18)]"
-    >
-      <div className="absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100">
-        <Image
-          src={category.image}
-          alt={category.name}
-          width={960}
-          height={720}
-          className="h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-sky-500/40 to-transparent" />
-      </div>
-      <div className="relative z-10 flex flex-col gap-4 p-8">
-        <span className="text-4xl">{category.icon}</span>
-        <h3 className="text-2xl font-semibold text-slate-100">{category.name}</h3>
-        <p className="text-sm text-slate-200/70">{category.description}</p>
-        <button className="neon-button mt-6 w-max px-6 py-2 text-xs uppercase tracking-[0.35em] text-slate-100">
-          <span>Explore</span>
-        </button>
-      </div>
-    </motion.article>
-  );
-}
-
-function Events() {
-  return (
-    <section id="events" className="relative mx-auto max-w-6xl px-6 pb-24">
-      <SectionHeading
-        eyebrow="Events"
-        title={"A kinetic calendar of experiences"}
-        subtitle={
-          "From flagship installations to dynamic service sprints, our events fuse spectacle with purpose and invite you to co-create."
-        }
-        align="center"
-      />
-      <div className="mt-20 grid gap-12 md:grid-cols-[0.6fr_1.4fr]">
-        <motion.div
-          {...fadeInUp()}
-          className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/10 p-6 text-slate-200 backdrop-blur-xl"
-        >
-          <h3 className="text-lg font-semibold uppercase tracking-[0.4em] text-sky-300/75">
-            Aurum&apos;25
-          </h3>
-          <p className="mt-2 text-3xl font-semibold text-slate-50">
-            Charter Installation
-          </p>
-          <div className="mt-6 flex items-center gap-3 text-sky-200/80">
-            <CalendarRange className="h-5 w-5" />
-            <span>July 12, 2025 · Colombo</span>
-          </div>
-          <p className="mt-6 text-sm text-slate-200/70">
-            Immerse in a night of synchronized light, sonic storytelling, and the ceremonial unveiling of our next leadership constellation.
-          </p>
-          <a
-            href="https://forms.gle/TjHd3bw3H8S53fGj6"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="neon-button mt-8 inline-flex px-6 py-2 items-center gap-2 group"
-          >
-            <span>RSVP / Register</span>
-            <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </a>
-        </motion.div>
-        <motion.div
-          {...fadeInUp(0.1)}
-          className="relative overflow-hidden rounded-3xl border border-sky-500/30 bg-slate-900/60 p-6"
-        >
-          <div className="grid gap-6 md:grid-cols-3">
-            {events.map((event) => (
-              <div
-                key={event.title}
-                className="group rounded-2xl border border-white/10 bg-slate-900/70 p-4 transition hover:border-sky-400/70 hover:bg-slate-900/80"
-              >
-                <h4 className="text-sm uppercase tracking-[0.35em] text-sky-300/70">
-                  {event.date}
-                </h4>
-                <p className="mt-3 text-lg font-semibold text-slate-100">
-                  {event.title}
-                </p>
-                <p className="mt-3 text-sm text-slate-300/75">{event.description}</p>
-                <button className="liquid-button mt-4 flex items-center gap-2 text-xs uppercase tracking-[0.35em]">
-                  {event.cta}
-                  <ArrowUpRight className="h-3 w-3" />
-                </button>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-function Media() {
-  return (
-    <>
-      <section id="media-gallery" className="relative mx-auto max-w-6xl px-6 pb-16">
-        <SectionHeading
-          eyebrow="Gallery"
-          title={"Visual stories of service"}
-          subtitle={
-            "Explore our immersive galleries capturing every pulse of LLCCUE's journey and impact."
-          }
-          align="center"
-        />
-
-        <div className="mt-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
-          <motion.div
-            {...fadeInUp()}
-            className="grid gap-8 sm:grid-cols-2"
-          >
-            {newsItems.map((item) => (
-              <article
-                key={item.title}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/60"
-              >
-                <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={640}
-                    height={480}
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/10 via-sky-500/20 to-slate-900/60" />
-                </div>
-                <div className="relative z-10 flex flex-col gap-3 p-6">
-                  <h3 className="text-xl font-semibold text-slate-100">{item.title}</h3>
-                  <p className="text-sm text-slate-300/75">{item.excerpt}</p>
-                  <Link
-                    href={item.href}
-                    className="mt-4 flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-sky-200/80 transition hover:text-sky-200"
-                  >
-                    Dive deeper
-                    <ArrowUpRight className="h-3 w-3" />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </motion.div>
-          <motion.div
-            {...fadeInUp(0.15)}
-            className="grid h-full gap-4 rounded-3xl border border-sky-500/30 bg-slate-900/60 p-4"
-          >
-            {galleryItems.map((src, idx) => (
-              <motion.div
-                key={src}
-                className="group relative h-40 overflow-hidden rounded-2xl border border-white/10"
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.4 }}
-              >
-                <Image
-                  src={src}
-                  alt={`Gallery item ${idx + 1}`}
-                  width={640}
-                  height={360}
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-900/30 via-transparent to-sky-400/20" />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-    </>
-  );
-}
-
-function Join() {
-  const benefits = [
-    {
-      title: "Immersive leadership journeys",
-      description: "Experience multi-sensory programs that elevate your Leo journey beyond expectation.",
-    },
-    {
-      title: "Innovation-first mindset",
-      description: "Co-create projects with access to design sprints, digital labs, and mentorship pods.",
-    },
-    {
-      title: "Global collaborations",
-      description: "Plug into cross-border alliances and futuristic lionism experiences around the world.",
-    },
-  ];
-
-  return (
-    <section id="join" className="relative mx-auto max-w-6xl px-6 pb-24">
-      <GlassCard className="overflow-hidden">
-        <motion.div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="space-y-8">
-            <SectionHeading
-              eyebrow="Join Us"
-              title={"Be part of the future of Lionism"}
-              subtitle={
-                "Transform your service journey with LLCCUE's immersive ecosystems, leadership catalysts, and global collaborations."
-              }
-            />
-            <div className="grid gap-6 md:grid-cols-3">
-              {benefits.map((benefit, idx) => (
-                <motion.div
-                  key={benefit.title}
-                  {...fadeInUp(idx * 0.15)}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-6"
-                >
-                  <h4 className="text-sm uppercase tracking-[0.35em] text-sky-300/75">
-                    {benefit.title}
-                  </h4>
-                  <p className="mt-4 text-sm text-slate-200/80">{benefit.description}</p>
-                </motion.div>
-              ))}
-            </div>
-            <SoundInstruction />
-          </div>
-
-          <motion.div
-            {...fadeInUp(0.2)}
-            className="relative rounded-3xl border border-white/10 bg-slate-900/60 p-6"
-          >
-            <JoinForm />
-          </motion.div>
-        </motion.div>
-      </GlassCard>
-    </section>
-  );
-}
-
-function JoinForm() {
-  return (
-    <div className="grid gap-6">
-      <div className="text-center space-y-4">
-        <h3 className="text-2xl font-semibold text-slate-50">
-          Ready to Join LLCCUE?
-        </h3>
-        <p className="text-slate-300/80 leading-relaxed">
-          Become part of Sri Lanka&apos;s most future-ready Leo club.
-          Fill out our membership application form to start your journey with us.
-        </p>
-      </div>
-
-      <div className="space-y-4">
-        <a
-          href="https://forms.gle/TjHd3bw3H8S53fGj6"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="neon-button w-full px-8 py-4 text-center inline-flex items-center justify-center gap-3 group"
-        >
-          <span>Join LLCCUE Today</span>
-          <ArrowUpRight className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-        </a>
-
-        <div className="p-4 rounded-2xl border border-sky-500/30 bg-slate-900/60">
-          <p className="text-sm text-slate-300/70 text-center">
-            📋 Application takes 5 minutes •
-            🎯 Join 18+ passionate members •
-            🌟 Start your leadership journey
-          </p>
-        </div>
-
-        <div className="text-center space-y-2">
-          <p className="text-xs text-slate-400/60">
-            Questions? Email us at
-            <a
-              href="mailto:colombouptowneminence@gmail.com"
-              className="text-sky-400 hover:text-sky-300 transition-colors ml-1"
-            >
-              colombouptowneminence@gmail.com
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SoundInstruction() {
-  return (
-    <div className="flex items-center gap-3 rounded-2xl border border-sky-500/30 bg-slate-900/60 px-4 py-3 text-xs uppercase tracking-[0.3em] text-sky-200/80">
-      <MessageSquare className="h-4 w-4" />
-      Hover to experience subtle soundscapes
-    </div>
-  );
-}
-
-function Contact() {
-  return (
-    <section id="contact" className="relative mx-auto max-w-6xl px-6 pb-24">
-      <GlassCard className="overflow-hidden">
-        <motion.div {...fadeInUp()} className="grid gap-10 lg:grid-cols-[1fr_1fr]">
-          <div className="space-y-6">
-            <SectionHeading
-              eyebrow="Contact"
-              title={"Let's craft tomorrow together"}
-              subtitle={
-                "Ping us for collaborations, membership, or AI-augmented initiatives that elevate Lionism."
-              }
-            />
-            <div className="grid gap-4 text-sm text-slate-200/80">
-              <div>
-                <span className="text-xs uppercase tracking-[0.35em] text-sky-300/70">
-                  Headquarters
-                </span>
-                <p className="mt-2 text-base text-slate-100">
-                  Colombo Uptown Hub, Sri Lanka
-                </p>
-              </div>
-              <div>
-                <span className="text-xs uppercase tracking-[0.35em] text-sky-300/70">
-                  Email
-                </span>
-                <p className="mt-2 text-base text-slate-100">colombouptowneminence@gmail.com</p>
-              </div>
-              <div>
-                <span className="text-xs uppercase tracking-[0.35em] text-sky-300/70">
-                  Phone
-                </span>
-                <p className="mt-2 text-base text-slate-100">+94 77 000 0000</p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-4">
-              <Link
-                href="#"
-                className="group flex h-12 w-12 items-center justify-center rounded-full border border-sky-400/40 bg-white/5 transition hover:border-sky-400/80 hover:bg-white/10"
-                aria-label="Visit our global page"
-              >
-                <Globe2 className="h-5 w-5 text-sky-200" />
-              </Link>
-              <Link
-                href="#"
-                className="group flex h-12 w-12 items-center justify-center rounded-full border border-sky-400/40 bg-white/5 transition hover:border-sky-400/80 hover:bg-white/10"
-                aria-label="Message us"
-              >
-                <MessageSquare className="h-5 w-5 text-sky-200" />
-              </Link>
-              <Link
-                href="#"
-                className="group flex h-12 w-12 items-center justify-center rounded-full border border-sky-400/40 bg-white/5 transition hover:border-sky-400/80 hover:bg-white/10"
-                aria-label="Follow our updates"
-              >
-                <Sparkle className="h-5 w-5 text-sky-200" />
-              </Link>
-            </div>
-          </div>
-
-          <div className="relative overflow-hidden rounded-3xl border border-white/10">
-            <Image
-              src={panoramaUrl("photo-1519681393784-d120267933ba")}
-              alt="Map of Colombo Uptown"
-              width={960}
-              height={720}
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-950/5 via-sky-500/20 to-slate-900/60" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
-                className="flex h-24 w-24 items-center justify-center rounded-full border border-sky-400/60 bg-sky-500/40 text-slate-50 backdrop-blur-md"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              >
-                LLCCUE
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
-      </GlassCard>
-    </section>
-  );
-}
-
-function ChatWidget() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="pointer-events-none fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4">
-      <AnimatePresence>
-        {isOpen ? (
-          <motion.div
-            key="chat-panel"
-            initial={{ opacity: 0, y: 24, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.96 }}
-            transition={{ duration: 0.45, ease: chatEase }}
-            className="pointer-events-auto glass-panel relative w-[320px] max-w-sm overflow-hidden rounded-3xl border border-white/15 bg-slate-950/85 p-6 text-left"
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-sky-300/80">AI Liaison</p>
-                <h4 className="mt-2 text-lg font-semibold text-slate-50">LLCCUE Nova</h4>
-              </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.3em] text-slate-300/80 transition hover:border-sky-400/60 hover:text-sky-200"
-              >
-                Close
-              </button>
-            </div>
-            <p className="mt-4 text-sm text-slate-300/80">
-              Ask about membership, upcoming innovations, or how to collaborate with Leo Lions Club of Colombo Uptown Eminence.
-            </p>
-            <div className="mt-5 grid gap-3 text-xs">
-              <button className="flex justify-between rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-left text-slate-200/85 transition hover:border-sky-400/60 hover:text-sky-100">
-                What is Aurum&apos;25?
-              </button>
-              <button className="flex justify-between rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-left text-slate-200/85 transition hover:border-sky-400/60 hover:text-sky-100">
-                How can I join LLCCUE?
-              </button>
-              <button className="flex justify-between rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-left text-slate-200/85 transition hover:border-sky-400/60 hover:text-sky-100">
-                Share our latest innovation projects
-              </button>
-            </div>
-            <div className="mt-6 flex flex-col gap-3">
-              <a
-                href="https://forms.gle/TjHd3bw3H8S53fGj6"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-sky-400/40 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.35em] text-sky-200 transition hover:border-sky-400/80 hover:bg-white/10 group"
-              >
-                Join LLCCUE
-                <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
-              <Link
-                href="#join"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.35em] text-slate-200/60 transition hover:border-white/40 hover:bg-white/10"
-              >
-                Learn More
-                <ArrowUpRight className="h-3 w-3" />
-              </Link>
-            </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
-
-      <motion.button
-        key="chat-toggle"
-        onClick={() => setIsOpen((open) => !open)}
-        className="pointer-events-auto inline-flex h-14 w-14 items-center justify-center rounded-full border border-sky-500/40 bg-sky-500/30 text-slate-100 shadow-[0_20px_60px_rgba(56,189,248,0.35)] backdrop-blur-xl transition hover:border-sky-400/80 hover:bg-sky-500/40"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.96 }}
-        aria-label="Toggle LLCCUE AI chat"
-      >
-        <MessageSquare className="h-6 w-6" />
-      </motion.button>
     </div>
   );
 }
