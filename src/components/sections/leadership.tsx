@@ -153,7 +153,7 @@ export default function Leadership() {
 
           {/* Remaining Board Members - Condensed Grid (No Click) */}
            {otherBoard.map((member) => (
-            <BentoCard key={member.id} member={member} className="md:col-span-1 min-h-[250px]" small />
+            <BentoCard key={member.id} member={member} className="md:col-span-1 min-h-[250px]" />
           ))}
         </div>
       </div>
@@ -165,14 +165,12 @@ function BentoCard({
   member, 
   className = "", 
   priority = false, 
-  small = false, 
   isOfficial = false,
   onClick 
 }: { 
   member: Member, 
   className?: string, 
   priority?: boolean, 
-  small?: boolean, 
   isOfficial?: boolean,
   onClick?: () => void
 }) {
