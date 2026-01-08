@@ -10,10 +10,6 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@modelcontextprotocol/server-brave-search": "^0.6.2",
-    "@modelcontextprotocol/server-github": "^2025.4.8",
-    "@modelcontextprotocol/server-puppeteer": "^2025.5.12",
-    "@motionone/utils": "^10.18.0",
     "@studio-freight/react-lenis": "^0.0.47",
     "framer-motion": "^12.24.10",
     "lucide-react": "^0.544.0",
@@ -38,5 +34,11 @@
   },
   "optionalDependencies": {
     "@next/swc-win32-x64-msvc": "^15.5.4"
+  },
+  "overrides": {
+    "@studio-freight/react-lenis": {
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0"
+    }
   }
 }
