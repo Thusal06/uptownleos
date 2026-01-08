@@ -1,16 +1,31 @@
 "use client";
 
 import data from "@/site-data.json";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+
+  const getSocialIcon = (platform: string) => {
+    switch (platform) {
+      case "facebook":
+        return <Facebook size={18} />;
+      case "instagram":
+        return <Instagram size={18} />;
+      case "linkedin":
+        return <Linkedin size={18} />;
+      default:
+        return null;
+    }
+  };
   
   return (
     <footer className="relative z-10 pt-20 pb-32 overflow-hidden border-t border-white/5 bg-obsidian/80 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           
-          {/* Brand */}
+          {/* Brand & Social */}
           <div className="col-span-1 lg:col-span-2">
             <h2 className="text-2xl font-bold text-white mb-6 tracking-tight">
               LEO LIONS CLUB OF <br />
@@ -20,18 +35,55 @@ export default function Footer() {
               Igniting youth leadership through service, creativity, and meaningful impact. 
               Join the movement.
             </p>
-            <div className="flex gap-4">
+            
+            {/* Social Icons */}
+            <div className="flex gap-4 mb-10">
               {Object.entries(data.social).map(([platform, url]) => (
                 <a
                   key={platform}
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-eminence-gold hover:text-obsidian transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-eminence-gold hover:text-white transition-all duration-300 border border-white/5 hover:border-eminence-gold/50"
                 >
-                  <span className="capitalize text-xs">{platform[0]}</span>
+                  {getSocialIcon(platform)}
                 </a>
               ))}
+            </div>
+
+            {/* Logo Bar */}
+            <div className="flex items-center gap-6 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
+              {/* Club Logo */}
+              <div className="relative w-16 h-16">
+                <Image 
+                  src="/logo.png" 
+                  alt="Club Logo" 
+                  fill 
+                  className="object-contain" 
+                />
+              </div>
+              
+              <div className="w-[1px] h-8 bg-white/10" />
+
+              {/* Lions Logo */}
+              <div className="relative w-16 h-16">
+                <Image 
+                  src="/lion.png" 
+                  alt="Lions Club International" 
+                  fill 
+                  className="object-contain" 
+                />
+              </div>
+
+              {/* Leo Logo */}
+              <div className="relative w-16 h-16">
+                <Image 
+                  src="/leo.png" 
+                  alt="Leo Club International" 
+                  fill 
+                  className="object-contain" 
+                />
+              </div>
             </div>
           </div>
 
