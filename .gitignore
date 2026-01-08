@@ -87,7 +87,7 @@ pids
 *.tgz
 
 # Claude Code settings
-.claude/settings.local.json
+.claude/
 
 # MongoDB
 *.msi
@@ -98,3 +98,6 @@ test-env.js
 
 # Scripts
 scripts/
+
+# Windows artifacts
+nul

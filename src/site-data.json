@@ -1,0 +1,320 @@
+{
+  "club": {
+    "name": "Leo Lions Club of Colombo Uptown Eminence",
+    "shortName": "LLCCUE",
+    "tagline": "We Lead. We Serve. We Uplift.",
+    "description": "A dynamic Leo club igniting youth leadership through service, creativity, and meaningful impact.",
+    "district": "District 306 D7",
+    "affiliation": "Part of Lions Clubs International"
+  },
+  "contact": {
+    "email": "colombouptowneminence@gmail.com",
+    "phone": "+94 11 234 5678",
+    "location": "Colombo, Sri Lanka",
+    "joinFormUrl": "https://forms.gle/TjHd3bw3H8S53fGj6"
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/share/1WZWZwmFBX/?mibextid=wwXIfr",
+    "instagram": "https://www.instagram.com/uptown.emi_leolions",
+    "linkedin": "https://www.linkedin.com/company/leo-lions-club-of-colombo-uptown-eminence/"
+  },
+  "about": {
+    "mission": "To empower youth through leadership development and community service that creates lasting positive change.",
+    "vision": "To be the leading youth organization fostering innovation, service, and excellence in everything we do.",
+    "values": "Integrity, service, excellence, and collaboration guide every initiative we undertake."
+  },
+  "clubCouncil": [
+    {
+      "id": "1",
+      "name": "Leo Lion Anuk Nisalitha",
+      "role": "President",
+      "avatar": "/board/anuk.jpeg",
+      "biography": "Leo Lion Anuk Nisalitha is an accomplished environmental leader, scout, and emerging entrepreneur recognized for his vision, leadership, and commitment to meaningful change. A proud alumnus of Ananda College, he has distinguished himself through a blend of leadership, innovation, and an unwavering commitment to creating a greener and more compassionate world.",
+      "background": "From his formative years, Anuk demonstrated an innate ability to lead. His educational journey at Ananda College was marked by academic excellence and environmental activism. He served as President of the Ananda College Environmental Society (ACES), Secretary of the Marine Association, and Scout Group. As a Leo, he served as Assistant Secretary and Director Panelist, spearheading impactful initiatives. He is also a co-founder of sustainable enterprises aligning profitability with purpose.",
+      "achievements": [
+        "President’s Scout Award",
+        "President’s Environment Pioneer",
+        "District President’s Appreciation Award",
+        "Supporting Mission 1.5 Medal",
+        "Most Outstanding Environmental Pioneer (2022/23)"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Leo Lion Vihandu Wanniarachchi",
+      "role": "Vice President",
+      "avatar": "/board/vihandu.jpg",
+      "biography": "Vihandu Wanniarachchi serves as Vice President, supporting club operations and member development initiatives.",
+      "background": "Background in project management and youth leadership development.",
+      "achievements": [
+        "Coordinated 10+ service projects",
+        "Established member training program",
+        "Increased membership by 40%"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Leo Lion Thusal Ranawaka",
+      "role": "Secretary",
+      "avatar": "/board/thusal.jpeg",
+      "biography": "Thusal Ranawaka serves as Secretary, managing communications and official club documentation.",
+      "background": "Strong organizational skills with experience in administrative management.",
+      "achievements": [
+        "Digitized club records",
+        "Improved meeting attendance by 60%",
+        "Created monthly newsletter system"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Leo Lion Rinoshi Nihara",
+      "role": "Treasurer",
+      "avatar": "/board/rinoshi.jpg",
+      "biography": "Rinoshi Nihara serves as Treasurer, overseeing financial management and budget planning.",
+      "background": "Financial management background with expertise in budget planning.",
+      "achievements": [
+        "Managed annual budget of $5000+",
+        "Implemented transparent reporting",
+        "Secured 3 corporate sponsorships"
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Leo Lion Yohani Gunathilaka",
+      "role": "Assistant Secretary",
+      "avatar": "/board/yohani.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Leo Lion Senuri Kawya",
+      "role": "Assistant Treasurer",
+      "avatar": "/board/senuri.jpg"
+    },
+    {
+      "id": "7",
+      "name": "Leo Lion Savindu Pahasara",
+      "role": "2nd Vice President",
+      "avatar": "/board/pahasara.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Leo Lion Sasira Vihanga",
+      "role": "Editor",
+      "avatar": "/board/sasira.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Leo Lion Ruchika Roshani",
+      "role": "Project Coordinator",
+      "avatar": "/board/ruchika.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Leo Lion Gayan Danasiri",
+      "role": "Project Coordinator",
+      "avatar": "/board/gayan.jpg"
+    },
+    {
+      "id": "11",
+      "name": "Leo Lion R.A. Seyara Bimdulee",
+      "role": "GST Coordinator",
+      "avatar": "/board/seyara.jpg"
+    },
+    {
+      "id": "12",
+      "name": "Leo Lion Devnaka Lakvidu",
+      "role": "Lion Twister",
+      "avatar": "/board/devnaka.jpg"
+    },
+    {
+      "id": "13",
+      "name": "Leo Lion Methira Gunathilaka",
+      "role": "Lion Tamer",
+      "avatar": "/board/methira.jpg"
+    },
+    {
+      "id": "14",
+      "name": "Leo Lion Hesani Withanage",
+      "role": "LCIF Coordinator",
+      "avatar": "/board/hesani.jpg"
+    },
+    {
+      "id": "15",
+      "name": "Leo Lion R.A. Thesara Nethdulee",
+      "role": "GLT Coordinator",
+      "avatar": "/board/thesara.jpg"
+    },
+    {
+      "id": "16",
+      "name": "Leo Lion Tharuja Wanaguru",
+      "role": "GMT Coordinator",
+      "avatar": "/board/tharuja.jpg"
+    },
+    {
+      "id": "17",
+      "name": "Leo Lion Ranudi Perera",
+      "role": "GMCT Coordinator",
+      "avatar": "/board/ranudi.jpg"
+    }
+  ],
+  "districtOfficials": [
+    {
+      "id": "dg-0a",
+      "name": "Lion A.P. Singh",
+      "role": "International President",
+      "avatar": "/lionsofficials/ap.jpeg",
+      "biography": "A.P. Singh, of Kolkata, India, was elected to serve as international president of Lions Clubs International at the association’s 107th international convention, held in Orlando, Florida from July 13 through July 17, 2025. He is a practicing chartered accountant and has family business interests in automobile dealerships.",
+      "background": "A Lion since 1984 and a member of the Calcutta Vikas Lions Club, he has held many positions including district governor and council chairperson. He has served as GMT international coordinator, chairperson for the 2017 DGE seminar, and faculty at numerous leadership institutes. He has also served as multi-national coordinator for Campaign SightFirst II and CA leader for Campaign 100.",
+      "achievements": [
+        "Ambassador of Good Will Award",
+        "Multiple International President’s Awards",
+        "Progressive Melvin Jones Fellow",
+        "Co-chairperson of ISAAME Forum"
+      ]
+    },
+    {
+      "id": "dg-0b",
+      "name": "Lion Fabricio Oliveira",
+      "role": "LCIF Chairperson",
+      "avatar": "/lionsofficials/fabricio.jpeg",
+      "biography": "Lion Fabricio Oliveira leads the Lions Clubs International Foundation, empowering Lions to create large-scale humanitarian impact."
+    },
+    {
+      "id": "dg-1",
+      "name": "Lion Shyana Jayalath",
+      "role": "Multiple Council Chairman",
+      "avatar": "/lionsofficials/shyana.jpg",
+      "biography": "Lion Shyana Jayalath, Past District Governor and dynamic leadership voice within Lions International, currently serves as the Council Chairperson of Lions Multiple District 306 for 2025/2026. She makes history as the first Council Chair to lead the newly expanded 12-district Multiple District—a milestone in Sri Lankan Lions history.",
+      "background": "Her leadership journey began in the Leo movement and reached historic heights as President of the Lions Club of Colombo (Host), where she led the club to its first “Most Outstanding Club” award in six decades. As District Governor of 306A1, she reinvigorated the district with her theme “Believe in the Power of One.” Today, she leads with vision, action, and an element of fun.",
+      "achievements": [
+        "First Council Chair of expanded MD 306",
+        "New Voices Global Winner in Marketing",
+        "International President’s and Leadership Medals",
+        "Lady Lion of the Year for MD 306"
+      ]
+    },
+    {
+      "id": "dg-2",
+      "name": "Lion Gaya Upasena",
+      "role": "District Governor",
+      "avatar": "/lionsofficials/gaya.jpeg",
+      "biography": "Lion Gaya Upasena serves as the District Governor for 306 D7, guiding clubs towards achieving their service goals."
+    },
+    {
+      "id": "dg-3",
+      "name": "Lion Ranjith Fernando",
+      "role": "Immediate Past District Governor",
+      "avatar": "/lionsofficials/ranjith.jpg",
+      "biography": "Lion Ranjith Fernando began his Lions journey while serving as a Branch Manager at Seylan Bank. Professionally, he built a distinguished career in banking, playing a key role in establishing the Leasing Unit at People’s Bank, before moving to Seylan Bank and later venturing into the printing and packaging industry as a successful entrepreneur.",
+      "background": "Academically, he holds a Bachelor of Commerce from the University of Sri Jayewardenepura, is an Associate Member of the Institute of Bankers, a finalist of the Institute of Chartered Accountants of Sri Lanka, and has pursued further studies in Japan and India. He also served as President of MASCO 85 of his alma mater. His leadership extended into the printing industry, where he became President of the Sri Lanka Association of Printers and represented the country at international forums. In Lionism, he rose through the ranks with dedication, serving in many cabinet roles, and publishing four acclaimed books on leadership and Lions governance.",
+      "achievements": [
+        "Most Outstanding Club President (2008)",
+        "Leadership Medal from International President Douglas Alexander",
+        "Established Dialysis Center at KDU Hospital (Rs. 40 million)",
+        "Membership Hero Award & Membership Rockstar Award (2025)",
+        "Kindness Matters Award",
+        "Multiple Council Secretary of MD 306"
+      ]
+    },
+    {
+      "id": "dg-4",
+      "name": "Lion Chandika Dedigama",
+      "role": "First Vice District Governor",
+      "avatar": "/lionsofficials/chandika.jpeg",
+      "biography": "Lion Chandika Dedigama supports the district's administration and prepares for future leadership."
+    },
+    {
+      "id": "dg-5",
+      "name": "Lion Viduranga Maddumage",
+      "role": "Second Vice District Governor",
+      "avatar": "/lionsofficials/viduranga.jpg",
+      "biography": "Lion Viduranga Maddumage plays a key role in district operations and member engagement."
+    }
+  ],
+  "projects": [
+    {
+      "id": "p1",
+      "name": "Aurum'25",
+      "title": "Charter Installation",
+      "description": "Historic milestone marking LLCCUE's official chartering and installation of the inaugural Board of Officials.",
+      "image": "/projects/aurum/WhatsApp Image 2025-08-01 at 11.01.17 AM.jpeg",
+      "gradient": "from-amber-400 to-orange-500",
+      "category": "inaugural",
+      "gallery": [
+        "/projects/aurum/WhatsApp Image 2025-08-01 at 11.01.17 AM.jpeg",
+        "/projects/aurum/WhatsApp Image 2025-08-01 at 11.01.25 AM.jpeg",
+        "/projects/aurum/WhatsApp Image 2025-08-01 at 11.01.26 AM.jpeg",
+        "/projects/aurum/WhatsApp Image 2025-08-01 at 11.01.28 AM.jpeg"
+      ]
+    },
+    {
+      "id": "p2",
+      "name": "BRANDBOOST360",
+      "title": "Digital Marketing Workshop",
+      "description": "Digital Marketing Basics for Youth Entrepreneurs workshop equipping young minds with essential digital knowledge.",
+      "image": "/projects/brandboost/0bd12c0caf70ee59c54d28c63c8ee713.jpg",
+      "gradient": "from-blue-400 to-cyan-500",
+      "category": "education",
+      "gallery": [
+        "/projects/brandboost/0bd12c0caf70ee59c54d28c63c8ee713.jpg",
+        "/projects/brandboost/0e19c6a1ac3a9289afd04b951e8b3d3c.jpg",
+        "/projects/brandboost/18963b6a592cb46fc837e3230cb8bdd5.jpg"
+      ]
+    },
+    {
+      "id": "p3",
+      "name": "Beach Cleanup",
+      "title": "Environmental Conservation",
+      "description": "Environmental sustainability project promoting coastal conservation at Wellawatta Beach.",
+      "image": "/projects/beachcleanup/00db8c9d61661d50ef61f74bcb76b6e6.jpg",
+      "gradient": "from-teal-400 to-emerald-500",
+      "category": "environment",
+      "gallery": [
+        "/projects/beachcleanup/00db8c9d61661d50ef61f74bcb76b6e6.jpg",
+        "/projects/beachcleanup/61a2690a3f913516a9e9dfc4ecf3f8c9.jpg",
+        "/projects/beachcleanup/71f2325e0be0787380e478daf7264181.jpg",
+        "/projects/beachcleanup/c1a51195f53eeef3f7a0c264eea0e357.jpg",
+        "/projects/beachcleanup/e57e1ee291709e269ca4e8042f9424ba.jpg"
+      ]
+    },
+    {
+      "id": "p4",
+      "name": "Ashirwada Pooja",
+      "title": "Blessings Ceremony",
+      "description": "Spiritually enriching ceremony at Asokaramaya Temple to invoke blessings for the club's future endeavors.",
+      "image": "/projects/ashirwadapooja/790e29afdf7e7be317617c82a6b33d9c.jpg",
+      "gradient": "from-cyan-400 to-blue-500",
+      "category": "cultural",
+      "gallery": [
+        "/projects/ashirwadapooja/790e29afdf7e7be317617c82a6b33d9c.jpg",
+        "/projects/ashirwadapooja/7c3d4e08ab6c302a5b69c959832ba9de.jpg",
+        "/projects/ashirwadapooja/c4922f8df326ed8968db4028c9d47d5c.jpg",
+        "/projects/ashirwadapooja/e350a25c197d09c024eb58cd479f5159.jpg",
+        "/projects/ashirwadapooja/f3ef41741344b8b9a334551b1e111243.jpg"
+      ]
+    },
+    {
+      "id": "p5",
+      "name": "Project Suwadivi",
+      "title": "Hospital Renovation",
+      "description": "Compassionate initiative renovating the Paralyzed Patients' Ward at Ayurvedic Hospital, Rajagiriya.",
+      "image": "/projects/suwadivi/7be4e95f1b7649249144940bbf38d103.jpg",
+      "gradient": "from-rose-400 to-red-500",
+      "category": "healthcare",
+      "gallery": [
+        "/projects/suwadivi/7be4e95f1b7649249144940bbf38d103.jpg",
+        "/projects/suwadivi/84367e61f43d275e9e86e33d5f4de95b.jpg",
+        "/projects/suwadivi/e1a081f4f07d68a82ba266ae2839d1a8.jpg",
+        "/projects/suwadivi/e4e4115bd4d5ec0dea129c09aeadc3ce.jpg",
+        "/projects/suwadivi/e5d2759a8e944573d8f84b9d69ee75ff.jpg"
+      ]
+    }
+  ],
+  "navigation": [
+    { "label": "Home", "id": "home" },
+    { "label": "About", "id": "about" },
+    { "label": "Leadership", "id": "leadership" },
+    { "label": "Projects", "id": "projects" },
+    { "label": "Contact", "id": "contact" }
+  ]
+}

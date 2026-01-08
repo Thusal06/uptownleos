@@ -1,164 +1,73 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
-import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, ArrowUpRight } from "lucide-react";
-
-const socialLinks = [
-  { icon: Facebook, href: "https://www.facebook.com/share/1WZWZwmFBX/?mibextid=wwXIfr", label: "Facebook" },
-  { icon: Instagram, href: "https://www.instagram.com/uptown.emi_leolions", label: "Instagram" },
-  { icon: Linkedin, href: "https://www.linkedin.com/company/leo-lions-club-of-colombo-uptown-eminence/", label: "LinkedIn" },
-];
-
-const contactInfo = [
-  { icon: Mail, text: "colombouptowneminence@gmail.com", href: "mailto:colombouptowneminence@gmail.com" },
-  { icon: Phone, text: "+94 11 234 5678", href: "tel:+94112345678" },
-  { icon: MapPin, text: "Colombo, Sri Lanka", href: "#" },
-];
+import data from "@/site-data.json";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+  
   return (
-    <footer className="relative bg-slate-950 border-t border-white/10">
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-950 to-slate-950" />
-
-      <div className="relative mx-auto max-w-6xl px-6 py-16 md:px-12">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          {/* Club Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="space-y-4"
-          >
-            <Link href="/" className="inline-flex items-center gap-3 group">
-              <motion.div
-                whileHover={{ scale: 1.05, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Image
-                  src="/logo.png"
-                  alt="Leo Lions Club of Colombo Uptown Eminence"
-                  width={48}
-                  height={48}
-                  className="h-12 w-12 drop-shadow-lg"
-                />
-              </motion.div>
-              <div>
-                <div className="text-lg font-bold text-slate-100 group-hover:text-sky-300 transition-colors">
-                  LLCCUE
-                </div>
-                <div className="text-sm text-slate-400 group-hover:text-sky-400 transition-colors">
-                  Uptown Eminence
-                </div>
-              </div>
-            </Link>
-
-            <p className="text-sm text-slate-300/70 leading-relaxed">
-              A futuristic Leo club igniting youth leadership through technology, creativity, and immersive service impact.
+    <footer className="relative z-10 pt-20 pb-32 overflow-hidden border-t border-white/5 bg-obsidian/80 backdrop-blur-xl">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          
+          {/* Brand */}
+          <div className="col-span-1 lg:col-span-2">
+            <h2 className="text-2xl font-bold text-white mb-6 tracking-tight">
+              LEO LIONS CLUB OF <br />
+              <span className="text-eminence-gold">COLOMBO UPTOWN EMINENCE</span>
+            </h2>
+            <p className="text-slate-400 max-w-md mb-8">
+              Igniting youth leadership through service, creativity, and meaningful impact. 
+              Join the movement.
             </p>
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="space-y-4"
-          >
-            <h3 className="text-lg font-semibold text-slate-100">Quick Links</h3>
-            <ul className="space-y-2">
-              {[
-                { label: "About Us", href: "#about" },
-                { label: "Leadership", href: "#leadership" },
-                { label: "Projects", href: "#projects" },
-                { label: "Events", href: "#events" },
-                { label: "Join Us", href: "#join" },
-              ].map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-slate-300/70 hover:text-sky-300 transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-4"
-          >
-            <h3 className="text-lg font-semibold text-slate-100">Contact</h3>
-            <ul className="space-y-3">
-              {contactInfo.map((item, index) => (
-                <li key={index}>
-                  <Link
-                    href={item.href}
-                    className="flex items-center gap-3 text-sm text-slate-300/70 hover:text-sky-300 transition-colors"
-                  >
-                    <item.icon className="h-4 w-4 text-sky-400" />
-                    <span>{item.text}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="space-y-4"
-          >
-            <h3 className="text-lg font-semibold text-slate-100">Follow Us</h3>
-            <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <Link
-                  key={social.label}
-                  href={social.href}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition hover:border-sky-400/60 hover:bg-sky-500/20 hover:text-sky-300"
-                  aria-label={social.label}
+            <div className="flex gap-4">
+              {Object.entries(data.social).map(([platform, url]) => (
+                <a
+                  key={platform}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-eminence-gold hover:text-obsidian transition-all duration-300"
                 >
-                  <social.icon className="h-4 w-4" />
-                </Link>
+                  <span className="capitalize text-xs">{platform[0]}</span>
+                </a>
               ))}
             </div>
+          </div>
 
-            <div className="pt-4">
-              <a
-                href="https://forms.gle/TjHd3bw3H8S53fGj6"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="neon-button px-6 py-2 text-sm font-semibold inline-flex items-center gap-2 group"
-              >
-                <span>Join Our Mission</span>
-                <ArrowUpRight className="h-3 w-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
-            </div>
-          </motion.div>
+          {/* Links */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500 mb-6">Explore</h3>
+            <ul className="space-y-4">
+              {['Home', 'About', 'Leadership', 'Projects'].map((item) => (
+                <li key={item}>
+                  <a href={`#${item.toLowerCase()}`} className="text-slate-300 hover:text-eminence-gold transition-colors">
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div id="contact">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500 mb-6">Contact</h3>
+            <ul className="space-y-4 text-slate-400">
+              <li>{data.contact.email}</li>
+              <li>{data.contact.phone}</li>
+              <li>{data.contact.location}</li>
+            </ul>
+          </div>
         </div>
 
-        {/* Bottom Bar */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-12 border-t border-white/10 pt-8 text-center"
-        >
-          <p className="text-sm text-slate-400">
-            © 2024 Leo Lions Club of Colombo Uptown Eminence. All rights reserved.
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-slate-500 text-sm">
+            &copy; {currentYear} LLCCUE. All rights reserved.
           </p>
-          <p className="text-xs text-slate-500 mt-2">
-            Part of Lions Clubs International | District 306 C1
+          <p className="text-slate-600 text-xs">
+            Designed with <span className="text-eminence-gold">♥</span> by LLCCUE Tech
           </p>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );
