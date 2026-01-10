@@ -52,36 +52,13 @@ export default function Footer() {
             </div>
 
             {/* Logo Bar */}
-            <div className="flex items-center gap-6 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
-              {/* Club Logo */}
-              <div className="relative w-16 h-16">
+            <div className="flex items-center opacity-80 grayscale hover:grayscale-0 transition-all duration-500 max-w-sm">
+              <div className="relative w-full h-16">
                 <Image 
-                  src="/logo.png" 
-                  alt="Club Logo" 
+                  src="/logo bar.png" 
+                  alt="Partner Logos" 
                   fill 
-                  className="object-contain" 
-                />
-              </div>
-              
-              <div className="w-[1px] h-8 bg-white/10" />
-
-              {/* Lions Logo */}
-              <div className="relative w-16 h-16">
-                <Image 
-                  src="/lion.png" 
-                  alt="Lions Club International" 
-                  fill 
-                  className="object-contain" 
-                />
-              </div>
-
-              {/* Leo Logo */}
-              <div className="relative w-16 h-16">
-                <Image 
-                  src="/leo.png" 
-                  alt="Leo Club International" 
-                  fill 
-                  className="object-contain" 
+                  className="object-contain object-left" 
                 />
               </div>
             </div>

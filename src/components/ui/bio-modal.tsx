@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import Image from "next/image";
 import { useEffect } from "react";
+import { useLenis } from "@studio-freight/react-lenis";
 
 interface Member {
   id: string;
@@ -22,17 +23,22 @@ interface BioModalProps {
 }
 
 export default function BioModal({ member, isOpen, onClose }: BioModalProps) {
+  const lenis = useLenis();
+
   // Prevent scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
+      lenis?.stop();
       document.body.style.overflow = "hidden";
     } else {
+      lenis?.start();
       document.body.style.overflow = "auto";
     }
     return () => {
+      lenis?.start();
       document.body.style.overflow = "auto";
     };
-  }, [isOpen]);
+  }, [isOpen, lenis]);
 
   if (!member) return null;
 
