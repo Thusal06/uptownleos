@@ -54,6 +54,7 @@ export default function Projects() {
               <span className="text-xs font-bold uppercase tracking-widest text-eminence-gold mb-2 block">
                 {project.category}
               </span>
+              <h4 className="text-white/60 text-sm font-medium mb-1 tracking-wider uppercase">{project.name}</h4>
               <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
               <p className="text-sm text-slate-300 line-clamp-2">{project.description}</p>
             </div>
@@ -122,6 +123,7 @@ function ProjectCard({ project, onClick }: { project: typeof projects[0], onClic
           </span>
         </div>
         
+        <h4 className="text-white/50 text-lg md:text-xl font-medium mb-2 tracking-widest uppercase">{project.name}</h4>
         <h3 className="mb-4 text-3xl md:text-5xl font-bold text-white leading-tight">
           {project.title}
         </h3>

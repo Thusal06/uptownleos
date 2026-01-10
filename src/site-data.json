@@ -111,7 +111,7 @@
       "id": "8b",
       "name": "Leo Lion Kasuni Apsara",
       "role": "Editor",
-      "avatar": "/board/kasuni.jfif"
+      "avatar": "/board/kasuni.jpg"
     },
     {
       "id": "9",
@@ -166,6 +166,12 @@
       "name": "Leo Lion Ranudi Perera",
       "role": "GMCT Coordinator",
       "avatar": "/board/ranudi.jpg"
+    },
+    {
+      "id": "18",
+      "name": "Leo Lion Supun Perera",
+      "role": "External Affairs Coordinator",
+      "avatar": "/board/supun.jpg"
     }
   ],
   "districtOfficials": [
@@ -293,8 +299,8 @@
     {
       "id": "p2",
       "name": "BRANDBOOST360",
-      "title": "Digital Marketing Workshop",
-      "description": "Digital Marketing Basics for Youth Entrepreneurs workshop equipping young minds with essential digital knowledge.",
+      "title": "Digital Marketing Basics",
+      "description": "Hosted in collaboration with Leo Club of St. Joseph’s College Anuradhapura and Lions Club of Anuradhapura City. Conducted by Leo Lion Pahan Ruchiranga, equipping young entrepreneurs with essential online presence knowledge.",
       "image": "/projects/brandboost/0bd12c0caf70ee59c54d28c63c8ee713.jpg",
       "gradient": "from-blue-400 to-cyan-500",
       "category": "education",
@@ -307,8 +313,8 @@
     {
       "id": "p3",
       "name": "Beach Cleanup",
-      "title": "Environmental Conservation",
-      "description": "Environmental sustainability project promoting coastal conservation at Wellawatta Beach.",
+      "title": "Coastal Preservation",
+      "description": "A successful cleanup project at Wellawatta Beach, uniting members to protect the environment and raise awareness on preserving coastal ecosystems.",
       "image": "/projects/beachcleanup/00db8c9d61661d50ef61f74bcb76b6e6.jpg",
       "gradient": "from-teal-400 to-emerald-500",
       "category": "environment",
@@ -324,7 +330,7 @@
       "id": "p4",
       "name": "Ashirwada Pooja",
       "title": "Blessings Ceremony",
-      "description": "Spiritually enriching ceremony at Asokaramaya Temple to invoke blessings for the club's future endeavors.",
+      "description": "A spiritually enriching ceremony held on 24th October 2025 to invoke blessings for the club’s future endeavors and seeking divine guidance for the upcoming Leoistic year.",
       "image": "/projects/ashirwadapooja/790e29afdf7e7be317617c82a6b33d9c.jpg",
       "gradient": "from-cyan-400 to-blue-500",
       "category": "cultural",
@@ -340,7 +346,7 @@
       "id": "p5",
       "name": "Project Suwadivi",
       "title": "Hospital Renovation",
-      "description": "Compassionate initiative renovating the Paralyzed Patients' Ward at Ayurvedic Hospital, Rajagiriya.",
+      "description": "Compassionate initiative uplifting the environment of the Paralyzed Patients’ Ward at Ayurvedic Hospital, Rajagiriya through repainting and renovation.",
       "image": "/projects/suwadivi/7be4e95f1b7649249144940bbf38d103.jpg",
       "gradient": "from-rose-400 to-red-500",
       "category": "healthcare",
@@ -350,6 +356,21 @@
         "/projects/suwadivi/e1a081f4f07d68a82ba266ae2839d1a8.jpg",
         "/projects/suwadivi/e4e4115bd4d5ec0dea129c09aeadc3ce.jpg",
         "/projects/suwadivi/e5d2759a8e944573d8f84b9d69ee75ff.jpg"
+      ]
+    },
+    {
+      "id": "p6",
+      "name": "Danumata Athwalak",
+      "title": "Educational Support",
+      "description": "Community-focused initiative providing essential stationery items to underprivileged schoolchildren to empower their academic journey.",
+      "image": "/projects/danumataathwalak/WhatsApp Image 2025-12-24 at 19.33.09.jpeg",
+      "gradient": "from-purple-400 to-indigo-500",
+      "category": "education",
+      "gallery": [
+        "/projects/danumataathwalak/WhatsApp Image 2025-12-24 at 19.33.09.jpeg",
+        "/projects/danumataathwalak/WhatsApp Image 2025-12-24 at 19.33.09 (1).jpeg",
+        "/projects/danumataathwalak/WhatsApp Image 2025-12-24 at 19.33.10.jpeg",
+        "/projects/danumataathwalak/WhatsApp Image 2025-12-24 at 19.33.10 (1).jpeg"
       ]
     }
   ],
