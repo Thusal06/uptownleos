@@ -9,7 +9,6 @@
   },
   "contact": {
     "email": "colombouptowneminence@gmail.com",
-    "phone": "+94 11 234 5678",
     "location": "Colombo, Sri Lanka",
     "joinFormUrl": "https://forms.gle/TjHd3bw3H8S53fGj6"
   },
@@ -377,19 +376,19 @@
   "lionOfMonth": [
     {
       "id": "lom-nov",
-      "name": "Leo Lion Rinoshi Nihara",
-      "month": "November",
-      "year": "2025",
-      "avatar": "/board/rinoshi.jpg",
-      "description": "Recognized for her outstanding financial management and dedication as Treasurer."
-    },
-    {
-      "id": "lom-dec",
       "name": "Leo Lion Gayan Danasiri",
-      "month": "December",
+      "month": "November",
       "year": "2025",
       "avatar": "/board/gayan.jpg",
       "description": "Honored for his exceptional coordination of the Danumata Athwalak project."
+    },
+    {
+      "id": "lom-dec",
+      "name": "Leo Lion Rinoshi Nihara",
+      "month": "December",
+      "year": "2025",
+      "avatar": "/board/rinoshi.jpg",
+      "description": "Recognized for her exemplary leadership in chairing Project Suwadivi and her continued commitment to the club's growth."
     }
   ],
   "navigation": [

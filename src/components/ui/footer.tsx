@@ -83,7 +83,6 @@ export default function Footer() {
             <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500 mb-6">Contact</h3>
             <ul className="space-y-4 text-slate-400">
               <li>{data.contact.email}</li>
-              <li>{data.contact.phone}</li>
               <li>{data.contact.location}</li>
             </ul>
           </div>

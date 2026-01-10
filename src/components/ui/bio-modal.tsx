@@ -85,7 +85,10 @@ export default function BioModal({ member, isOpen, onClose }: BioModalProps) {
             </div>
 
             {/* Right Side: Content */}
-            <div className="w-full md:w-3/5 overflow-y-auto custom-scrollbar bg-[#0a1120]/50">
+            <div 
+              className="w-full md:w-3/5 overflow-y-auto custom-scrollbar bg-[#0a1120]/50"
+              data-lenis-prevent
+            >
                <div className="p-8 md:p-10 space-y-8">
                  
                  {/* Header */}
