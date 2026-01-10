@@ -374,6 +374,24 @@
       ]
     }
   ],
+  "lionOfMonth": [
+    {
+      "id": "lom-nov",
+      "name": "Leo Lion Rinoshi Nihara",
+      "month": "November",
+      "year": "2025",
+      "avatar": "/board/rinoshi.jpg",
+      "description": "Recognized for her outstanding financial management and dedication as Treasurer."
+    },
+    {
+      "id": "lom-dec",
+      "name": "Leo Lion Gayan Danasiri",
+      "month": "December",
+      "year": "2025",
+      "avatar": "/board/gayan.jpg",
+      "description": "Honored for his exceptional coordination of the Danumata Athwalak project."
+    }
+  ],
   "navigation": [
     { "label": "Home", "id": "home" },
     { "label": "About", "id": "about" },
