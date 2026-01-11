@@ -52,8 +52,8 @@ export default function Footer() {
             </div>
 
             {/* Logo Bar */}
-            <div className="flex items-center opacity-80 grayscale hover:grayscale-0 transition-all duration-500 max-w-sm">
-              <div className="relative w-full h-16">
+            <div className="flex items-center opacity-80 grayscale hover:grayscale-0 transition-all duration-500 max-w-md">
+              <div className="relative w-full h-24">
                 <Image 
                   src="/logo bar.png" 
                   alt="Partner Logos" 
@@ -68,7 +68,7 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500 mb-6">Explore</h3>
             <ul className="space-y-4">
-              {['Home', 'About', 'Leadership', 'Projects'].map((item) => (
+              {['Home', 'About', 'Leadership', 'Projects', 'Meetings'].map((item) => (
                 <li key={item}>
                   <a href={`#${item.toLowerCase()}`} className="text-slate-300 hover:text-eminence-gold transition-colors">
                     {item}

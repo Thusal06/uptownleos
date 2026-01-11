@@ -373,22 +373,60 @@
       ]
     }
   ],
+  "meetings": [
+    {
+      "id": "m1",
+      "name": "General Meeting",
+      "title": "August 2025",
+      "description": "The official charter certificate was presented to the Club President by Chief Guest Lion Ranjith Fernando (IPDG 306 C2). Appreciation pins awarded to the top board.",
+      "date": "30th August 2025",
+      "time": "10.30 a.m. – 12.00 p.m.",
+      "venue": "Club Secretary’s Residence",
+      "chiefGuest": "Lion Ranjith Fernando (IPDG 306 C2)",
+      "image": "/mgm/aug/august_1.jpeg",
+      "category": "Meeting",
+      "gallery": [
+        "/mgm/aug/august_1.jpeg",
+        "/mgm/aug/august_2.jpeg",
+        "/mgm/aug/august_3.jpeg",
+        "/mgm/aug/august_4.jpeg"
+      ]
+    },
+    {
+      "id": "m2",
+      "name": "General Meeting",
+      "title": "December 2025",
+      "description": "Held at Million Spaces. A significant gathering discussing club progress with Chief Guest Leo Lion Lakisha Perera - Zone Chairperson.",
+      "date": "28th December 2025",
+      "time": "2.30 p.m. – 4.00 p.m.",
+      "venue": "Million Spaces",
+      "chiefGuest": "Leo Lion Lakisha Perera - Zone Chairperson",
+      "image": "/mgm/dec/december_1.jpeg",
+      "category": "Meeting",
+      "gallery": [
+        "/mgm/dec/december_1.jpeg",
+        "/mgm/dec/december_2.jpeg",
+        "/mgm/dec/december_3.jpeg",
+        "/mgm/dec/december_4.jpeg"
+      ]
+    }
+  ],
   "lionOfMonth": [
     {
       "id": "lom-nov",
-      "name": "Leo Lion Gayan Danasiri",
-      "month": "November",
-      "year": "2025",
-      "avatar": "/board/gayan.jpg",
-      "description": "Honored for his exceptional coordination of the Danumata Athwalak project."
-    },
-    {
-      "id": "lom-dec",
       "name": "Leo Lion Rinoshi Nihara",
-      "month": "December",
+      "month": "November",
       "year": "2025",
       "avatar": "/board/rinoshi.jpg",
       "description": "Recognized for her exemplary leadership in chairing Project Suwadivi and her continued commitment to the club's growth."
+    },
+    {
+      "id": "lom-dec",
+      "name": "Leo Lion Gayan Danasiri",
+      "month": "December",
+      "year": "2025",
+      "avatar": "/board/gayan.jpg",
+      "description": "Honored for his exceptional coordination of the Danumata Athwalak project."
     }
   ],
   "navigation": [

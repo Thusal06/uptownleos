@@ -9,6 +9,7 @@ const navItems = [
   { label: "About", id: "about" },
   { label: "Leadership", id: "leadership" },
   { label: "Projects", id: "projects" },
+  { label: "Meetings", id: "meetings" },
 ];
 
 export default function Navigation() {

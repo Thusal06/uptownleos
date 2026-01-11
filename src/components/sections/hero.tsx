@@ -73,7 +73,7 @@ export default function Hero() {
           </h1>
 
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-400 font-light leading-relaxed mb-10">
-            The Leo Lions Club of Colombo Uptown Eminence. <br/>
+            Leo Lions Club of Colombo Uptown Eminence <br/>
             <span className="text-slate-300">Amplify youth leadership through immersive service ecosystems.</span>
           </p>
 
