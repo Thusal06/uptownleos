@@ -371,6 +371,35 @@
         "/projects/danumataathwalak/WhatsApp Image 2025-12-24 at 19.33.10.jpeg",
         "/projects/danumataathwalak/WhatsApp Image 2025-12-24 at 19.33.10 (1).jpeg"
       ]
+    },
+    {
+      "id": "p7",
+      "name": "Project Feed Hope - Phase I",
+      "title": "Nourishing the Voiceless",
+      "description": "Launched on March 8, 2026, across the Colombo area, Phase I focused exclusively on animal welfare. Recognizing the daily struggles of street animals, our dedicated members took to the streets to provide high-quality, nutritious meals to stray dogs. This initiative was driven by a deep sense of compassion, ensuring that the often-overlooked animals in our urban environment received much-needed nourishment and care.",
+      "image": "/projects/feedhope1/WhatsApp Image 2026-03-11 at 19.44.13.jpeg",
+      "gradient": "from-amber-500 to-yellow-400",
+      "category": "community",
+      "gallery": [
+        "/projects/feedhope1/WhatsApp Image 2026-03-11 at 19.44.13.jpeg",
+        "/projects/feedhope1/WhatsApp Image 2026-03-11 at 19.44.13 (1).jpeg",
+        "/projects/feedhope1/WhatsApp Image 2026-03-11 at 19.44.14.jpeg",
+        "/projects/feedhope1/WhatsApp Image 2026-03-11 at 19.44.14 (1).jpeg",
+        "/projects/feedhope1/WhatsApp Image 2026-03-11 at 19.44.14 (2).jpeg"
+      ]
+    },
+    {
+      "id": "p8",
+      "name": "Project Feed Hope - Phase II",
+      "title": "Uplifting the Community",
+      "description": "Successfully executed on April 3, 2026, within the Colombo area. Shifting focus to human welfare, this phase was dedicated to alleviating hunger among underprivileged individuals and families facing severe economic hardships. Our team distributed warm, freshly prepared meals, reinforcing our commitment to food security and community support.",
+      "image": "/projects/feedhope2/WhatsApp Image 2026-04-08 at 19.25.15.jpeg",
+      "gradient": "from-orange-500 to-red-400",
+      "category": "community",
+      "gallery": [
+        "/projects/feedhope2/WhatsApp Image 2026-04-08 at 19.25.15.jpeg",
+        "/projects/feedhope2/WhatsApp Image 2026-04-08 at 19.25.22.jpeg"
+      ]
     }
   ],
   "meetings": [
@@ -412,6 +441,30 @@
     }
   ],
   "lionOfMonth": [
+    {
+      "id": "lom-jan",
+      "name": "Leo Lion Senuri Kawya",
+      "month": "January",
+      "year": "2026",
+      "avatar": "/board/senuri.jpg",
+      "description": "Recognized for her outstanding contribution as Assistant Treasurer and dedication to the club's financial management."
+    },
+    {
+      "id": "lom-feb",
+      "name": "Leo Lion Thusal Ranawaka",
+      "month": "February",
+      "year": "2026",
+      "avatar": "/board/thusal.jpeg",
+      "description": "Recognized for his outstanding contribution as Secretary and dedication to club administration."
+    },
+    {
+      "id": "lom-mar",
+      "name": "Leo Lion Yohani Gunathilaka",
+      "month": "March",
+      "year": "2026",
+      "avatar": "/board/yohani.jpg",
+      "description": "Celebrated for her exemplary service as Assistant Secretary and unwavering dedication to the club."
+    },
     {
       "id": "lom-nov",
       "name": "Leo Lion Rinoshi Nihara",
