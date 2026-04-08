@@ -487,6 +487,16 @@
     { "label": "About", "id": "about" },
     { "label": "Leadership", "id": "leadership" },
     { "label": "Projects", "id": "projects" },
+    { "label": "Magazine", "id": "magazine" },
     { "label": "Contact", "id": "contact" }
-  ]
+  ],
+  "magazine": {
+    "title": "EMINENCE",
+    "subtitle": "First Issue - Vol I",
+    "description": "The official magazine of Leo Lions Club of Colombo Uptown Eminence",
+    "flipbookUrl": "https://heyzine.com/flip-book/92f8b18843.html",
+    "pdfUrl": "https://cdnc.heyzine.com/files/uploaded/v3/92f8b18843820a4b636a84723394f14f373e6517.pdf",
+    "coverImage": "https://cdnc.heyzine.com/files/uploaded/v3/92f8b18843820a4b636a84723394f14f373e6517.pdf-thumb.jpg",
+    "pages": 22
+  }
 }
