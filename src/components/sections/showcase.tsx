@@ -15,14 +15,16 @@ import Image from "next/image";
 
 // Image Paths (Hardcoded based on filesystem)
 const images = [
+  "/projects/roadx/WhatsApp Image 2026-04-24 at 20.26.46 (1).jpeg",
+  "/projects/punchihadawatheawurudu/WhatsApp Image 2026-04-24 at 18.48.55.jpeg",
+  "/projects/lifebeyonddiabetes/WhatsApp Image 2026-04-24 at 19.51.26.jpeg",
+  "/projects/feedhope2/WhatsApp Image 2026-04-08 at 19.25.15.jpeg",
+  "/projects/feedhope1/WhatsApp Image 2026-03-11 at 19.44.13.jpeg",
   "/projects/aurum/WhatsApp Image 2025-08-01 at 11.01.17 AM.jpeg",
   "/projects/beachcleanup/00db8c9d61661d50ef61f74bcb76b6e6.jpg",
   "/projects/brandboost/0bd12c0caf70ee59c54d28c63c8ee713.jpg",
   "/projects/suwadivi/7be4e95f1b7649249144940bbf38d103.jpg",
-  "/projects/ashirwadapooja/790e29afdf7e7be317617c82a6b33d9c.jpg",
-  "/projects/aurum/WhatsApp Image 2025-08-01 at 11.01.25 AM.jpeg",
-  "/projects/beachcleanup/61a2690a3f913516a9e9dfc4ecf3f8c9.jpg",
-  "/projects/brandboost/0e19c6a1ac3a9289afd04b951e8b3d3c.jpg"
+  "/projects/ashirwadapooja/790e29afdf7e7be317617c82a6b33d9c.jpg"
 ];
 
 interface ParallaxProps {
