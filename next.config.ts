@@ -27,6 +27,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "i.pravatar.cc",
       },
+      {
+        protocol: "https",
+        hostname: "cdnc.heyzine.com",
+      },
+      {
+        protocol: "https",
+        hostname: "heyzine.com",
+      },
     ],
   },
 };
