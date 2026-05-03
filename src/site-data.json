@@ -400,6 +400,52 @@
         "/projects/feedhope2/WhatsApp Image 2026-04-08 at 19.25.15.jpeg",
         "/projects/feedhope2/WhatsApp Image 2026-04-08 at 19.25.22.jpeg"
       ]
+    },
+    {
+      "id": "p9",
+      "name": "RoadX",
+      "title": "Infrastructure Development",
+      "description": "Executed all day on April 23, 2026, \"RoadX\" stands as one of the largest physical infrastructure projects organized by the Leo Lions Club of Colombo Uptown Eminence. Located near the Gauthama Arana in Radawadunna, Gampaha, the club partnered directly with local residents to transform an underdeveloped rural path into a fully paved concrete road. This massive, labor-intensive initiative successfully eliminated a major transportation barrier, providing the local community with long-term, sustainable infrastructure that will permanently ease daily travel and uplift the entire region's accessibility.",
+      "image": "/projects/roadx/WhatsApp Image 2026-04-24 at 20.26.46 (1).jpeg",
+      "gradient": "from-gray-400 to-slate-500",
+      "category": "infrastructure",
+      "gallery": [
+        "/projects/roadx/WhatsApp Image 2026-04-24 at 20.26.46 (1).jpeg",
+        "/projects/roadx/WhatsApp Image 2026-04-24 at 20.26.48 (1).jpeg",
+        "/projects/roadx/WhatsApp Image 2026-04-24 at 20.26.50 (2).jpeg",
+        "/projects/roadx/WhatsApp Image 2026-04-24 at 20.26.51 (1).jpeg"
+      ]
+    },
+    {
+      "id": "p10",
+      "name": "Punchi Hadawathe Awurudu",
+      "title": "New Year Festival",
+      "description": "\"Punchi Hadawathe Awurudu\" was a heartwarming Sinhala and Tamil New Year festival organized by the Leo Lions Club of Colombo Uptown Eminence for approximately 25 children at the Lawris Childrens' Home in Colombo 10. The event provided a completely new festive experience for the home, featuring a special morning breakfast, traditional Avurudu games like musical chairs and balloon bursting, ice cream treats, and a gift distribution. This deeply engaging project successfully uplifted the spirits of the children, fostering a sense of joy, cultural inclusion, and community belonging.",
+      "image": "/projects/punchihadawatheawurudu/WhatsApp Image 2026-04-24 at 18.48.55.jpeg",
+      "gradient": "from-yellow-400 to-red-500",
+      "category": "community",
+      "gallery": [
+        "/projects/punchihadawatheawurudu/WhatsApp Image 2026-04-24 at 18.48.55.jpeg",
+        "/projects/punchihadawatheawurudu/WhatsApp Image 2026-04-24 at 18.48.58 (1).jpeg",
+        "/projects/punchihadawatheawurudu/WhatsApp Image 2026-04-24 at 18.48.58 (2).jpeg",
+        "/projects/punchihadawatheawurudu/WhatsApp Image 2026-04-24 at 18.48.58.jpeg",
+        "/projects/punchihadawatheawurudu/WhatsApp Image 2026-04-24 at 18.48.59.jpeg"
+      ]
+    },
+    {
+      "id": "p11",
+      "name": "Life Beyond Diabetes",
+      "title": "Health Awareness Campaign",
+      "description": "\"Life Beyond Diabetes\" was a focused public health and awareness campaign organized by the Leo Lions Club of Colombo Uptown Eminence in the Kelaniya area. Dedicated to one of the core global causes of Lions International, club members actively engaged with the local community to distribute approximately 50 educational leaflets detailing critical information on diabetes prevention and management. This grassroots advocacy project successfully raised local health literacy and reinforced the club’s commitment to promoting proactive health and well-being.",
+      "image": "/projects/lifebeyonddiabetes/WhatsApp Image 2026-04-24 at 19.51.26.jpeg",
+      "gradient": "from-blue-400 to-indigo-500",
+      "category": "healthcare",
+      "gallery": [
+        "/projects/lifebeyonddiabetes/WhatsApp Image 2026-04-24 at 19.51.26 (1).jpeg",
+        "/projects/lifebeyonddiabetes/WhatsApp Image 2026-04-24 at 19.51.26 (2).jpeg",
+        "/projects/lifebeyonddiabetes/WhatsApp Image 2026-04-24 at 19.51.26.jpeg",
+        "/projects/lifebeyonddiabetes/WhatsApp Image 2026-04-24 at 19.52.54.jpeg"
+      ]
     }
   ],
   "meetings": [
@@ -437,6 +483,26 @@
         "/mgm/dec/december_2.jpeg",
         "/mgm/dec/december_3.jpeg",
         "/mgm/dec/december_4.jpeg"
+      ]
+    },
+    {
+      "id": "m3",
+      "name": "General Meeting",
+      "title": "March 2026",
+      "description": "March General Meeting was held virtually via Zoom on April 8th, commencing at 8:00 p.m.. Presided over by Meeting Chairperson Leo Lion Anuk Nisalitha , the session featured standard administrative reports from the Secretary and Treasurer. Key highlights of the evening included the announcement of the Leo Lion of the Month and the official launch of the club's new magazine and website. The meeting concluded following an inspiring address from the Chief Guest, Region Chairman Lion Priyantha Sahabandu.",
+      "date": "8th April 2026",
+      "time": "8.00 p.m.",
+      "venue": "Zoom (Virtual)",
+      "chiefGuest": "Lion Priyantha Sahabandu (Region Chairman)",
+      "image": "/mgm/mar/Zoom Meeting 40-Minutes  4_8_2026 8_16_45 PM.png",
+      "category": "Meeting",
+      "gallery": [
+        "/mgm/mar/Sri Lanka - National Anthem.mp4 4_8_2026 8_16_22 PM.png",
+        "/mgm/mar/Zoom Meeting 40-Minutes  4_8_2026 8_10_02 PM.png",
+        "/mgm/mar/Zoom Meeting 40-Minutes  4_8_2026 8_16_45 PM.png",
+        "/mgm/mar/Zoom Meeting 40-Minutes  4_8_2026 8_20_49 PM.png",
+        "/mgm/mar/Zoom Meeting 40-Minutes  4_8_2026 8_24_00 PM.png",
+        "/mgm/mar/Zoom Meeting 40-Minutes  4_8_2026 8_29_44 PM.png"
       ]
     }
   ],
